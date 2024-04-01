@@ -74,10 +74,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 new ShoppingCartNotFound("ShoppingCartNotFound  id   :" + cartId)) ;
         ShoppingCartItem item = this.shoppingCartItemRepo.findById(itemId).orElseThrow(()
                 -> new ShoppingCartItemNotFound("ShoppingCartItemNotFound  id   :" + itemId));
-        cart.getItems().remove(item) ;
+        int index = cart.getItems().indexOf(item) ;
         item.setQuantity(quantity);
-        ShoppingCartItem savedItem = this.shoppingCartItemRepo.save(item);
-        cart.getItems().add(savedItem);
+        this.shoppingCartItemRepo.save(item);
+        cart.getItems().get(index).setQuantity(quantity);
         return this.shoppingCartRepo.save(cart);
 
     }

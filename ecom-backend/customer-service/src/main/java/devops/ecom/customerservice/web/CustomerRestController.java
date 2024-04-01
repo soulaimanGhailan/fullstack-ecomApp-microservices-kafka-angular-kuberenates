@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api")
 public class CustomerRestController {
     private ShoppingCartService cartService ;
-
     public CustomerRestController(ShoppingCartService cartService) {
         this.cartService = cartService;
     }
