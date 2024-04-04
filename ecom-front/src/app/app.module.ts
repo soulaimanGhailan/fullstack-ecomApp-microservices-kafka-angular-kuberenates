@@ -19,6 +19,14 @@ import { ProductsOfCategoryListHeaderComponent } from './components/products-of-
 import { PagginationComponent } from './components/products-of-category-list/paggination/paggination.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ContactComponent } from './components/contact/contact.component';
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
+import {StoreDevtools, StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {productReducer} from "./ngrx/productsState/products.reducer";
+import {ProductsEffects} from "./ngrx/productsState/products.effects";
+import {HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -39,10 +47,16 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     PagginationComponent,
     ProductDetailsComponent,
     ShoppingCartComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    AppRoutingModule ,
+    StoreModule.forRoot({productState : productReducer , }) ,
+    EffectsModule.forRoot([ProductsEffects]),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

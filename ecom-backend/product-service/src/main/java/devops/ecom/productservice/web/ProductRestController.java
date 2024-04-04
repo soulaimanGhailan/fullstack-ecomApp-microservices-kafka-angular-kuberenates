@@ -21,7 +21,7 @@ public class ProductRestController {
     }
     @PostMapping
     private Product addProduct(@RequestBody Product product){
-        return this.productService.createProduct(product) ;
+        return this.productService.createProduct(product, null) ;
     }
 
     @PutMapping

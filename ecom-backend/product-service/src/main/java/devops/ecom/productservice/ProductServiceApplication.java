@@ -1,8 +1,9 @@
 package devops.ecom.productservice;
 
+import devops.ecom.productservice.dao.entities.Price;
 import devops.ecom.productservice.dao.entities.Product;
-import devops.ecom.productservice.dao.enums.ProductCategory;
 import devops.ecom.productservice.dao.repos.ProductRepo;
+import devops.ecom.productservice.service.ProductService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,18 +11,17 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
-
-import java.util.Date;
-import java.util.UUID;
 @SpringBootApplication
 @EnableFeignClients
 public class ProductServiceApplication {
     private ProductRepo productRepo ;
     private RepositoryRestConfiguration restConfiguration;
+    private ProductService productService;
 
-    public ProductServiceApplication(ProductRepo productRepo, RepositoryRestConfiguration restConfiguration) {
+    public ProductServiceApplication(ProductRepo productRepo, RepositoryRestConfiguration restConfiguration, ProductService productService) {
         this.productRepo = productRepo;
         this.restConfiguration = restConfiguration;
+        this.productService = productService;
     }
 
     public static void main(String[] args) {
@@ -32,14 +32,8 @@ public class ProductServiceApplication {
     public CommandLineRunner run(){
         return args -> {
             restConfiguration.exposeIdsFor(Product.class) ;
-            for (int i = 0; i < 10; i++) {
-                Product product = Product.builder()
-                        .productId(UUID.randomUUID().toString())
-                        .name((Math.random()>0.5)?"product 1":"product 2").addingDate(new Date())
-                        .description("dddddddddddddddddddddddddddddddddddd")
-                        .category(ProductCategory.ELECTRONICS).build();
-                this.productRepo.insert(product) ;
-            }
+            restConfiguration.exposeIdsFor(Price.class) ;
+            this.productService.initProduct();
         };
     }
 
