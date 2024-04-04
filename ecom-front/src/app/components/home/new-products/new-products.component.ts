@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Product} from "../../../models/product.model";
 
 @Component({
   selector: 'app-new-products',
@@ -6,6 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./new-products.component.css']
 })
 export class NewProductsComponent {
-  array:number[] = [1,2,3,4];
+   @Input() newProducts: Product[] | null = null
 
 }

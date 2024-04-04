@@ -9,8 +9,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
       - MONGO_INITDB_DATABASE=product-db
-    volumes:
-      - data:/data
+
 
   mongo-express:
     depends_on:
@@ -25,8 +24,7 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongodb
 
 # Define named volumes
-volumes:
-  data: {}
+
 networks:
   default:
     name: mongodb_network

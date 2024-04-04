@@ -1,5 +1,6 @@
 package devops.ecom.productservice.service;
 
+import devops.ecom.productservice.dao.entities.PageInfo;
 import devops.ecom.productservice.dao.entities.Price;
 import devops.ecom.productservice.dao.entities.Product;
 import devops.ecom.productservice.dao.enums.Colors;
@@ -8,6 +9,7 @@ import devops.ecom.productservice.dao.enums.ProductCategory;
 import devops.ecom.productservice.dao.enums.ProductStatus;
 import devops.ecom.productservice.dao.repos.PriceRepo;
 import devops.ecom.productservice.dao.repos.ProductRepo;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,6 +80,7 @@ public class ProductServiceImpl implements ProductService {
         for (int i = 0; i < 10; i++) {
             Price price = Price.builder().currency(Currency.MAD)
                     .price((long) (Math.random() * 100 + 100))
+                    .symbol("MAD")
                     .build();
             Product product = Product.builder()
                     .productPrice(price)
@@ -96,6 +99,7 @@ public class ProductServiceImpl implements ProductService {
         for (int i = 0; i < 5; i++) {
             Price price = Price.builder().currency(Currency.MAD)
                     .price((long) (Math.random() * 100 + 100))
+                    .symbol("MAD")
                     .build();
             Product product = Product.builder()
                     .productPrice(price)
@@ -111,5 +115,15 @@ public class ProductServiceImpl implements ProductService {
                     .build();
             createProduct(product , price) ;
         }
+    }
+
+    @Override
+    public PageInfo getProductPageInfo(int size) {
+        PageInfo pageInfo = PageInfo.builder()
+                .totalElements(this.productRepo.findAll().size())
+                .totalPages(this.productRepo.findAll(PageRequest.of(0, size)).getTotalPages())
+                .size(size)
+                .build();
+        return pageInfo;
     }
 }

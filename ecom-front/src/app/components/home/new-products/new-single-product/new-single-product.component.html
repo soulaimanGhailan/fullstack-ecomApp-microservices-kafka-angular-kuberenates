@@ -1,10 +1,12 @@
 <li class="span3" style="margin: 5px">
   <div class="thumbnail" style="background-color: white">
     <i class="tag"></i>
-    <a href="product_details.html"><img src="assets/template/themes/images/products/b4.jpg" alt=""></a>
+    <a href="product_details.html"><img src="{{'data:image/jpeg;base64,'+newProduct.productImagesBas64[0]}}" alt=""></a>
     <div class="caption">
-      <h5>Product name</h5>
-      <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>
+      <h5>{{newProduct.name}}</h5>
+      <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">
+        {{newProduct.productPrice.symbol}}{{newProduct.productPrice.price}}
+      </span></h4>
     </div>
   </div>
 </li>

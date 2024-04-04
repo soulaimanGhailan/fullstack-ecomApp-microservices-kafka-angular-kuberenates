@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Product} from "../../models/product.model";
 
 @Component({
   selector: 'app-products-list',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./products-list.component.css']
 })
 export class ProductsListComponent {
-  array:number[]= [1,2,3,4,5,6]
+  @Input() products : Product[] | null=null ;
+
 
 }

@@ -1,14 +1,22 @@
 import {Action} from "@ngrx/store";
-import {Product} from "../../models/product.model";
+import {ActionPayload, PageSize} from "../../models/product.model";
 
 export enum ProductActionType  {
   GET_ALL_PRODUCTS = "*PRODUCTS* GET ALL PRODUCTS",
   GET_ALL_PRODUCTS_SUCCESS = "*PRODUCTS* GET ALL PRODUCTS [SUCCESS]",
   GET_ALL_PRODUCTS_ERROR = "*PRODUCTS* GET ALL PRODUCTS [ERROR]" ,
 
-  GET_ALL_PRODUCTS_PAGE = "*PRODUCTS* GET  PRODUCTS PAGE ",
-  GET_ALL_PRODUCT_SUCCESS_PAGE = "*PRODUCTS* GET  PRODUCTS PAGE [SUCCESS]",
-  GET_ALL_PRODUCTS_ERROR_PAGE = "*PRODUCTS* GET  PRODUCTS PAGE [ERROR]  "
+  GET_PRODUCTS_PAGE = "*PRODUCTS* GET  PRODUCTS PAGE ",
+  GET_PRODUCT_PAGE_SUCCESS = "*PRODUCTS* GET  PRODUCTS PAGE [SUCCESS]",
+  GET_PRODUCTS_PAGE_ERROR = "*PRODUCTS* GET  PRODUCTS PAGE [ERROR]  ",
+
+  GET_PRODUCTS_PAGE_BY_KEYWORD= "*PRODUCTS* GET  PRODUCTS PAGE BY_KEYWORD",
+  GET_PRODUCT_PAGE_BY_KEYWORD_SUCCESS = "*PRODUCTS* GET  PRODUCTS PAGE BY_KEYWORD [SUCCESS]",
+  GET_PRODUCTS_PAGE_BY_KEYWORD_ERROR = "*PRODUCTS* GET  PRODUCTS PAGE BY_KEYWORD [ERROR]  ",
+
+  GET_PRODUCTS_PAGE_BY_CATEGORY = "*PRODUCTS* GET  PRODUCTS PAGE BY_CATEGORY ",
+  GET_PRODUCT_PAGE_BY_CATEGORY_SUCCESS = "*PRODUCTS* GET  PRODUCTS PAGE BY_CATEGORY [SUCCESS]",
+  GET_PRODUCTS_PAGE_BY_CATEGORY_ERROR = "*PRODUCTS* GET  PRODUCTS PAGE BY_CATEGORY [ERROR]  ",
 }
 
 /** GetAllProductAction **/
@@ -19,7 +27,7 @@ export class GetAllProductsAction implements Action{
 }
 export class GetAllProductsActionSuccess implements Action{
   type: ProductActionType = ProductActionType.GET_ALL_PRODUCTS_SUCCESS;
-  constructor(public payload : Product[]) {
+  constructor(public payload : any) {
   }
 }
 export class GetAllProductsActionError implements Action{
@@ -28,22 +36,60 @@ export class GetAllProductsActionError implements Action{
   }
 }
 
-/** GetAllProduct PAGE **/
+/** GetProduct PAGE **/
 export class GetProductsPageAction implements Action{
-  type: ProductActionType = ProductActionType.GET_ALL_PRODUCTS;
-  constructor(public payload : any) {
+  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE;
+  constructor(public payload : PageSize) {
   }
 }
 export class GetProductsPageActionSuccess implements Action{
-  type: ProductActionType = ProductActionType.GET_ALL_PRODUCTS;
+  type: ProductActionType = ProductActionType.GET_PRODUCT_PAGE_SUCCESS;
   constructor(public payload : any) {
   }
 }
 export class GetProductsPageActionError implements Action{
-  type: ProductActionType = ProductActionType.GET_ALL_PRODUCTS;
+  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_ERROR;
   constructor(public payload : string) {
   }
 }
 
-export type ProductAction = GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError
+
+/** GetAllProduct PAGE BY KEYWORD **/
+export class GetProductsPageByKeyWordAction implements Action{
+  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_BY_KEYWORD;
+  constructor(public payload : ActionPayload<String>) {
+  }
+}
+export class GetProductsPageByKeyWordActionSuccess implements Action{
+  type: ProductActionType = ProductActionType.GET_PRODUCT_PAGE_BY_KEYWORD_SUCCESS;
+  constructor(public payload : any) {
+  }
+}
+export class GetProductsPageByKeyWordActionError implements Action{
+  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_BY_KEYWORD_ERROR;
+  constructor(public payload : string) {
+  }
+}
+
+/** GetAllProduct PAGE BY CATEGORY **/
+export class GetProductsPageByCategoryAction implements Action{
+  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_BY_CATEGORY;
+  constructor(public payload : ActionPayload<String>) {
+  }
+}
+export class GetProductsPageByCategoryActionSuccess implements Action{
+  type: ProductActionType = ProductActionType.GET_PRODUCT_PAGE_BY_CATEGORY_SUCCESS;
+  constructor(public payload : any) {
+  }
+}
+export class GetProductsPageByCategoryActionError implements Action{
+  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_BY_CATEGORY_ERROR;
+  constructor(public payload : string) {
+  }
+}
+
+export type ProductAction = GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError |
+   GetProductsPageAction | GetProductsPageActionSuccess | GetProductsPageActionError |
+   GetProductsPageByKeyWordAction | GetProductsPageByKeyWordActionSuccess | GetProductsPageByKeyWordActionError |
+   GetProductsPageByCategoryAction | GetProductsPageByCategoryActionSuccess | GetProductsPageByCategoryActionError
 ;

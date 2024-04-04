@@ -27,6 +27,8 @@ import {productReducer} from "./ngrx/productsState/products.reducer";
 import {ProductsEffects} from "./ngrx/productsState/products.effects";
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import {newProductsReducer} from "./ngrx/newProductsState/newProduct.reducer";
+import {NewProductEffects} from "./ngrx/newProductsState/newProduct.effects";
 
 @NgModule({
   declarations: [
@@ -54,8 +56,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule ,
-    StoreModule.forRoot({productState : productReducer , }) ,
-    EffectsModule.forRoot([ProductsEffects]),
+    StoreModule.forRoot({productState : productReducer , newProductsState: newProductsReducer}) ,
+    EffectsModule.forRoot([ProductsEffects , NewProductEffects]),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],

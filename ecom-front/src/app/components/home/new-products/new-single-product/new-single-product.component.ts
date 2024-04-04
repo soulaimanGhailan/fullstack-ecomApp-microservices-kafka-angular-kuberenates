@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Product} from "../../../../models/product.model";
 
 @Component({
   selector: 'app-new-single-product',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./new-single-product.component.css']
 })
 export class NewSingleProductComponent {
-
+  @Input() newProduct! : Product
 }

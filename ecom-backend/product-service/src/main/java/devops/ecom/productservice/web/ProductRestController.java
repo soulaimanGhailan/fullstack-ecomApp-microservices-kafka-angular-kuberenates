@@ -1,13 +1,15 @@
 package devops.ecom.productservice.web;
 
+import devops.ecom.productservice.dao.entities.PageInfo;
 import devops.ecom.productservice.dao.entities.Product;
 import devops.ecom.productservice.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RestController
-//@RequestMapping("products")
+@RestController
+@RequestMapping("api/products")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductRestController {
     private ProductService productService;
 
@@ -15,21 +17,9 @@ public class ProductRestController {
         this.productService = productService;
     }
 
-    @GetMapping
-    private List<Product> getAll(){
-        return this.productService.getAllProduct() ;
-    }
-    @PostMapping
-    private Product addProduct(@RequestBody Product product){
-        return this.productService.createProduct(product, null) ;
+    @GetMapping("{size}")
+    public PageInfo getProductsPageInfo(@PathVariable int size){
+        return this.productService.getProductPageInfo(size);
     }
 
-    @PutMapping
-    private Product updateProduct(@RequestBody Product product){
-        return this.productService.updateProduct(product) ;
-    }
-    @DeleteMapping("{productId}")
-    private void deleteProduct(@PathVariable String productId){
-         this.productService.deleteProduct(productId); ;
-    }
 }

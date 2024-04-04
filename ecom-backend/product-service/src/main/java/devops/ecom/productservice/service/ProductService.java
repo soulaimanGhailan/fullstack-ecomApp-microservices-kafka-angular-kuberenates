@@ -1,5 +1,6 @@
 package devops.ecom.productservice.service;
 
+import devops.ecom.productservice.dao.entities.PageInfo;
 import devops.ecom.productservice.dao.entities.Price;
 import devops.ecom.productservice.dao.entities.Product;
 
@@ -15,4 +16,5 @@ public interface ProductService {
     List<Product> getAllProduct();
     List<Product> getProductPage(int page , int size);
     void initProduct() ;
+    PageInfo getProductPageInfo(int size);
 }

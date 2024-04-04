@@ -17,4 +17,5 @@ public class Price {
     private String priceId ;
     private Currency currency ;
     private long price ;
+    private String symbol ;
 }

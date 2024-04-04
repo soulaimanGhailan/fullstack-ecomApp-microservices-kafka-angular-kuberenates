@@ -5,8 +5,8 @@
       <div class="carousel-inner">
         <div class="item active">
           <ul class="thumbnails">
-            <ng-container *ngFor="let a of array">
-              <app-new-single-product></app-new-single-product>
+            <ng-container *ngFor="let newProduct of newProducts">
+              <app-new-single-product [newProduct]="newProduct"></app-new-single-product>
             </ng-container>
           </ul>
         </div>
