@@ -23,15 +23,11 @@
       </a>
       <div class="navbar-inner">
         <a class="brand" href="index.html"><img src="assets/template/themes/images/logo.png" alt="Bootsshop"/></a>
-        <form class="form-inline navbar-search" method="post" action="products.html" >
+        <form class="form-inline navbar-search"  >
           <input id="srchFld" class="srchTxt" type="text" />
           <select class="srchTxt">
             <option>All</option>
-            <option>CLOTHES </option>
-            <option>FOOD AND BEVERAGES </option>
-            <option>HEALTH & BEAUTY </option>
-            <option>SPORTS & LEISURE </option>
-            <option>BOOKS & ENTERTAINMENTS </option>
+            <option *ngFor="let cat of categories">{{cat}}</option>
           </select>
           <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
         </form>

@@ -24,6 +24,7 @@ public class Product {
     private String productId ;
     private String name;
     private Date addingDate ;
+    private String brand ;
     private String description ;
     @Field
     private ProductCategory category;
@@ -35,5 +36,6 @@ public class Product {
     private List<Colors> colors;
     private boolean selected ;
     private List<String> productImagesBas64 = new ArrayList<>();
+    private Dimension dimension ;
 //    private Enum subCategory;
 }

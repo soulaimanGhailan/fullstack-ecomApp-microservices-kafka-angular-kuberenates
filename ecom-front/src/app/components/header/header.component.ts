@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {ProductsCategory} from "../../models/product.model";
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+  categories : string[] =  Object.values(ProductsCategory).map((color) => String(color));
   constructor(private router : Router) {
   }
 

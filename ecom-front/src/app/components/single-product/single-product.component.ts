@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../models/product.model";
+import {Store} from "@ngrx/store";
+import {Router} from "@angular/router";
+import {GetProductItemAction} from "../../ngrx/Product-item-State/productItem.actions";
 
 @Component({
   selector: 'app-single-product',
@@ -8,11 +11,15 @@ import {Product} from "../../models/product.model";
 })
 export class SingleProductComponent implements OnInit{
   @Input() product!: Product ;
-  constructor() {
+  constructor(private store : Store<any>, private router: Router) {
 
   }
   ngOnInit(): void {
-    console.log(this.product)
+
   }
 
+  onProductItem() {
+    this.store.dispatch(new GetProductItemAction(this.product)) ;
+    this.router.navigateByUrl("/product-details") ;
+  }
 }

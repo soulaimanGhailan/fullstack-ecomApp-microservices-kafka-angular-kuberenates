@@ -10,9 +10,7 @@ import { SidecarComponent } from './components/sidecar/sidecar.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { SingleProductComponent } from './components/single-product/single-product.component';
 import { CategoryComponent } from './components/sidecar/category/category.component';
-import { ProductsOfCategoryListComponent } from './components/products-of-category-list/products-of-category-list.component';
-import { ProductsOfCategoryListHeaderComponent } from './components/products-of-category-list/products-of-category-list-header/products-of-category-list-header.component';
-import { PagginationComponent } from './components/products-of-category-list/paggination/paggination.component';
+import { PagginationComponent } from './components/searched-products-list/paggination/paggination.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -29,6 +27,12 @@ import { SelectedNewProductsComponent } from './components/home/selected-new-pro
 import { SelectedProductItemComponent } from './components/home/selected-new-products/selected-product-item/selected-product-item.component';
 import { RandomProductsComponent } from './components/sidecar/random-products/random-products.component';
 import { PaymentMethodesComponent } from './components/sidecar/payment-methodes/payment-methodes.component';
+import {ProductItemReducer} from "./ngrx/Product-item-State/productItem.reducers";
+import { GalleryComponent } from './components/product-details/gallery/gallery.component';
+import { ProductItemDescriptionComponent } from './components/product-details/product-item-description/product-item-description.component';
+import { ProductItemAddetionalInfoComponent } from './components/product-details/product-item-addetional-info/product-item-addetional-info.component';
+import { SearchedProductsListComponent } from './components/searched-products-list/searched-products-list.component';
+import { SearchedProductsListHeaderComponent } from './components/searched-products-list/searched-products-list-header/searched-products-list-header.component';
 
 
 @NgModule({
@@ -41,8 +45,6 @@ import { PaymentMethodesComponent } from './components/sidecar/payment-methodes/
     ProductsListComponent,
     SingleProductComponent,
     CategoryComponent,
-    ProductsOfCategoryListComponent,
-    ProductsOfCategoryListHeaderComponent,
     PagginationComponent,
     ProductDetailsComponent,
     ShoppingCartComponent,
@@ -51,13 +53,18 @@ import { PaymentMethodesComponent } from './components/sidecar/payment-methodes/
     SelectedProductItemComponent,
     RandomProductsComponent,
     PaymentMethodesComponent,
+    GalleryComponent,
+    ProductItemDescriptionComponent,
+    ProductItemAddetionalInfoComponent,
+    SearchedProductsListComponent,
+    SearchedProductsListHeaderComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule ,
-    StoreModule.forRoot({productState : productReducer , selectedProductsState: SelectedProductsReducer}) ,
+    StoreModule.forRoot({productState : productReducer , selectedProductsState: SelectedProductsReducer  , productItemState:ProductItemReducer}) ,
     EffectsModule.forRoot([ProductsEffects , SelectedProductEffects ]),
     StoreDevtoolsModule.instrument()
   ],

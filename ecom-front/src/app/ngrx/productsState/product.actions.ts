@@ -1,7 +1,7 @@
 import {Action} from "@ngrx/store";
 import {ActionPayload, PageSize} from "../../models/product.model";
 
-export enum ProductActionType  {
+export enum ProductsActionType  {
   GET_ALL_PRODUCTS = "*PRODUCTS* GET ALL PRODUCTS",
   GET_ALL_PRODUCTS_SUCCESS = "*PRODUCTS* GET ALL PRODUCTS [SUCCESS]",
   GET_ALL_PRODUCTS_ERROR = "*PRODUCTS* GET ALL PRODUCTS [ERROR]" ,
@@ -21,34 +21,34 @@ export enum ProductActionType  {
 
 /** GetAllProductAction **/
 export class GetAllProductsAction implements Action{
-  type: ProductActionType = ProductActionType.GET_ALL_PRODUCTS;
+  type: ProductsActionType = ProductsActionType.GET_ALL_PRODUCTS;
   constructor(public payload : any) {
   }
 }
 export class GetAllProductsActionSuccess implements Action{
-  type: ProductActionType = ProductActionType.GET_ALL_PRODUCTS_SUCCESS;
+  type: ProductsActionType = ProductsActionType.GET_ALL_PRODUCTS_SUCCESS;
   constructor(public payload : any) {
   }
 }
 export class GetAllProductsActionError implements Action{
-  type: ProductActionType = ProductActionType.GET_ALL_PRODUCTS_ERROR;
+  type: ProductsActionType = ProductsActionType.GET_ALL_PRODUCTS_ERROR;
   constructor(public payload : string) {
   }
 }
 
 /** GetProduct PAGE **/
 export class GetProductsPageAction implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCTS_PAGE;
   constructor(public payload : PageSize) {
   }
 }
 export class GetProductsPageActionSuccess implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCT_PAGE_SUCCESS;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCT_PAGE_SUCCESS;
   constructor(public payload : any) {
   }
 }
 export class GetProductsPageActionError implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_ERROR;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCTS_PAGE_ERROR;
   constructor(public payload : string) {
   }
 }
@@ -56,34 +56,34 @@ export class GetProductsPageActionError implements Action{
 
 /** GetAllProduct PAGE BY KEYWORD **/
 export class GetProductsPageByKeyWordAction implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_BY_KEYWORD;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCTS_PAGE_BY_KEYWORD;
   constructor(public payload : ActionPayload<String>) {
   }
 }
 export class GetProductsPageByKeyWordActionSuccess implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCT_PAGE_BY_KEYWORD_SUCCESS;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCT_PAGE_BY_KEYWORD_SUCCESS;
   constructor(public payload : any) {
   }
 }
 export class GetProductsPageByKeyWordActionError implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_BY_KEYWORD_ERROR;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCTS_PAGE_BY_KEYWORD_ERROR;
   constructor(public payload : string) {
   }
 }
 
 /** GetAllProduct PAGE BY CATEGORY **/
 export class GetProductsPageByCategoryAction implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_BY_CATEGORY;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCTS_PAGE_BY_CATEGORY;
   constructor(public payload : ActionPayload<String>) {
   }
 }
 export class GetProductsPageByCategoryActionSuccess implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCT_PAGE_BY_CATEGORY_SUCCESS;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCT_PAGE_BY_CATEGORY_SUCCESS;
   constructor(public payload : any) {
   }
 }
 export class GetProductsPageByCategoryActionError implements Action{
-  type: ProductActionType = ProductActionType.GET_PRODUCTS_PAGE_BY_CATEGORY_ERROR;
+  type: ProductsActionType = ProductsActionType.GET_PRODUCTS_PAGE_BY_CATEGORY_ERROR;
   constructor(public payload : string) {
   }
 }

@@ -1,0 +1,40 @@
+<div id="mainBody">
+  <div class="container">
+    <div class="row">
+      <app-sidecar> </app-sidecar>
+      <div class="span9">
+
+
+        <ng-container *ngIf="productState$ | async as state" [ngSwitch]="state.dataState">
+          <ng-container *ngSwitchCase="ProductStateEnum.LOADING">
+            <h1>data is LOADING .....................................</h1>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="ProductStateEnum.LOADED">
+
+            <app-searched-products-list-header></app-searched-products-list-header>
+            <br class="clr"/>
+            <div class="tab-content">
+
+              <div class="tab-pane  active" id="blockView">
+                <app-products-list [products]="state.products"></app-products-list>
+                <hr class="soft"/>
+              </div>
+            </div>
+            <app-paggination> </app-paggination>
+
+          </ng-container>
+
+          <ng-container *ngSwitchCase="ProductStateEnum.ERROR">
+            <h1>data is loaded with error : / {{state.errorMessage}}  /</h1>
+          </ng-container>
+
+        </ng-container>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import {map, Observable, switchMap} from "rxjs";
-import {ActionPayload, PageInfo, PageSize, Product, ProductsPage} from "../models/product.model";
+import {ActionPayload, PageInfo, PageSize, Product, ProductPrice, ProductsPage} from "../models/product.model";
 import {Hosts} from "../envirments/env";
 import {HttpClient} from "@angular/common/http";
 
@@ -44,5 +44,13 @@ export class ProductService implements OnInit{
 
   public getProductsPageByCategory(payload : ActionPayload<String>): Observable<Product[]> {
     return this.http.get<Product[]>(Hosts.productService + "/products/search/findByCategory?category=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
+  }
+
+  public getProductItem(productId : string):Observable<Product>{
+    return  this.http.get<Product>(Hosts.productService + "/products/"+productId) ;
+  }
+
+  public getDate(product : Product){
+    return product.addingDate.slice(0 ,10);
   }
 }

@@ -7,8 +7,16 @@ export interface Product {
   productImagesBas64: string[],
   category:string ,
   status:string ,
-  color: string[],
+  brand:string ;
+  colors: string[],
   productPrice: ProductPrice ;
+  dimension: Dimension ;
+}
+export interface Dimension{
+  height : number ,
+  width: number,
+  larger: number ,
+  weight : number
 }
 export interface ProductsPage{
   products: Product[] ,

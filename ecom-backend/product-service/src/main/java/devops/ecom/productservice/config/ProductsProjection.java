@@ -1,5 +1,6 @@
 package devops.ecom.productservice.config;
 
+import devops.ecom.productservice.dao.entities.Dimension;
 import devops.ecom.productservice.dao.entities.Price;
 import devops.ecom.productservice.dao.entities.Product;
 import devops.ecom.productservice.dao.enums.Colors;
@@ -22,4 +23,6 @@ public interface ProductsProjection {
     boolean isSelected();
     List<String> getProductImagesBas64();
     Price getProductPrice(); // Include the productPrice field
+    String getBrand();
+    Dimension getDimension() ;
 }
