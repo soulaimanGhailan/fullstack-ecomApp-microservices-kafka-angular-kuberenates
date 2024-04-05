@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {map, Observable} from "rxjs";
-import {ProductState, ProductStateEnum} from "../../ngrx/productsState/products.reducer";
+import {FetchMethode, ProductState, ProductStateEnum} from "../../ngrx/productsState/products.reducer";
 
 @Component({
   selector: 'app-searched-products-list',
@@ -10,7 +10,8 @@ import {ProductState, ProductStateEnum} from "../../ngrx/productsState/products.
 })
 export class SearchedProductsListComponent implements OnInit{
     productState$? : Observable<ProductState> ;
-    public readonly ProductStateEnum = ProductStateEnum ;
+  public readonly ProductStateEnum = ProductStateEnum ;
+  public readonly fetchMethode = FetchMethode ;
     constructor(private store:Store<any>) {
     }
 

@@ -27,7 +27,6 @@ export interface PageInfo {
   size:number ,
   totalElements:number ,
   number: number
-
 }
 
 export interface ProductPrice{

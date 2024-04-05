@@ -21,7 +21,15 @@
                 <hr class="soft"/>
               </div>
             </div>
-            <app-paggination> </app-paggination>
+<!--            check the fetch methode to continue the pagination in the same context-->
+            <ng-container [ngSwitch]="state.fetchMethode">
+              <ng-container *ngSwitchCase=fetchMethode.SEARCH_BY_KEYWORD>
+                <app-paggination [pageInfo]="state.pageInfo" [fetchMethode]="state.fetchMethode" [payload]="state.products[0].name"> </app-paggination>
+              </ng-container>
+              <ng-container *ngSwitchCase=fetchMethode.SEARCH_BY_CATEGORY>
+                <app-paggination [pageInfo]="state.pageInfo" [fetchMethode]="state.fetchMethode" [payload]="state.products[0].category"> </app-paggination>
+              </ng-container>
+          </ng-container>
 
           </ng-container>
 

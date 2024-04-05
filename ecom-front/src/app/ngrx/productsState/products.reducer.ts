@@ -9,13 +9,20 @@ export enum ProductStateEnum{
   ERROR = "Error",
   INITIAL="Initial",
 }
+export enum FetchMethode{
+  ALL="ALL"  ,
+  PAGE = "PAGE",
+  SEARCH_BY_KEYWORD = "SEARCH_BY_KEYWORD",
+  SEARCH_BY_CATEGORY= "SEARCH_BY_CATEGORY"
+}
 export interface ProductState{
   products: Product[] ,
   errorMessage: string ,
   dataState: ProductStateEnum,
-  pageInfo?: PageInfo
-
+  pageInfo?: PageInfo ,
+  fetchMethode?: FetchMethode
 }
+
 const initState:ProductState = {
   products:[] ,
   errorMessage:"" ,
@@ -27,7 +34,7 @@ export function productReducer(state:ProductState=initState , action : Action) :
     case ProductsActionType.GET_ALL_PRODUCTS:
       return {...state , dataState:ProductStateEnum.LOADING}
     case ProductsActionType.GET_ALL_PRODUCTS_SUCCESS:
-      return  {...state , dataState:ProductStateEnum.LOADED , products:(<ProductAction>(action)).payload._embedded.products ,pageInfo:(<ProductAction>(action)).payload.page };
+      return  {...state , dataState:ProductStateEnum.LOADED , products:(<ProductAction>(action)).payload._embedded.products ,pageInfo:(<ProductAction>(action)).payload.page , fetchMethode:FetchMethode.ALL };
     case ProductsActionType.GET_ALL_PRODUCTS_ERROR:
       return {...state , dataState:ProductStateEnum.ERROR , errorMessage:(<ProductAction>(action)).payload}
 
@@ -35,7 +42,7 @@ export function productReducer(state:ProductState=initState , action : Action) :
     case ProductsActionType.GET_PRODUCTS_PAGE:
       return {...state , dataState:ProductStateEnum.LOADING}
     case ProductsActionType.GET_PRODUCT_PAGE_SUCCESS:
-      return  {...state , dataState:ProductStateEnum.LOADED , products:(<ProductAction>(action)).payload._embedded.products ,pageInfo:(<ProductAction>(action)).payload.page };
+      return  {...state , dataState:ProductStateEnum.LOADED , products:(<ProductAction>(action)).payload._embedded.products ,pageInfo:(<ProductAction>(action)).payload.page,fetchMethode:FetchMethode.PAGE };
     case ProductsActionType.GET_PRODUCTS_PAGE_ERROR:
       return {...state , dataState:ProductStateEnum.ERROR , errorMessage:(<ProductAction>(action)).payload}
 
@@ -43,7 +50,7 @@ export function productReducer(state:ProductState=initState , action : Action) :
     case ProductsActionType.GET_PRODUCTS_PAGE_BY_KEYWORD:
       return {...state , dataState:ProductStateEnum.LOADING}
     case ProductsActionType.GET_PRODUCT_PAGE_BY_KEYWORD_SUCCESS:
-      return  {...state , dataState:ProductStateEnum.LOADED , products:(<ProductAction>(action)).payload._embedded.products ,pageInfo:(<ProductAction>(action)).payload.page };
+      return  {...state , dataState:ProductStateEnum.LOADED , products:(<ProductAction>(action)).payload._embedded.products ,pageInfo:(<ProductAction>(action)).payload.page , fetchMethode:FetchMethode.SEARCH_BY_KEYWORD };
     case ProductsActionType.GET_PRODUCTS_PAGE_BY_KEYWORD_ERROR:
       return {...state , dataState:ProductStateEnum.ERROR , errorMessage:(<ProductAction>(action)).payload}
 
@@ -51,7 +58,7 @@ export function productReducer(state:ProductState=initState , action : Action) :
     case ProductsActionType.GET_PRODUCTS_PAGE_BY_CATEGORY:
       return {...state , dataState:ProductStateEnum.LOADING}
     case ProductsActionType.GET_PRODUCT_PAGE_BY_CATEGORY_SUCCESS:
-      return  {...state , dataState:ProductStateEnum.LOADED , products:(<ProductAction>(action)).payload._embedded.products ,pageInfo:(<ProductAction>(action)).payload.page };
+      return  {...state , dataState:ProductStateEnum.LOADED , products:(<ProductAction>(action)).payload._embedded.products ,pageInfo:(<ProductAction>(action)).payload.page ,fetchMethode:FetchMethode.SEARCH_BY_CATEGORY };
     case ProductsActionType.GET_PRODUCTS_PAGE_BY_CATEGORY_ERROR:
       return {...state , dataState:ProductStateEnum.ERROR , errorMessage:(<ProductAction>(action)).payload}
 
