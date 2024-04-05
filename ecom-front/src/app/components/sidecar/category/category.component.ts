@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ProductsCategory} from "../../../models/product.model";
 
 @Component({
   selector: 'app-category',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
-
+  categories : string[] =  Object.values(ProductsCategory).map((color) => String(color));
 }

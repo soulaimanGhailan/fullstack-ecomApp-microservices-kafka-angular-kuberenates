@@ -13,4 +13,5 @@ public interface ProductRepo extends MongoRepository<Product , String> {
     Page<Product> findByStatus(String status, Pageable pageable);
     Page<Product> findByCategory(String category, Pageable pageable);
     Page<Product> findByNameContainsIgnoreCase(String keyword, Pageable pageable);
+    Page<Product> findBySelected(Boolean selected, Pageable pageable);
 }

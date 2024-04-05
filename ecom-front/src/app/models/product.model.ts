@@ -36,3 +36,11 @@ export interface ActionPayload<T>{
   pageSize:PageSize;
   data : T;
 }
+export enum ProductsCategory {
+  ELECTRONICS = "ELECTRONICS" ,
+  CLOTHES="CLOTHES" ,
+  FOOD ="FOOD" ,
+  HEALTH_BEAUTY = "HEALTH_BEAUTY" ,
+  SPORT="SPORT" ,
+  BOOKS = "BOOKS"
+}

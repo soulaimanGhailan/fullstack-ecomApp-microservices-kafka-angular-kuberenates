@@ -22,7 +22,7 @@ export class ProductsEffects{
            map(data => {
              return new GetAllProductsActionSuccess(data)
            }) ,
-           catchError(err => of(new GetAllProductsActionError(err.message())))
+           catchError(err => of(new GetAllProductsActionError(err.message)))
          ) ;
        })
      )

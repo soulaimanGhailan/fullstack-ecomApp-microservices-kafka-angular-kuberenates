@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {GetAllProductsAction, GetProductsPageAction} from "../../ngrx/productsState/product.actions";
+import { GetProductsPageAction} from "../../ngrx/productsState/product.actions";
 import {map, Observable} from "rxjs";
-import {ProductService} from "../../services/product.service";
 import {ProductState, ProductStateEnum} from "../../ngrx/productsState/products.reducer";
-import {NewProductsState} from "../../ngrx/newProductsState/newProduct.reducer";
-import {GetNewProductAction} from "../../ngrx/newProductsState/newProduct.action";
+import {SelectedProductsState} from "../../ngrx/Selected-Products-State/SelectedProduct.reducer";
+import {GetSelectedProductAction} from "../../ngrx/Selected-Products-State/SelectedProduct.action";
 
 @Component({
   selector: 'app-home',
@@ -14,19 +13,20 @@ import {GetNewProductAction} from "../../ngrx/newProductsState/newProduct.action
 })
 export class HomeComponent implements OnInit{
   productState$? : Observable<ProductState> ;
-  newProductsState$?: Observable<NewProductsState>
+  selectedProductsState$?: Observable<SelectedProductsState> ;
   public readonly ProductStateEnum = ProductStateEnum ;
-  constructor(private store:Store<any> , private productService:ProductService) {
+  constructor(private store:Store<any>) {
   }
   ngOnInit(): void {
     this.productState$ = this.store.pipe(
       map(state => state.productState)
     )
-    this.newProductsState$ = this.store.pipe(
-      map(state => state.newProductsState)
+    this.selectedProductsState$ = this.store.pipe(
+      map(state => state.selectedProductsState)
     )
+
     this.store.dispatch(new GetProductsPageAction({page: 0 , size:6}))
-    this.store.dispatch(new GetNewProductAction({page: 0 , size:4}))
+    this.store.dispatch(new GetSelectedProductAction({page: 0 , size:4}))
   }
 
 }

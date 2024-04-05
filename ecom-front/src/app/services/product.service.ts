@@ -34,10 +34,10 @@ export class ProductService implements OnInit{
   //   );
   // }
 
-  getNewProduct(payload: PageSize): Observable<Product[]> {
-    return this.http.get<Product[]>(Hosts.productService + "/products/search/findByStatus?status=NEW&page=" + payload.page +"&size="+payload.size)
-  }
 
+  public getSelectedProducts(pageSize : PageSize): Observable<Product[]> {
+    return this.http.get<Product[]>(Hosts.productService + "/products/search/findBySelected?selected=true&page=" + pageSize.page +"&size="+pageSize.size)
+  }
   public getProductsPageByKeyword(payload : ActionPayload<String>): Observable<Product[]> {
     return this.http.get<Product[]>(Hosts.productService + "/products/search/findByNameContainsIgnoreCase?keyword=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
   }

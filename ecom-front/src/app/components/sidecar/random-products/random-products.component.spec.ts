@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewProductsComponent } from './new-products.component';
+import { RandomProductsComponent } from './random-products.component';
 
-describe('NewProductsComponent', () => {
-  let component: NewProductsComponent;
-  let fixture: ComponentFixture<NewProductsComponent>;
+describe('RandomProductsComponent', () => {
+  let component: RandomProductsComponent;
+  let fixture: ComponentFixture<RandomProductsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewProductsComponent ]
+      declarations: [ RandomProductsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NewProductsComponent);
+    fixture = TestBed.createComponent(RandomProductsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

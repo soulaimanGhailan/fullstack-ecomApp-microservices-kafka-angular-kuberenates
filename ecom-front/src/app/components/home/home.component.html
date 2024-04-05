@@ -1,20 +1,17 @@
 
-<app-selected-products></app-selected-products>
-<!--this is shoud be seen if we are in the home page-->
-
 <div id="mainBody">
   <div class="container">
     <div class="row">
       <app-sidecar> </app-sidecar>
       <div class="span9">
 
-        <ng-container *ngIf="newProductsState$ | async as state" [ngSwitch]="state.dataState">
+        <ng-container *ngIf="selectedProductsState$ | async as state" [ngSwitch]="state.dataState">
           <ng-container *ngSwitchCase="ProductStateEnum.LOADING">
             <h1>data is LOADING .....................................</h1>
           </ng-container>
 
           <ng-container *ngSwitchCase="ProductStateEnum.LOADED">
-            <app-new-products [newProducts]="state.products"></app-new-products>
+            <app-selected-new-products [newProducts]="state.products"></app-selected-new-products>
           </ng-container>
 
           <ng-container *ngSwitchCase="ProductStateEnum.ERROR">
