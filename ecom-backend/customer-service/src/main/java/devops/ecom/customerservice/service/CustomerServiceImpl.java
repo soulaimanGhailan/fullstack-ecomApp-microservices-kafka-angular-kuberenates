@@ -7,6 +7,7 @@ import devops.ecom.customerservice.repos.ShoppingCartRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Service
@@ -24,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer createCustomer(Customer customer) {
         ShoppingCart cart = ShoppingCart.builder()
                 .id(UUID.randomUUID().toString())
-                .items(null)
+                .items(new ArrayList<>())
                 .customerId(customer.getCustomerId()).build();
         ShoppingCart insertedCart = this.shoppingCartRepo.insert(cart);
         customer.setShoppingCart(insertedCart);

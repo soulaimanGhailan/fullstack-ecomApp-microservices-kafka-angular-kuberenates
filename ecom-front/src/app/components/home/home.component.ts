@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import { GetProductsPageAction} from "../../ngrx/productsState/product.actions";
 import {map, Observable} from "rxjs";
-import {ProductState, ProductStateEnum} from "../../ngrx/productsState/products.reducer";
+import {ProductState, DataStateEnum} from "../../ngrx/productsState/products.reducer";
 import {SelectedProductsState} from "../../ngrx/Selected-Products-State/SelectedProduct.reducer";
 import {GetSelectedProductAction} from "../../ngrx/Selected-Products-State/SelectedProduct.action";
 
@@ -14,7 +14,7 @@ import {GetSelectedProductAction} from "../../ngrx/Selected-Products-State/Selec
 export class HomeComponent implements OnInit{
   productState$? : Observable<ProductState> ;
   selectedProductsState$?: Observable<SelectedProductsState> ;
-  public readonly ProductStateEnum = ProductStateEnum ;
+  public readonly ProductStateEnum = DataStateEnum ;
   constructor(private store:Store<any>) {
   }
   ngOnInit(): void {

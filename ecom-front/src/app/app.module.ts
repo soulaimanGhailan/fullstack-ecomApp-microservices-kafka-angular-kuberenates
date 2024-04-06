@@ -33,6 +33,8 @@ import { ProductItemDescriptionComponent } from './components/product-details/pr
 import { ProductItemAddetionalInfoComponent } from './components/product-details/product-item-addetional-info/product-item-addetional-info.component';
 import { SearchedProductsListComponent } from './components/searched-products-list/searched-products-list.component';
 import { SearchedProductsListHeaderComponent } from './components/searched-products-list/searched-products-list-header/searched-products-list-header.component';
+import {ShoppingCartEffect} from "./ngrx/ShoppingCartState/cart.effects";
+import {ShoppingCartReducer} from "./ngrx/ShoppingCartState/cart.reducer";
 
 
 @NgModule({
@@ -64,8 +66,9 @@ import { SearchedProductsListHeaderComponent } from './components/searched-produ
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule ,
-    StoreModule.forRoot({productState : productReducer , selectedProductsState: SelectedProductsReducer  , productItemState:ProductItemReducer}) ,
-    EffectsModule.forRoot([ProductsEffects , SelectedProductEffects ]),
+    StoreModule.forRoot({productState : productReducer , selectedProductsState: SelectedProductsReducer
+      , productItemState:ProductItemReducer , shoppingCartState : ShoppingCartReducer}) ,
+    EffectsModule.forRoot([ProductsEffects , SelectedProductEffects , ShoppingCartEffect]),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],

@@ -11,6 +11,7 @@ export interface Product {
   colors: string[],
   productPrice: ProductPrice ;
   dimension: Dimension ;
+  pickedColor : string | null
 }
 export interface Dimension{
   height : number ,

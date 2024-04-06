@@ -10,11 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 @Builder
-@Document
 public class ShoppingCartItem {
-    @Id
-    private String id ;
     private Product product;
-    private String shoppingCartId;
     private int quantity;
 }

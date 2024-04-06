@@ -8,6 +8,10 @@ import {
   GetProductsPageByCategoryAction,
   GetProductsPageByKeyWordAction
 } from "../../ngrx/productsState/product.actions";
+import {map, Observable} from "rxjs";
+import {ShoppingCartState} from "../../ngrx/ShoppingCartState/cart.reducer";
+import {GetShoppingCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
+import {Auth_Test_Customer} from "../../envirments/env";
 
 @Component({
   selector: 'app-header',
@@ -18,7 +22,8 @@ export class HeaderComponent implements OnInit{
 
   categories : string[] =  Object.values(ProductsCategory).map((color) => String(color));
   searchFormGroup? : FormGroup
-  constructor(private router : Router , private fb : FormBuilder , private store :Store) {
+  shoppingCart$? : Observable<ShoppingCartState>
+  constructor(private router : Router , private fb : FormBuilder , private store :Store<any>) {
   }
 
   ngOnInit(): void {
@@ -28,6 +33,10 @@ export class HeaderComponent implements OnInit{
         category:[""]
       }
     )
+    this.shoppingCart$ = this.store.pipe(
+      map(state => state.shoppingCartState)
+    )
+    this.store.dispatch(new GetShoppingCartAction(Auth_Test_Customer.customerId))
   }
 
   onHome() {
@@ -54,5 +63,9 @@ export class HeaderComponent implements OnInit{
           this.router.navigateByUrl("/searched-products");
         }
       }
+  }
+
+  onShCart() {
+    this.router.navigateByUrl("/cart")
   }
 }

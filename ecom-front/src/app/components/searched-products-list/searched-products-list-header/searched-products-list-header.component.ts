@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-searched-products-list-header',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./searched-products-list-header.component.css']
 })
 export class SearchedProductsListHeaderComponent {
-
+   @Input() productsNumber!: number ;
 }

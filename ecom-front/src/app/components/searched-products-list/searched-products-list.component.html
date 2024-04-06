@@ -12,7 +12,8 @@
 
           <ng-container *ngSwitchCase="ProductStateEnum.LOADED">
 
-            <app-searched-products-list-header></app-searched-products-list-header>
+              <app-searched-products-list-header *ngIf="state.pageInfo"  [productsNumber]="state.pageInfo.totalElements"></app-searched-products-list-header>
+
             <br class="clr"/>
             <div class="tab-content">
 

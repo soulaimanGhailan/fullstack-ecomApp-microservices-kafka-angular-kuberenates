@@ -5,11 +5,12 @@ import devops.ecom.customerservice.dao.ShoppingCartItem;
 import devops.ecom.customerservice.exceptions.CustomerNotFoundException;
 import devops.ecom.customerservice.exceptions.ShoppingCartItemNotFound;
 import devops.ecom.customerservice.exceptions.ShoppingCartNotFound;
+import devops.ecom.customerservice.model.AddItemRequest;
 
 public interface ShoppingCartService {
-    ShoppingCartItem createItem(String productId , int quantity , String cartId) ;
-    ShoppingCart addItemToCart(String customerId , String productId , int quantity) throws CustomerNotFoundException, ShoppingCartNotFound, ShoppingCartItemNotFound;
+    ShoppingCartItem createItem(AddItemRequest addItemRequest ) ;
+    ShoppingCart addItemToCart(AddItemRequest addItemRequest) throws CustomerNotFoundException;
     ShoppingCart removeItemFromCart(String customerId , String productId);
 
-    ShoppingCart updateItemQuantityInCart(String itemId, int quantity, String cartId) throws ShoppingCartNotFound, ShoppingCartItemNotFound;
+    ShoppingCart updateItemQuantityInCart(ShoppingCartItem item, int quantity, ShoppingCart cart) ;
 }
