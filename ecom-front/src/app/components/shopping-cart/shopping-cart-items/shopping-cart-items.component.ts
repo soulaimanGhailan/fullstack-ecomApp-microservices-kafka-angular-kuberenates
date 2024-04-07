@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {ShoppingCart} from "../../../models/ShoppingCart";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ShoppingCartService} from "../../../services/shopping-cart.service";
+import {ShoppingCartService} from "../../../services/shoppingCartService/shopping-cart.service";
 import {DeleteProductFromCartAction} from "../../../ngrx/ShoppingCartState/cart.actions";
 import {Auth_Test_Customer} from "../../../envirments/env";
 import {Product} from "../../../models/product.model";

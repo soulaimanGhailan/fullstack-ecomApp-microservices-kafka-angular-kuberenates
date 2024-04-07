@@ -30,8 +30,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public ShoppingCartItem createItem(AddItemRequest addItemRequest) {
 
         Product p = this.productRestClient.getProduct(addItemRequest.getProductId()) ;
-        Price productPrice = this.productRestClient.getProductPrice(addItemRequest.getProductId());
-        p.setProductPrice(productPrice);
+//        Price productPrice = this.productRestClient.getProductPrice(addItemRequest.getProductId());
+//        p.setProductPrice(productPrice);
         p.setPickedColor(addItemRequest.getPickedColor());
         return ShoppingCartItem.builder()
                 .product(p)

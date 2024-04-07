@@ -70,4 +70,8 @@ export class HeaderComponent implements OnInit{
   onShCart() {
     this.router.navigateByUrl("/cart")
   }
+
+  onAdmin() {
+    this.router.navigateByUrl("/admin")
+  }
 }

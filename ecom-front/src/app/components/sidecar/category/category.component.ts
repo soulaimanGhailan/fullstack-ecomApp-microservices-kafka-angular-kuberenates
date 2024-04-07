@@ -6,7 +6,7 @@ import {GetProductsPageByCategoryAction} from "../../../ngrx/productsState/produ
 import {map, Observable} from "rxjs";
 import {ShoppingCartState} from "../../../ngrx/ShoppingCartState/cart.reducer";
 import {DataStateEnum} from "../../../ngrx/productsState/products.reducer";
-import {ShoppingCartService} from "../../../services/shopping-cart.service";
+import {ShoppingCartService} from "../../../services/shoppingCartService/shopping-cart.service";
 
 @Component({
   selector: 'app-category',

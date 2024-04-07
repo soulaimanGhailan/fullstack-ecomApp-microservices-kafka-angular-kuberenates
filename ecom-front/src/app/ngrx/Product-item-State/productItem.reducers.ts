@@ -15,6 +15,14 @@ export function ProductItemReducer(state: ProductItemState=initialState , action
   switch (action.type){
     case ProductItemActionType.GET_PRODUCT_ITEM  :
       return {...state , dataState:DataStateEnum.LOADED , product: (<ProductItemAction>action).payload}
+
+    //save Product
+    case ProductItemActionType.SAVE_PRODUCT  :
+      return {...state , dataState:DataStateEnum.LOADING }
+    case ProductItemActionType.SAVE_PRODUCT_SUCCESS  :
+      return {...state , dataState:DataStateEnum.LOADED , product: (<ProductItemAction>action).payload}
+    case ProductItemActionType.SAVE_PRODUCT_ERROR  :
+      return {...state , dataState:DataStateEnum.LOADED , errorMessage:(<ProductItemAction>action).payload}
     default : return  {...state}
   }
 }

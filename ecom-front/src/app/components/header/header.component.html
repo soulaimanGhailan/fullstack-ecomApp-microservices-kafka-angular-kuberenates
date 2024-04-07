@@ -39,10 +39,12 @@
 
         <ul id="topMenu" class="nav pull-right">
           <li class=""><a style="cursor: pointer" (click)="onHome()">Home</a></li>
-          <li class=""><a href="special_offer.html">Specials Offer</a></li>
           <li class=""><a style="cursor: pointer" (click)="onContact()">Contact</a></li>
           <li class="">
-            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+            <a (click)="onAdmin()" role="button" data-toggle="modal" style="padding-right:0 ; cursor: pointer"><span class="btn btn-large btn-primary">ADMIN</span></a>
+          </li>
+          <li class="">
+            <a  role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
           </li>
         </ul>
       </div>

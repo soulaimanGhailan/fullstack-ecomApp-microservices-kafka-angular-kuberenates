@@ -22,4 +22,8 @@ public class ProductRestController {
         return this.productService.getProductPageInfo(size);
     }
 
+    @PostMapping
+    public Product getProductsPageInfo(@RequestBody Product product){
+        return this.productService.createProduct(product);
+    }
 }

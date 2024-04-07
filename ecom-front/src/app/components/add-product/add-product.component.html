@@ -1,0 +1,140 @@
+<div id="mainBody">
+  <div class="container">
+    <div class="row">
+
+      <app-product-picked-images
+        [productName]="addProductFormGroup.get('productName')?.value"
+          [productImage1]="addProductFormGroup.get('productImage1')?.value"
+          [productImage2]="addProductFormGroup.get('productImage2')?.value"
+          [productImage3]="addProductFormGroup.get('productImage3')?.value">
+      </app-product-picked-images>
+
+      <div class="span4">
+
+        <form (ngSubmit)="addProduct()" [formGroup]="addProductFormGroup" class="form-horizontal">
+          <fieldset>
+
+            <div class="control-group">
+              <input  formControlName="productName" type="text" placeholder="product name" class="input-xlarge"
+                      [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productName'].errors}"/>
+              <div *ngIf="submitted && addProductFormGroup.controls['productName'].errors" class="invalid-feedback">
+                <div style="color: red"> title is Required</div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="image1">product image num 1</label>
+              <input (change)="onFileSelected($event , 1)" formControlName="productImage1" id="image1" type="file" placeholder="product name" class="input-xlarge"
+                     [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productImage1'].errors}"/>
+              <div *ngIf="submitted && addProductFormGroup.controls['productImage1'].errors" class="invalid-feedback">
+                <div style="color: red"> productImage 1 is Required</div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="image2">product image num 2</label>
+              <input (change)="onFileSelected($event ,2)" formControlName="productImage2" id="image2" type="file" placeholder="product name" class="input-xlarge"
+                     [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productImage2'].errors}"/>
+              <div *ngIf="submitted && addProductFormGroup.controls['productImage2'].errors" class="invalid-feedback">
+                <div style="color: red"> productImage 2 is Required</div>
+              </div>
+            </div>
+
+
+            <div class="control-group">
+              <label for="image3">product image num 3</label>
+              <input (change)="onFileSelected($event , 3)" formControlName="productImage3" id="image3" type="file" placeholder="product name" class="input-xlarge"
+                     [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productImage3'].errors}"/>
+              <div *ngIf="submitted && addProductFormGroup.controls['productImage3'].errors" class="invalid-feedback">
+                <div style="color: red"> productImage 3 is Required</div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <input formControlName="productBrand" type="text" placeholder="product brand" class="input-xlarge"
+                     [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productBrand'].errors}"/>
+              <div *ngIf="submitted && addProductFormGroup.controls['productBrand'].errors" class="invalid-feedback">
+                <div style="color: red"> productBrand  is Required</div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <input formControlName="productPrice" type="text" placeholder="product price" class="input-xlarge"
+                     [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productPrice'].errors}"/>
+              <div *ngIf="submitted && addProductFormGroup.controls['productPrice'].errors" class="invalid-feedback">
+                <div style="color: red"> product price  is Required</div>
+              </div>
+            </div>
+
+           <div class="control-group">
+             <label for="currency">Currency</label>
+             <select formControlName="productCurrency" id="currency" class="form-control"
+                     [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productCurrency'].errors}">
+               <option></option>
+               <option *ngFor="let c of currencies">{{c}}</option>
+             </select>
+             <div *ngIf="submitted && addProductFormGroup.controls['productCurrency'].errors" class="invalid-feedback">
+               <div style="color: red"> currency is Required</div>
+             </div>
+           </div>
+
+            <div class="control-group">
+              <label for="category">Category</label>
+              <select formControlName="productCategory" id="category" class="form-control"
+                      [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productCategory'].errors}">
+                <option></option>
+                <option *ngFor="let cat of categories">{{cat}}</option>
+              </select>
+              <div *ngIf="submitted && addProductFormGroup.controls['productCategory'].errors" class="invalid-feedback">
+                <div style="color: red"> Category  is Required</div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="Colors">Colors</label>
+              <select formControlName="productColors" id="Colors" class="form-control" multiple
+                      [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productColors'].errors}">
+                <option *ngFor="let color of colors">{{color}}</option>
+              </select>
+              <div *ngIf="submitted && addProductFormGroup.controls['productColors'].errors" class="invalid-feedback">
+                <div style="color: red"> colors  is Required</div>
+              </div>
+            </div>
+
+
+            <div class="control-group">
+              <textarea formControlName="productDescription" placeholder="product description" rows="3" id="textarea" class="input-xlarge"
+                        [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productDescription'].errors}"></textarea>
+              <div *ngIf="submitted && addProductFormGroup.controls['productDescription'].errors" class="invalid-feedback">
+                <div style="color: red"> Description  is Required</div>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input formControlName="productSelected" class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                     [ngClass]="{'is-invalid' : submitted && addProductFormGroup.controls['productSelected'].errors}">
+              <label class="form-check-label" for="defaultCheck1">
+                Selected
+              </label>
+              <div *ngIf="submitted && addProductFormGroup.controls['productSelected'].errors" class="invalid-feedback">
+                <div style="color: red"> Description  is Required</div>
+              </div>
+            </div>
+
+            <label for="height">height</label>
+            <input formControlName="productHeight" type="number" i id="height" name="doubleNumber" min="0" max="100" step="0.01">
+            <label for="width">width</label>
+            <input formControlName="productWidth" type="number"  id="width" min="0" max="100" step="0.01">
+            <label for="size">size</label>
+            <input formControlName="productLarger" type="number"  id="size" min="0" max="100" step="0.01">
+            <label for="productWeight">Weight</label>
+            <input formControlName="productWeight" type="number"  id="productWeight" min="0" max="100" step="0.01">
+            <button class="btn btn-large" type="submit">Save Product</button>
+
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

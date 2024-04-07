@@ -3,7 +3,6 @@ package devops.ecom.productservice.config;
 import devops.ecom.productservice.dao.entities.Dimension;
 import devops.ecom.productservice.dao.entities.Price;
 import devops.ecom.productservice.dao.entities.Product;
-import devops.ecom.productservice.dao.enums.Colors;
 import devops.ecom.productservice.dao.enums.ProductCategory;
 import devops.ecom.productservice.dao.enums.ProductStatus;
 import org.springframework.data.rest.core.config.Projection;
@@ -19,7 +18,7 @@ public interface ProductsProjection {
     String getDescription();
     ProductCategory getCategory();
     ProductStatus getStatus();
-    List<Colors> getColors();
+    List<String> getColors();
     boolean isSelected();
     List<String> getProductImagesBas64();
     Price getProductPrice(); // Include the productPrice field

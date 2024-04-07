@@ -1,8 +1,16 @@
 import {Action} from "@ngrx/store";
-import {Product} from "../../models/product.model";
+import {CreatedProduct, Product} from "../../models/product.model";
 
 export enum ProductItemActionType {
   GET_PRODUCT_ITEM = "*PRODUCT_ITEM* GET PRODUCT ITEM",
+
+  SAVE_PRODUCT = "*PRODUCT* SAVE PRODUCT",
+  SAVE_PRODUCT_SUCCESS = "*PRODUCT* SAVE PRODUCT [SUCCESS]",
+  SAVE_PRODUCT_ERROR = "*PRODUCT* SAVE PRODUCT [ERROR] ",
+
+  EDIT_PRODUCT = "*PRODUCT* EDIT PRODUCT",
+  EDIT_PRODUCT_SUCCESS = "*PRODUCT* EDIT PRODUCT [SUCCESS]",
+  EDIT_PRODUCT_ERROR = "*PRODUCT* EDIT PRODUCT [ERROR] ",
 }
 
 
@@ -13,4 +21,40 @@ export class GetProductItemAction implements Action{
   }
 }
 
-export type ProductItemAction = GetProductItemAction
+// save product
+export class SaveProductAction implements Action{
+  type: ProductItemActionType = ProductItemActionType.SAVE_PRODUCT;
+  constructor(public payload : CreatedProduct) {
+  }
+}
+export class SaveProductActionSuccess implements Action{
+  type: ProductItemActionType = ProductItemActionType.SAVE_PRODUCT_SUCCESS;
+  constructor(public payload : any) {
+  }
+}
+export class SaveProductActionError implements Action{
+  type: ProductItemActionType = ProductItemActionType.SAVE_PRODUCT_ERROR;
+  constructor(public payload : string) {
+  }
+}
+
+//edit product
+export class EditProductAction implements Action{
+  type: ProductItemActionType = ProductItemActionType.EDIT_PRODUCT;
+  constructor(public payload : Product) {
+  }
+}
+export class EditProductActionSuccess implements Action{
+  type: ProductItemActionType = ProductItemActionType.EDIT_PRODUCT_SUCCESS;
+  constructor(public payload : any) {
+  }
+}
+export class EditProductActionError implements Action{
+  type: ProductItemActionType = ProductItemActionType.EDIT_PRODUCT_ERROR;
+  constructor(public payload : string) {
+  }
+}
+
+export type ProductItemAction = GetProductItemAction |
+  SaveProductAction | SaveProductActionSuccess | SaveProductActionError |
+  EditProductAction | EditProductActionSuccess | EditProductActionError

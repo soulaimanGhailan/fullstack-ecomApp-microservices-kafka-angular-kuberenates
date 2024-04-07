@@ -32,7 +32,6 @@ public class ProductServiceApplication {
     public CommandLineRunner run(){
         return args -> {
             restConfiguration.exposeIdsFor(Product.class) ;
-            restConfiguration.exposeIdsFor(Price.class) ;
             this.productService.initProduct();
         };
     }

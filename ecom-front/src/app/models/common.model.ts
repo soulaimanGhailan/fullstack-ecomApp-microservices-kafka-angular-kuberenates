@@ -14,3 +14,17 @@ export interface DeleteProductReq{
   customerId : string ,
   productId : string
 }
+
+export enum Color {
+  Red = "Red",
+  Blue = "Blue",
+  Green = "Green",
+  Yellow = "Yellow",
+}
+
+export enum Currency {
+  DOLLAR = "DOLLAR",
+  MAD = "MAD",
+  EUR = "EUR",
+
+}

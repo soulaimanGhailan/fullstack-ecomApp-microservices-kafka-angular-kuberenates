@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Price {
-    private String priceId ;
     private String currency ;
     private long price ;
     private String symbol ;

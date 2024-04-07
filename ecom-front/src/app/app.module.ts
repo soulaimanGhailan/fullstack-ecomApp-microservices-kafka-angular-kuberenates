@@ -37,6 +37,11 @@ import {ShoppingCartEffect} from "./ngrx/ShoppingCartState/cart.effects";
 import {ShoppingCartReducer} from "./ngrx/ShoppingCartState/cart.reducer";
 import {ShoppingCartItemsComponent} from "./components/shopping-cart/shopping-cart-items/shopping-cart-items.component";
 import { SingleItemComponent } from './components/shopping-cart/shopping-cart-items/single-item/single-item.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
+import { ProductPickedImagesComponent } from './components/add-product/product-picked-images/product-picked-images.component';
+import {ProductItemEffect} from "./ngrx/Product-item-State/productItem.effects";
 
 
 @NgModule({
@@ -64,6 +69,10 @@ import { SingleItemComponent } from './components/shopping-cart/shopping-cart-it
     SearchedProductsListHeaderComponent,
     ShoppingCartItemsComponent,
     SingleItemComponent,
+    AdminDashboardComponent,
+    AdminComponent,
+    AddProductComponent,
+    ProductPickedImagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +81,7 @@ import { SingleItemComponent } from './components/shopping-cart/shopping-cart-it
     AppRoutingModule ,
     StoreModule.forRoot({productState : productReducer , selectedProductsState: SelectedProductsReducer
       , productItemState:ProductItemReducer , shoppingCartState : ShoppingCartReducer}) ,
-    EffectsModule.forRoot([ProductsEffects , SelectedProductEffects , ShoppingCartEffect]),
+    EffectsModule.forRoot([ProductsEffects , SelectedProductEffects , ShoppingCartEffect , ProductItemEffect]),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],

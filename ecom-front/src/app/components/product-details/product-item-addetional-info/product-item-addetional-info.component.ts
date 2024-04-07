@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Product} from "../../../models/product.model";
-import {ProductService} from "../../../services/product.service";
+import {ProductService} from "../../../services/productService/product.service";
 
 @Component({
   selector: 'app-product-item-addetional-info',

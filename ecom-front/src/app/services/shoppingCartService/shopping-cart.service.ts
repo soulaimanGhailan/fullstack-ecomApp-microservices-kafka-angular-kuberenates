@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AddItemRequest, ShoppingCart} from "../models/ShoppingCart";
-import {Hosts} from "../envirments/env";
-import {DeleteProductReq} from "../models/common.model";
+import {AddItemRequest, ShoppingCart} from "../../models/ShoppingCart";
+import {Hosts} from "../../envirments/env";
+import {DeleteProductReq} from "../../models/common.model";
 
 @Injectable({
   providedIn: 'root'

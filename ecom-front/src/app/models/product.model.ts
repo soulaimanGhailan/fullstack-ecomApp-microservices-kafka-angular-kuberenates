@@ -28,10 +28,25 @@ export interface ProductsPage{
 
 
 export interface ProductPrice{
-  priceId:string ,
   currency:string ,
   price: number ,
   symbol: string
+}
+
+export interface CreatedProduct{
+  productId?:string  ,
+  name:string ,
+  addingDate?:string ,
+  description:string ,
+  selected:boolean ,
+  productImagesBas64: string[],
+  category:string ,
+  status?:string ,
+  brand:string ;
+  colors: string[],
+  productPrice: ProductPrice ;
+  dimension: Dimension ;
+  pickedColor? : string
 }
 
 export interface ActionPayload<T>{

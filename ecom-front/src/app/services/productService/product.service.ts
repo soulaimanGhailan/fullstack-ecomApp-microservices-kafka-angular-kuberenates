@@ -1,9 +1,9 @@
 import {Injectable, OnInit} from '@angular/core';
 import {map, Observable, switchMap} from "rxjs";
-import {ActionPayload, Product, ProductPrice, ProductsPage} from "../models/product.model";
-import {Hosts} from "../envirments/env";
+import {ActionPayload, CreatedProduct, Product, ProductPrice, ProductsPage} from "../../models/product.model";
+import {Hosts} from "../../envirments/env";
 import {HttpClient} from "@angular/common/http";
-import {PageSize} from "../models/common.model";
+import {PageSize} from "../../models/common.model";
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +49,10 @@ export class ProductService implements OnInit{
 
   public getProductItem(productId : string):Observable<Product>{
     return  this.http.get<Product>(Hosts.productService + "/products/"+productId) ;
+  }
+
+  public saveProduct(product : CreatedProduct):Observable<Product>{
+    return this.http.post<Product>(Hosts.productService + "/api/products" , product) ;
   }
 
   public getDate(product : Product){

@@ -12,7 +12,7 @@ import {
   GetShoppingCartActionError,
   GetShoppingCartActionSuccess
 } from "./cart.actions";
-import {ShoppingCartService} from "../../services/shopping-cart.service";
+import {ShoppingCartService} from "../../services/shoppingCartService/shopping-cart.service";
 
 @Injectable()
 export class ShoppingCartEffect {
