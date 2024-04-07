@@ -1,5 +1,6 @@
 import {Action} from "@ngrx/store";
-import {ActionPayload, PageSize} from "../../models/product.model";
+import {ActionPayload} from "../../models/product.model";
+import {PageSize} from "../../models/common.model";
 
 export enum ProductsActionType  {
   GET_ALL_PRODUCTS = "*PRODUCTS* GET ALL PRODUCTS",

@@ -1,7 +1,8 @@
-import {PageInfo, Product} from "../../models/product.model";
+import { Product} from "../../models/product.model";
 import {ProductAction, ProductsActionType} from "./product.actions";
 import {sample} from "rxjs";
 import {Action} from "@ngrx/store";
+import {PageInfo} from "../../models/common.model";
 
 export enum DataStateEnum{
   LOADING="Loading",

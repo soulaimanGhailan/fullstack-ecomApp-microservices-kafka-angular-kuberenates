@@ -9,3 +9,9 @@ export interface ShoppingCartItem{
   product : Product ,
   quantity : number
 }
+export interface AddItemRequest{
+  productId?:string ,
+  customerId: string ,
+  quantity : number
+  pickedColor?: string
+}

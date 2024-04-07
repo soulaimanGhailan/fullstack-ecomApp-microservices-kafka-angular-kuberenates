@@ -8,8 +8,13 @@
         <a class="btn">
             <i class="icon-trash" ></i>
         </a>
-        <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">
-        {{product.productPrice.symbol}}{{product.productPrice.price}} </a></h4>
+        <a class="btn" style="cursor: pointer" (click)="addProductToCart()">
+          Add to <i class="icon-shopping-cart"></i>
+        </a>
+          <a class="btn btn-primary" href="#">
+          {{product.productPrice.symbol}}{{product.productPrice.price}}
+        </a>
+      </h4>
     </div>
   </div>
 </li>

@@ -12,6 +12,7 @@ import {map, Observable} from "rxjs";
 import {ShoppingCartState} from "../../ngrx/ShoppingCartState/cart.reducer";
 import {GetShoppingCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
 import {Auth_Test_Customer} from "../../envirments/env";
+import {DataStateEnum} from "../../ngrx/productsState/products.reducer";
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit{
   categories : string[] =  Object.values(ProductsCategory).map((color) => String(color));
   searchFormGroup? : FormGroup
   shoppingCart$? : Observable<ShoppingCartState>
+  public readonly CartDataState = DataStateEnum ;
   constructor(private router : Router , private fb : FormBuilder , private store :Store<any>) {
   }
 

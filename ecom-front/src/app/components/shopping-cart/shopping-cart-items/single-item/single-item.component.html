@@ -1,0 +1,24 @@
+<ng-container *ngIf="item">
+
+    <td> <img width="60" src="{{'data:image/jpeg;base64,'+item.product.productImagesBas64[0]}}" alt=""/></td>
+    <td>MASSA AST<br/>Color : {{item.product.pickedColor}}</td>
+    <td>
+
+      <div class="input-append">
+        <input class="span1" style="max-width:34px" placeholder="{{item.quantity}}" id="appendedInputButtons" size="16" type="text">
+        <button class="btn" type="button">
+          <i class="icon-minus"></i>
+        </button>
+        <button class="btn" type="button">
+          <i class="icon-plus"></i>
+        </button>
+        <button class="btn btn-danger" type="button">
+          <i class="icon-remove icon-white"></i>
+        </button>				</div>
+    </td>
+    <td>{{item.product.productPrice.symbol}}{{item.product.productPrice.price}}</td>
+    <td>{{item.product.productPrice.symbol}}0</td>
+    <td>{{item.product.productPrice.symbol}}0</td>
+    <td>{{item.product.productPrice.price}}</td>
+
+</ng-container>

@@ -1,7 +1,8 @@
-import {PageInfo, Product} from "../../models/product.model";
+import {Product} from "../../models/product.model";
 import {DataStateEnum} from "../productsState/products.reducer";
 import {Action} from "@ngrx/store";
 import {SelectedProductAction, NewProductActionType} from "./SelectedProduct.action";
+import {PageInfo} from "../../models/common.model";
 
 
 export interface SelectedProductsState {

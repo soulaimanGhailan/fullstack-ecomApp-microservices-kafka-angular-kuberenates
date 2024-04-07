@@ -3,6 +3,9 @@ import {Product} from "../../models/product.model";
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
 import {GetProductItemAction} from "../../ngrx/Product-item-State/productItem.actions";
+import {AddProductToCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
+import {AddItemRequest} from "../../models/ShoppingCart";
+import {Auth_Test_Customer} from "../../envirments/env";
 
 @Component({
   selector: 'app-single-product',
@@ -21,5 +24,10 @@ export class SingleProductComponent implements OnInit{
   onProductItem() {
     this.store.dispatch(new GetProductItemAction(this.product)) ;
     this.router.navigateByUrl("/product-details") ;
+  }
+
+  addProductToCart() {
+      let itemReq : AddItemRequest = {productId: this.product.productId , quantity:1 ,customerId : Auth_Test_Customer.customerId }
+      this.store.dispatch(new AddProductToCartAction(itemReq))
   }
 }

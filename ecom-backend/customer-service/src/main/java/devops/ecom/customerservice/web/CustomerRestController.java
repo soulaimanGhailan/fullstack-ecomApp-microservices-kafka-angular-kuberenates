@@ -25,5 +25,13 @@ public class CustomerRestController {
             throw new RuntimeException(e);
         }
     }
+    @DeleteMapping("{customerId}/{productId}")
+    public ShoppingCart deleteItemFromCart(@PathVariable String customerId , @PathVariable String productId){
+        try {
+            return this.cartService.removeItemFromCart(customerId , productId) ;
+        } catch (CustomerNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

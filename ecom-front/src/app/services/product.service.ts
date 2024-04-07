@@ -1,8 +1,9 @@
 import {Injectable, OnInit} from '@angular/core';
 import {map, Observable, switchMap} from "rxjs";
-import {ActionPayload, PageInfo, PageSize, Product, ProductPrice, ProductsPage} from "../models/product.model";
+import {ActionPayload, Product, ProductPrice, ProductsPage} from "../models/product.model";
 import {Hosts} from "../envirments/env";
 import {HttpClient} from "@angular/common/http";
+import {PageSize} from "../models/common.model";
 
 @Injectable({
   providedIn: 'root'

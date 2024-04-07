@@ -35,6 +35,8 @@ import { SearchedProductsListComponent } from './components/searched-products-li
 import { SearchedProductsListHeaderComponent } from './components/searched-products-list/searched-products-list-header/searched-products-list-header.component';
 import {ShoppingCartEffect} from "./ngrx/ShoppingCartState/cart.effects";
 import {ShoppingCartReducer} from "./ngrx/ShoppingCartState/cart.reducer";
+import {ShoppingCartItemsComponent} from "./components/shopping-cart/shopping-cart-items/shopping-cart-items.component";
+import { SingleItemComponent } from './components/shopping-cart/shopping-cart-items/single-item/single-item.component';
 
 
 @NgModule({
@@ -60,6 +62,8 @@ import {ShoppingCartReducer} from "./ngrx/ShoppingCartState/cart.reducer";
     ProductItemAddetionalInfoComponent,
     SearchedProductsListComponent,
     SearchedProductsListHeaderComponent,
+    ShoppingCartItemsComponent,
+    SingleItemComponent,
   ],
   imports: [
     BrowserModule,

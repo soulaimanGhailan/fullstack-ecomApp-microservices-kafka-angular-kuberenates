@@ -10,7 +10,11 @@
           <a href="product_summary.html"><span>&pound;</span></a>
           <span class="btn btn-mini">$155.00</span>
           <a href="product_summary.html"><span class="">$</span></a>
-          <a style="cursor: pointer" (click)="onShCart()"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
+          <ng-container *ngIf="shoppingCart$ | async  as state">
+            <ng-container *ngIf="state.dataState == CartDataState.LOADED && state.shoppingCart">
+              <a style="cursor: pointer" (click)="onShCart()"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ {{state.shoppingCart.items.length}} ] Itemes in your cart </span> </a>
+            </ng-container>
+          </ng-container>
         </div>
       </div>
     </div>

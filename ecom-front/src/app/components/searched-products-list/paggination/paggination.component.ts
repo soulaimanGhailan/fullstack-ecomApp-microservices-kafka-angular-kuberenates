@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PageInfo} from "../../../models/product.model";
+import {} from "../../../models/product.model";
 import {FetchMethode} from "../../../ngrx/productsState/products.reducer";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
@@ -7,6 +7,7 @@ import {
   GetProductsPageByCategoryAction,
   GetProductsPageByKeyWordAction
 } from "../../../ngrx/productsState/product.actions";
+import {PageInfo} from "../../../models/common.model";
 
 @Component({
   selector: 'app-paggination',

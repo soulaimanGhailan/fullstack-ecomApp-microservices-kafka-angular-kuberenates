@@ -4,8 +4,10 @@ import {Action} from "@ngrx/store";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 
 import {
+  AddProductToCartActionError,
+  AddProductToCartActionSuccess,
   CartAction,
-  CartActionType,
+  CartActionType, DeleteProductFromCartActionError, DeleteProductFromCartActionSuccess,
   GetShoppingCartAction,
   GetShoppingCartActionError,
   GetShoppingCartActionSuccess
@@ -25,6 +27,34 @@ export class ShoppingCartEffect {
             return new GetShoppingCartActionSuccess(data)
           }) ,
           catchError(err => of(new GetShoppingCartActionError(err.message)))
+        ) ;
+      })
+    )
+  );
+
+  addProductToCart:Observable<Action>=createEffect(
+    () => this.effectAction.pipe(
+      ofType(CartActionType.ADD_PRODUCT_TO_CART) ,
+      mergeMap((action: CartAction) => {
+        return this.shCartService.addProductToShoppingCart(action.payload).pipe(
+          map(data => {
+            return new AddProductToCartActionSuccess(data)
+          }) ,
+          catchError(err => of(new AddProductToCartActionError(err.message)))
+        ) ;
+      })
+    )
+  );
+
+  deleteProductFromCart:Observable<Action>=createEffect(
+    () => this.effectAction.pipe(
+      ofType(CartActionType.DELETE_PRODUCT_FROM_CART) ,
+      mergeMap((action: CartAction) => {
+        return this.shCartService.deleteItemFromCart(action.payload).pipe(
+          map(data => {
+            return new DeleteProductFromCartActionSuccess(data)
+          }) ,
+          catchError(err => of(new DeleteProductFromCartActionError(err.message)))
         ) ;
       })
     )

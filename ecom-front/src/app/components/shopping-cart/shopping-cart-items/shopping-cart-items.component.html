@@ -1,0 +1,62 @@
+<ng-container *ngIf="shoppingCart">
+
+  <h3>  SHOPPING CART [ <small>{{shoppingCart.items.length}} Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
+  <hr class="soft"/>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Product</th>
+      <th>Description</th>
+      <th>Quantity/Update</th>
+      <th>Price</th>
+      <th>Discount</th>
+      <th>Tax</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of shoppingCart.items">
+        <td> <img width="60" src="{{'data:image/jpeg;base64,'+item.product.productImagesBas64[0]}}" alt=""/></td>
+        <td>MASSA AST<br/>Color : {{item.product.pickedColor}}</td>
+        <td>
+
+            <div class="input-append">
+              <input class="span1" style="max-width:34px" placeholder="{{item.quantity}}" id="appendedInputButtons" size="16" type="text">
+              <button class="btn" type="button">
+                <i class="icon-minus"></i>
+              </button>
+              <button class="btn" type="button">
+                <i class="icon-plus"></i>
+              </button>
+              <button (click)="onDeleteItem(item.product)" class="btn btn-danger" type="button">
+                <i class="icon-remove icon-white"></i>
+              </button>				</div>
+        </td>
+        <td>{{item.product.productPrice.symbol}}{{item.product.productPrice.price}}</td>
+        <td>{{item.product.productPrice.symbol}}0</td>
+        <td>{{item.product.productPrice.symbol}}0</td>
+        <td>{{item.product.productPrice.price}}</td>
+      </tr>
+
+
+    <tr>
+      <td colspan="6" style="text-align:right">Total Price:	</td>
+      <td>{{shoppingCartService.calcTotalPrice(shoppingCart)}}</td>
+    </tr>
+    <tr>
+      <td colspan="6" style="text-align:right">Total Discount:	</td>
+      <td> $50.00</td>
+    </tr>
+    <tr>
+      <td colspan="6" style="text-align:right">Total Tax:	</td>
+      <td> $31.00</td>
+    </tr>
+    <tr>
+      <td colspan="6" style="text-align:right"><strong>TOTAL ($228 - $50 + $31) =</strong></td>
+      <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</ng-container>

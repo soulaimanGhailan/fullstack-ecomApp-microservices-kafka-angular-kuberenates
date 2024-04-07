@@ -1,3 +1,5 @@
+import {PageInfo, PageSize} from "./common.model";
+
 export interface Product {
   productId:string  ,
   name:string ,
@@ -23,12 +25,7 @@ export interface ProductsPage{
   products: Product[] ,
   pageInfo : PageInfo ;
 }
-export interface PageInfo {
-  totalPages:number ,
-  size:number ,
-  totalElements:number ,
-  number: number
-}
+
 
 export interface ProductPrice{
   priceId:string ,
@@ -36,10 +33,7 @@ export interface ProductPrice{
   price: number ,
   symbol: string
 }
-export interface PageSize{
-  page: number ,
-  size: number
-}
+
 export interface ActionPayload<T>{
   pageSize:PageSize;
   data : T;

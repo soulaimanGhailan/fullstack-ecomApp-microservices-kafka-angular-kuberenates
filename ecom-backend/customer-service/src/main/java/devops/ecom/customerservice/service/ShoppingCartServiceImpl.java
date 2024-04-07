@@ -5,8 +5,6 @@ import devops.ecom.customerservice.dao.Customer;
 import devops.ecom.customerservice.dao.ShoppingCart;
 import devops.ecom.customerservice.dao.ShoppingCartItem;
 import devops.ecom.customerservice.exceptions.CustomerNotFoundException;
-import devops.ecom.customerservice.exceptions.ShoppingCartItemNotFound;
-import devops.ecom.customerservice.exceptions.ShoppingCartNotFound;
 import devops.ecom.customerservice.model.AddItemRequest;
 import devops.ecom.customerservice.model.Price;
 import devops.ecom.customerservice.model.Product;
@@ -48,7 +46,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart shoppingCart = customer.getShoppingCart();
         ShoppingCartItem item = checkProductInCart(shoppingCart , addItemRequest.getProductId()) ;
         if(item != null){
-            return updateItemQuantityInCart(item , addItemRequest.getQuantity() , shoppingCart);
+            return updateItemInCart(item , addItemRequest , shoppingCart);
         }else{
             item = createItem(addItemRequest) ;
             shoppingCart.getItems().add(item) ;
@@ -60,15 +58,26 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart removeItemFromCart(String customerId, String productId) {
-        return null;
+    public ShoppingCart removeItemFromCart(String customerId, String productId) throws CustomerNotFoundException {
+        Customer customer = this.customerRepo.findById(customerId).orElseThrow(()
+                -> new CustomerNotFoundException("customer fo id *" + customerId + "not found"));
+        ShoppingCart shoppingCart = customer.getShoppingCart();
+        ShoppingCartItem item = checkProductInCart(shoppingCart , productId) ;
+        if(item !=null){
+            shoppingCart.getItems().remove(item) ;
+            ShoppingCart savedCard = this.shoppingCartRepo.save(shoppingCart);
+            customer.setShoppingCart(savedCard);
+            this.customerRepo.save(customer);
+            return savedCard ;
+        }else throw  new RuntimeException("product not found in shoppingCart to delete") ;
+
     }
 
     @Override
-    public ShoppingCart updateItemQuantityInCart(ShoppingCartItem item, int quantity, ShoppingCart cart)   {
+    public ShoppingCart updateItemInCart(ShoppingCartItem item, AddItemRequest addItemRequest, ShoppingCart cart)   {
         int index = cart.getItems().indexOf(item) ;
-        item.setQuantity(quantity);
-        cart.getItems().get(index).setQuantity(quantity);
+        cart.getItems().get(index).setQuantity(addItemRequest.getQuantity());
+        cart.getItems().get(index).getProduct().setPickedColor(addItemRequest.getPickedColor());
         return this.shoppingCartRepo.save(cart);
 
     }

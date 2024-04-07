@@ -3,23 +3,23 @@
   <div class="span6">
     <h3>{{product.name}}  </h3>
     <hr class="soft"/>
-    <form class="form-horizontal qtyFrm">
+
+    <form [formGroup]="addProductFrom" class="form-horizontal qtyFrm">
       <div class="control-group">
         <label class="control-label" style="color: black"><span>{{product.productPrice.symbol}}{{product.productPrice.price}}</span></label>
         <div class="controls">
-          <input type="number" class="span1" placeholder="Qty."/>
-          <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+          <input formControlName="quantity" type="number" class="span1" placeholder="Qty."/>
+          <button (click)="onAddProductToCart()" type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
         </div>
       </div>
-    </form>
 
     <hr class="soft"/>
     <h4>100 items in stock</h4>
-    <form class="form-horizontal qtyFrm pull-right">
+
       <div class="control-group">
         <label class="control-label"><span style="color: black">Color</span></label>
         <div class="controls">
-          <select class="span2">
+          <select formControlName="color" class="span2">
             <option *ngFor="let color of product.colors">{{color}}</option>
           </select>
         </div>
