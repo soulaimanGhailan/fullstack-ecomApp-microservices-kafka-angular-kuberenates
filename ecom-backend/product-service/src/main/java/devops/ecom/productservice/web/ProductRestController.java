@@ -23,7 +23,11 @@ public class ProductRestController {
     }
 
     @PostMapping
-    public Product getProductsPageInfo(@RequestBody Product product){
+    public Product createProduct(@RequestBody Product product){
         return this.productService.createProduct(product);
+    }
+    @PutMapping
+    public Product update(@RequestBody Product product){
+        return this.productService.updateProduct(product);
     }
 }

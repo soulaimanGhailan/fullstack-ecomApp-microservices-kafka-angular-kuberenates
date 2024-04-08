@@ -8,6 +8,7 @@ import {
   ProductsActionType
 } from "../productsState/product.actions";
 import {
+  EditProductAction, EditProductActionError, EditProductActionSuccess,
   ProductItemAction,
   ProductItemActionType,
   SaveProductActionError,
@@ -35,18 +36,18 @@ export class ProductItemEffect{
     )
   );
 
-  // editProductEffect:Observable<Action>=createEffect(
-  //   () => this.effectAction.pipe(
-  //     ofType(ProductItemActionType.EDIT_PRODUCT) ,
-  //     mergeMap((action: ProductItemAction) => {
-  //       return this.productService.editProduct(action.payload).pipe(
-  //         map(data => {
-  //           return new EditProductActionSuccess(data)
-  //         }) ,
-  //         catchError(err => of(new EditProductActionError(err.message)))
-  //       ) ;
-  //     })
-  //   )
-  // );
+  editProductEffect:Observable<Action>=createEffect(
+    () => this.effectAction.pipe(
+      ofType(ProductItemActionType.EDIT_PRODUCT) ,
+      mergeMap((action: ProductItemAction) => {
+        return this.productService.editProduct(action.payload).pipe(
+          map(data => {
+            return new EditProductActionSuccess(data)
+          }) ,
+          catchError(err => of(new EditProductActionError(err.message)))
+        ) ;
+      })
+    )
+  );
 
 }

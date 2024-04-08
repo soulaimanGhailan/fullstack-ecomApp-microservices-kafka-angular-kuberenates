@@ -28,14 +28,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCartItem createItem(AddItemRequest addItemRequest) {
-
+        int quantity = 1 ;
         Product p = this.productRestClient.getProduct(addItemRequest.getProductId()) ;
 //        Price productPrice = this.productRestClient.getProductPrice(addItemRequest.getProductId());
 //        p.setProductPrice(productPrice);
         p.setPickedColor(addItemRequest.getPickedColor());
+        if(!addItemRequest.isIncrement())
+            quantity = addItemRequest.getQuantity();
         return ShoppingCartItem.builder()
                 .product(p)
-                .quantity(addItemRequest.getQuantity())
+                .quantity(quantity)
                 .build();
     }
 
@@ -76,7 +78,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart updateItemInCart(ShoppingCartItem item, AddItemRequest addItemRequest, ShoppingCart cart)   {
         int index = cart.getItems().indexOf(item) ;
-        cart.getItems().get(index).setQuantity(addItemRequest.getQuantity());
+        if(addItemRequest.isIncrement())
+            cart.getItems().get(index).setQuantity(item.getQuantity() + 1);
+        else
+            cart.getItems().get(index).setQuantity(addItemRequest.getQuantity());
         cart.getItems().get(index).getProduct().setPickedColor(addItemRequest.getPickedColor());
         return this.shoppingCartRepo.save(cart);
 

@@ -6,7 +6,7 @@ import {AddItemRequest} from "../../../models/ShoppingCart";
 import {Store} from "@ngrx/store";
 import {Auth_Test_Customer} from "../../../envirments/env";
 import {Router} from "@angular/router";
-import {EditProductAction} from "../../../ngrx/Product-item-State/productItem.actions";
+import {EditProductAction, GetProductItemAction} from "../../../ngrx/Product-item-State/productItem.actions";
 
 @Component({
   selector: 'app-product-item-description',
@@ -29,12 +29,12 @@ export class ProductItemDescriptionComponent implements OnInit{
   onAddProductToCart() {
     let quantity : number = this.addProductFrom.value.quantity;
     let color : string = this.addProductFrom.value.color;
-    this.store.dispatch(new AddProductToCartAction({productId :this.product?.productId , quantity: quantity ,customerId :Auth_Test_Customer.customerId ,pickedColor:color}))
+    this.store.dispatch(new AddProductToCartAction({productId :this.product?.productId , quantity: quantity ,customerId :Auth_Test_Customer.customerId ,pickedColor:color  ,increment:false}))
   }
 
   onEditProduct() {
     if(this.product){
-      this.store.dispatch(new EditProductAction(this.product))
+      this.store.dispatch(new GetProductItemAction(this.product))
       this.router.navigateByUrl("/edit-product");
     }
 

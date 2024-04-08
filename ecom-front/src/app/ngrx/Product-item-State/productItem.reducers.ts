@@ -13,8 +13,13 @@ const initialState: ProductItemState = {
 }
 export function ProductItemReducer(state: ProductItemState=initialState , action : Action):ProductItemState{
   switch (action.type){
+    // get product item
     case ProductItemActionType.GET_PRODUCT_ITEM  :
       return {...state , dataState:DataStateEnum.LOADED , product: (<ProductItemAction>action).payload}
+
+    // empty product item state
+    case ProductItemActionType.EMPTY_PRODUCT_ITEM_STATE  :
+      return initialState ;
 
     //save Product
     case ProductItemActionType.SAVE_PRODUCT  :
@@ -27,10 +32,10 @@ export function ProductItemReducer(state: ProductItemState=initialState , action
     //edit Product
     case ProductItemActionType.EDIT_PRODUCT  :
       return {...state , dataState:DataStateEnum.EDIT , product: (<ProductItemAction>action).payload}
-    // case ProductItemActionType.EDIT_PRODUCT_SUCCESS  :
-    //   return {...state , dataState:DataStateEnum.LOADED , product: (<ProductItemAction>action).payload}
-    // case ProductItemActionType.EDIT_PRODUCT_ERROR  :
-    //   return {...state , dataState:DataStateEnum.ERROR , errorMessage:(<ProductItemAction>action).payload}
+    case ProductItemActionType.EDIT_PRODUCT_SUCCESS  :
+      return {...state , dataState:DataStateEnum.EDITED , product: (<ProductItemAction>action).payload}
+    case ProductItemActionType.EDIT_PRODUCT_ERROR  :
+      return {...state , dataState:DataStateEnum.ERROR , errorMessage:(<ProductItemAction>action).payload}
     default : return  {...state}
   }
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Route, Router} from "@angular/router";
+import {Store} from "@ngrx/store";
+import {EmptyProductItemAction} from "../../ngrx/Product-item-State/productItem.actions";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,9 +10,10 @@ import {Route, Router} from "@angular/router";
 })
 export class AdminDashboardComponent {
 
-  constructor(private router : Router) {
+  constructor(private router : Router, private store : Store<any>) {
   }
   onAddProduct() {
+    this.store.dispatch(new EmptyProductItemAction({}))
     this.router.navigateByUrl("/addProduct")
   }
 }

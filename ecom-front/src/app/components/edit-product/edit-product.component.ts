@@ -6,7 +6,8 @@ import {Store} from "@ngrx/store";
 import {DataStateEnum, ProductState} from "../../ngrx/productsState/products.reducer";
 import {map, Observable} from "rxjs";
 import {ProductItemState} from "../../ngrx/Product-item-State/productItem.reducers";
-import {SaveProductAction} from "../../ngrx/Product-item-State/productItem.actions";
+import {EditProductAction, GetProductItemAction} from "../../ngrx/Product-item-State/productItem.actions";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-product',
@@ -21,20 +22,23 @@ export class EditProductComponent implements OnInit{
   currencies : string[] =  Object.values(Currency).map((val) => String(val));
   submitted:boolean = false
   public dataState = DataStateEnum ;
-  constructor(private store : Store<any> , private fb : FormBuilder) {
+  editedProduct! : ProductItemState ;
+  productImages!: string[]
+
+  constructor(private store : Store<any> , private fb : FormBuilder , private router : Router) {
   }
 
   ngOnInit(): void {
     this.store.subscribe(
       s => {
           this.productState=s.productItemState ;
-          if(s.productItemState.dataState == this.dataState.EDIT){
-            console.log(s.productItemState)
+          if(s.productItemState.dataState == this.dataState.LOADED){
+            this.productImages = s.productItemState.product.productImagesBas64 ;
             this.editProductFormGroup=this.fb.group({
               productName : [s.productItemState.product.name , Validators.required],
-              productImage1 : [null , Validators.required],
-              productImage2 : [null , Validators.required],
-              productImage3 : [null , Validators.required],
+              productImage1 : [null],
+              productImage2 : [null],
+              productImage3 : [null],
               productBrand : [s.productItemState.product.brand , Validators.required],
               productPrice : [s.productItemState.product.productPrice.price , Validators.required],
               productCurrency : [s.productItemState.product.productPrice.currency , Validators.required],
@@ -51,11 +55,43 @@ export class EditProductComponent implements OnInit{
       }
     )
 
+
+    let confirmationShown = false;
+    this.store.subscribe(
+      s => {
+        if(s.productItemState.dataState == DataStateEnum.EDITED)
+          this.editedProduct = s.productItemState
+        if(this.editedProduct && this.editedProduct.product  && !confirmationShown){
+          console.log(this.editedProduct.product?.productId) ;
+          confirmationShown = true;
+          let confirmation : boolean = confirm("product of name " + this.editedProduct.product.name + " has been created edited " +
+            "confirm to go to see product details");
+          if(confirmation == true )
+          {
+            this.router.navigateByUrl("/product-details") ;
+            this.store.dispatch(new GetProductItemAction(this.editedProduct.product)) ;
+          }
+        }
+
+      }
+    )
   }
 
   editProduct() {
     this.submitted = true ;
+
     if(this.editProductFormGroup.invalid) return ;
+
+    let selectedImage: string[] = []
+    for (let i = 1; i < 4; i++) {
+      const controlName = `productImage${i}` ;
+        if(this.editProductFormGroup.get(controlName)?.value){
+          selectedImage.push(this.editProductFormGroup.get(controlName)?.value)
+        }
+        else
+          selectedImage.push(this.productImages[i-1])
+    }
+
     let product: CreatedProduct ={
       productId: this.productState?.product?.productId ,
       name : this.editProductFormGroup.get("productName")?.value ,
@@ -64,11 +100,7 @@ export class EditProductComponent implements OnInit{
       productPrice : {price :this.editProductFormGroup.get("productPrice")?.value ,
         currency:this.editProductFormGroup.get("productCurrency")?.value ,
         symbol: "MAD" } ,
-      productImagesBas64: [
-        this.editProductFormGroup.get("productImage1")?.value ,
-        this.editProductFormGroup.get("productImage2")?.value ,
-        this.editProductFormGroup.get("productImage3")?.value
-      ] ,
+      productImagesBas64: selectedImage,
       colors: this.editProductFormGroup.get("productColors")?.value ,
       brand : this.editProductFormGroup.get("productBrand")?.value ,
       selected : this.editProductFormGroup.get("productSelected")?.value ,
@@ -80,7 +112,7 @@ export class EditProductComponent implements OnInit{
         width:this.editProductFormGroup.get("productWidth")?.value
       } ,
     }
-    this.store.dispatch(new SaveProductAction(product)) ;
+    this.store.dispatch(new EditProductAction(product)) ;
   }
 
   onFileSelected(event: any , imageNum: number) {
@@ -110,6 +142,7 @@ export class EditProductComponent implements OnInit{
     reader.readAsDataURL(file);
     event.target.value = ''
   }
+
 
 
 }

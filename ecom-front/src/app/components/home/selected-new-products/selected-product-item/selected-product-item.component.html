@@ -1,7 +1,7 @@
 <li class="span3" style="margin: 5px">
   <div class="thumbnail" style="background-color: white">
     <i class="tag"></i>
-    <a href="product_details.html"><img src="{{newProduct.productImagesBas64[0]}}" alt=""></a>
+    <a (click)="onSelectedProduct()" style="cursor: pointer"><img src="{{newProduct.productImagesBas64[0]}}" alt=""></a>
     <div class="caption">
       <h5>{{newProduct.name}}</h5>
       <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">

@@ -16,8 +16,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of shoppingCart.items">
-        <td> <img width="60" src="{{item.product.productImagesBas64[0]}}" alt=""/></td>
-        <td>MASSA AST<br/>Color : {{item.product.pickedColor}}</td>
+        <td (click)="goToProduct(item.product)"> <img width="60" src="{{item.product.productImagesBas64[0]}}" alt=""/></td>
+        <td>{{item.product.name}}<br/>Color : {{item.product.pickedColor}}</td>
         <td>
 
             <div class="input-append">
@@ -35,7 +35,7 @@
         <td>{{item.product.productPrice.symbol}}{{item.product.productPrice.price}}</td>
         <td>{{item.product.productPrice.symbol}}0</td>
         <td>{{item.product.productPrice.symbol}}0</td>
-        <td>{{item.product.productPrice.price}}</td>
+        <td>{{item.quantity*item.product.productPrice.price}}</td>
       </tr>
 
 
@@ -45,15 +45,15 @@
     </tr>
     <tr>
       <td colspan="6" style="text-align:right">Total Discount:	</td>
-      <td> $50.00</td>
+      <td> 0</td>
     </tr>
     <tr>
       <td colspan="6" style="text-align:right">Total Tax:	</td>
-      <td> $31.00</td>
+      <td> 0</td>
     </tr>
     <tr>
-      <td colspan="6" style="text-align:right"><strong>TOTAL ($228 - $50 + $31) =</strong></td>
-      <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>
+      <td colspan="6" style="text-align:right"><strong>TOTAL ({{shoppingCartService.calcTotalPrice(shoppingCart)}} - 0 - 0) =</strong></td>
+      <td class="label label-important" style="display:block"> <strong> {{shoppingCartService.calcTotalPrice(shoppingCart)}} </strong></td>
     </tr>
     </tbody>
   </table>

@@ -12,6 +12,7 @@ export interface ShoppingCartItem{
 export interface AddItemRequest{
   productId?:string ,
   customerId: string ,
-  quantity : number
-  pickedColor?: string
+  quantity? : number
+  pickedColor?: string ,
+  increment: boolean;
 }

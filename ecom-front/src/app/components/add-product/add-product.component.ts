@@ -1,10 +1,13 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Observable} from "rxjs";
+import {map, Observable, Subscription} from "rxjs";
 import {CreatedProduct, Product, ProductsCategory} from "../../models/product.model";
 import {Store} from "@ngrx/store";
-import {SaveProductAction} from "../../ngrx/Product-item-State/productItem.actions";
+import {GetProductItemAction, SaveProductAction} from "../../ngrx/Product-item-State/productItem.actions";
 import {Color, Currency} from "../../models/common.model";
+import {ProductItemState} from "../../ngrx/Product-item-State/productItem.reducers";
+import {DataStateEnum} from "../../ngrx/productsState/products.reducer";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-product',
@@ -16,10 +19,12 @@ export class AddProductComponent implements OnInit{
   categories : string[] =  Object.values(ProductsCategory).map((val) => String(val));
   colors : string[] =  Object.values(Color).map((val) => String(val));
   currencies : string[] =  Object.values(Currency).map((val) => String(val));
-  submitted:boolean = false
-  constructor(private fb : FormBuilder , private store : Store<any>) {
+  submitted:boolean = false ;
+  savedProduct! : ProductItemState
+  constructor(private fb : FormBuilder , private store : Store<any> , private router: Router) {
   }
   ngOnInit(): void {
+
     this.addProductFormGroup=this.fb.group({
       productName : ['' , Validators.required],
       productImage1 : [null , Validators.required],
@@ -38,6 +43,26 @@ export class AddProductComponent implements OnInit{
       productCategory : ["" , Validators.required]
     })
 
+    let confirmationShown = false;
+    this.store.subscribe(
+
+      s => {
+        if(s.productItemState.dataState == DataStateEnum.LOADED)
+          this.savedProduct = s.productItemState
+        if(this.savedProduct && this.savedProduct.product  && !confirmationShown){
+          console.log(this.savedProduct.product?.productId) ;
+          confirmationShown = true;
+          let confirmation : boolean = confirm("product of name " + this.savedProduct.product.name + " has been created succesfuly " +
+            "confirm to go to see product details");
+          if(confirmation == true )
+          {
+            this.router.navigateByUrl("/product-details") ;
+            this.store.dispatch(new GetProductItemAction(this.savedProduct.product)) ;
+          }
+        }
+
+      }
+    )
 
      }
 

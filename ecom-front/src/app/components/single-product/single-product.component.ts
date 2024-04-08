@@ -27,7 +27,7 @@ export class SingleProductComponent implements OnInit{
   }
 
   addProductToCart() {
-      let itemReq : AddItemRequest = {productId: this.product.productId , quantity:1 ,customerId : Auth_Test_Customer.customerId }
-      this.store.dispatch(new AddProductToCartAction(itemReq))
+      let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : Auth_Test_Customer.customerId , increment:true }
+    this.store.dispatch(new AddProductToCartAction(itemReq))
   }
 }

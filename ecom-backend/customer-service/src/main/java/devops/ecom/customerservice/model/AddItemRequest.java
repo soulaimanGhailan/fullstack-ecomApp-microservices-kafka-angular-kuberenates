@@ -8,4 +8,5 @@ public class AddItemRequest {
     private String customerId ;
     private int quantity;
     private String pickedColor ;
+    private boolean increment ;
 }
