@@ -52,7 +52,11 @@ export class ProductService implements OnInit{
   }
 
   public saveProduct(product : CreatedProduct):Observable<Product>{
-    return this.http.post<Product>(Hosts.productService + "/api/products" , product) ;
+    return this.http.post<Product>(Hosts.productService + "/products" , product) ;
+  }
+
+  public editProduct(product : CreatedProduct):Observable<Product>{
+    return this.http.put<Product>(Hosts.productService + "/products" , product) ;
   }
 
   public getDate(product : Product){

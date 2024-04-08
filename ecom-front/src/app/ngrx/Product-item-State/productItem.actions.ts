@@ -9,8 +9,8 @@ export enum ProductItemActionType {
   SAVE_PRODUCT_ERROR = "*PRODUCT* SAVE PRODUCT [ERROR] ",
 
   EDIT_PRODUCT = "*PRODUCT* EDIT PRODUCT",
-  EDIT_PRODUCT_SUCCESS = "*PRODUCT* EDIT PRODUCT [SUCCESS]",
-  EDIT_PRODUCT_ERROR = "*PRODUCT* EDIT PRODUCT [ERROR] ",
+  // EDIT_PRODUCT_SUCCESS = "*PRODUCT* EDIT PRODUCT [SUCCESS]",
+  // EDIT_PRODUCT_ERROR = "*PRODUCT* EDIT PRODUCT [ERROR] ",
 }
 
 
@@ -44,17 +44,17 @@ export class EditProductAction implements Action{
   constructor(public payload : Product) {
   }
 }
-export class EditProductActionSuccess implements Action{
-  type: ProductItemActionType = ProductItemActionType.EDIT_PRODUCT_SUCCESS;
-  constructor(public payload : any) {
-  }
-}
-export class EditProductActionError implements Action{
-  type: ProductItemActionType = ProductItemActionType.EDIT_PRODUCT_ERROR;
-  constructor(public payload : string) {
-  }
-}
+// export class EditProductActionSuccess implements Action{
+//   type: ProductItemActionType = ProductItemActionType.EDIT_PRODUCT_SUCCESS;
+//   constructor(public payload : any) {
+//   }
+// }
+// export class EditProductActionError implements Action{
+//   type: ProductItemActionType = ProductItemActionType.EDIT_PRODUCT_ERROR;
+//   constructor(public payload : string) {
+//   }
+// }
 
 export type ProductItemAction = GetProductItemAction |
-  SaveProductAction | SaveProductActionSuccess | SaveProductActionError |
-  EditProductAction | EditProductActionSuccess | EditProductActionError
+  SaveProductAction | SaveProductActionSuccess | SaveProductActionError
+  // EditProductAction | EditProductActionSuccess | EditProductActionError

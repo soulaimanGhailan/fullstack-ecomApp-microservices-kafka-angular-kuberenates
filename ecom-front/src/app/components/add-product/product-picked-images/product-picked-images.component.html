@@ -1,13 +1,19 @@
 <div class="span4">
   <div id="gallery" class="span3">
     <h3>{{productName}}</h3>
-    <img [src]="productImage1"  style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+    <img *ngIf="productImage1" [src]="productImage1"  style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+    <img *ngIf="!productImage1 && productState.product" [src]="productState.product.productImagesBas64[0]"  style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
     <div id="differentview" class="moreOptopm carousel slide">
       <div class="carousel-inner">
         <div class="item active">
-          <a> <img style="width:29%" [src]="productImage1"  alt=""/></a>
-          <a> <img style="width:29%" [src]="productImage2"  alt=""/></a>
-          <a > <img style="width:29%" [src]="productImage3"  alt=""/></a>
+          <a *ngIf="productImage1"> <img style="width:29%" [src]="productImage1"  alt=""/></a>
+          <a *ngIf="!productImage1 && productState.product"> <img style="width:29%" [src]="productState.product.productImagesBas64[0]"  alt=""/></a>
+
+          <a *ngIf="productImage2"> <img style="width:29%" [src]="productImage2"  alt=""/></a>
+          <a *ngIf="!productImage2 && productState.product"> <img style="width:29%" [src]="productState.product.productImagesBas64[1]"  alt=""/></a>
+
+          <a *ngIf="productImage3" > <img style="width:29%" [src]="productImage3"  alt=""/></a>
+          <a *ngIf="!productImage3 && productState.product" > <img style="width:29%" [src]="productState.product.productImagesBas64[2]"  alt=""/></a>
         </div>
       </div>
     </div>

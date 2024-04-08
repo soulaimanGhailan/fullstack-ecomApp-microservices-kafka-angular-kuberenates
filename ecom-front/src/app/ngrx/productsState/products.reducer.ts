@@ -9,6 +9,7 @@ export enum DataStateEnum{
   LOADED ="Loaded",
   ERROR = "Error",
   INITIAL="Initial",
+  EDIT = "EDIT"
 }
 export enum FetchMethode{
   ALL="ALL"  ,

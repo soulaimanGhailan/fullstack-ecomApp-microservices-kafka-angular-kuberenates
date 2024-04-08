@@ -42,6 +42,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { ProductPickedImagesComponent } from './components/add-product/product-picked-images/product-picked-images.component';
 import {ProductItemEffect} from "./ngrx/Product-item-State/productItem.effects";
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import {ProductItemEffect} from "./ngrx/Product-item-State/productItem.effects";
     AdminComponent,
     AddProductComponent,
     ProductPickedImagesComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,7 @@ export class ProductItemEffect{
 
   constructor(private productService : ProductService , private effectAction : Actions) {
   }
-  getAllProductEffect:Observable<Action>=createEffect(
+  saveProductEffect:Observable<Action>=createEffect(
     () => this.effectAction.pipe(
       ofType(ProductItemActionType.SAVE_PRODUCT) ,
       mergeMap((action: ProductItemAction) => {
@@ -34,5 +34,19 @@ export class ProductItemEffect{
       })
     )
   );
+
+  // editProductEffect:Observable<Action>=createEffect(
+  //   () => this.effectAction.pipe(
+  //     ofType(ProductItemActionType.EDIT_PRODUCT) ,
+  //     mergeMap((action: ProductItemAction) => {
+  //       return this.productService.editProduct(action.payload).pipe(
+  //         map(data => {
+  //           return new EditProductActionSuccess(data)
+  //         }) ,
+  //         catchError(err => of(new EditProductActionError(err.message)))
+  //       ) ;
+  //     })
+  //   )
+  // );
 
 }

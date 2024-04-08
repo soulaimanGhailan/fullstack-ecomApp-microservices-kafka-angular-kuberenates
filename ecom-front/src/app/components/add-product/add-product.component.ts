@@ -22,9 +22,9 @@ export class AddProductComponent implements OnInit{
   ngOnInit(): void {
     this.addProductFormGroup=this.fb.group({
       productName : ['' , Validators.required],
-      productImage1 : ["" , Validators.required],
-      productImage2 : ["" , Validators.required],
-      productImage3 : ["" , Validators.required],
+      productImage1 : [null , Validators.required],
+      productImage2 : [null , Validators.required],
+      productImage3 : [null , Validators.required],
       productBrand : ["" , Validators.required],
       productPrice : ["" , Validators.required],
       productCurrency : ["" , Validators.required],
@@ -67,6 +67,7 @@ export class AddProductComponent implements OnInit{
         width:this.addProductFormGroup.get("productWidth")?.value
       } ,
     }
+    this.store.dispatch(new SaveProductAction(product)) ;
 
   }
 

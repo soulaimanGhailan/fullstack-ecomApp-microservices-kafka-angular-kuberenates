@@ -22,7 +22,15 @@ export function ProductItemReducer(state: ProductItemState=initialState , action
     case ProductItemActionType.SAVE_PRODUCT_SUCCESS  :
       return {...state , dataState:DataStateEnum.LOADED , product: (<ProductItemAction>action).payload}
     case ProductItemActionType.SAVE_PRODUCT_ERROR  :
-      return {...state , dataState:DataStateEnum.LOADED , errorMessage:(<ProductItemAction>action).payload}
+      return {...state , dataState:DataStateEnum.ERROR , errorMessage:(<ProductItemAction>action).payload}
+
+    //edit Product
+    case ProductItemActionType.EDIT_PRODUCT  :
+      return {...state , dataState:DataStateEnum.EDIT , product: (<ProductItemAction>action).payload}
+    // case ProductItemActionType.EDIT_PRODUCT_SUCCESS  :
+    //   return {...state , dataState:DataStateEnum.LOADED , product: (<ProductItemAction>action).payload}
+    // case ProductItemActionType.EDIT_PRODUCT_ERROR  :
+    //   return {...state , dataState:DataStateEnum.ERROR , errorMessage:(<ProductItemAction>action).payload}
     default : return  {...state}
   }
 }
