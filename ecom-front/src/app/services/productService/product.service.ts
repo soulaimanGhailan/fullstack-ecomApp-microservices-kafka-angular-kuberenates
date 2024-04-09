@@ -1,7 +1,7 @@
 import {Injectable, OnInit} from '@angular/core';
 import {map, Observable, switchMap} from "rxjs";
 import {ActionPayload, CreatedProduct, Product, ProductPrice, ProductsPage} from "../../models/product.model";
-import {Hosts} from "../../envirments/env";
+import {Hosts} from "../../envirements/env";
 import {HttpClient} from "@angular/common/http";
 import {PageSize} from "../../models/common.model";
 

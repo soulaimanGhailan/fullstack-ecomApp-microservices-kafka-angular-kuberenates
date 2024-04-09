@@ -11,7 +11,7 @@ import {
 import {map, Observable} from "rxjs";
 import {ShoppingCartState} from "../../ngrx/ShoppingCartState/cart.reducer";
 import {GetShoppingCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
-import {Auth_Test_Customer} from "../../envirments/env";
+import {Auth_Test_Customer} from "../../envirements/env";
 import {DataStateEnum} from "../../ngrx/productsState/products.reducer";
 
 @Component({

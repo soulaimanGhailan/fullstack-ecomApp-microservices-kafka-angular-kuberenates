@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {AddProductToCartAction} from "../../../ngrx/ShoppingCartState/cart.actions";
 import {AddItemRequest} from "../../../models/ShoppingCart";
 import {Store} from "@ngrx/store";
-import {Auth_Test_Customer} from "../../../envirments/env";
+import {Auth_Test_Customer} from "../../../envirements/env";
 import {Router} from "@angular/router";
 import {EditProductAction, GetProductItemAction} from "../../../ngrx/Product-item-State/productItem.actions";
 

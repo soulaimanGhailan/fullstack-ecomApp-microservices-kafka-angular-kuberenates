@@ -4,7 +4,7 @@ import {ShoppingCart} from "../../../models/ShoppingCart";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ShoppingCartService} from "../../../services/shoppingCartService/shopping-cart.service";
 import {DeleteProductFromCartAction} from "../../../ngrx/ShoppingCartState/cart.actions";
-import {Auth_Test_Customer} from "../../../envirments/env";
+import {Auth_Test_Customer} from "../../../envirements/env";
 import {Product} from "../../../models/product.model";
 import {GetProductItemAction} from "../../../ngrx/Product-item-State/productItem.actions";
 import {Router} from "@angular/router";

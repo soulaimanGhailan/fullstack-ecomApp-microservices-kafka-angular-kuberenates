@@ -1,0 +1,70 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=product-db
+
+  mongo-express:
+    depends_on:
+      - mongodb
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+
+  product-service:
+    build: ./ecom-backend/product-service
+    container_name: product-service
+    ports:
+      - '8080:8080'
+    expose:
+      - '8080'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+        - mongodb
+    environment:
+      - MONGODB_HOST=mongodb
+  customer-service:
+    build: ./ecom-backend/customer-service
+    container_name: customer-service
+    ports:
+      - '8081:8081'
+    expose:
+      - '8081'
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
+      interval: 10s
+      retries: 4
+    depends_on:
+        - mongodb
+    environment:
+      - PRODUCT_SERVICE_URL=http://product-service:8080
+      - MONGODB_HOST=mongodb
+  ecom-fron:
+    build: ./ecom-front
+    container_name: ecom-front
+    ports:
+      - '4200:80'
+    expose:
+        - '4200'
+#    environment:
+#      - PRODUCT_SERVICE_URL=http://product-service:8080
+#      - CUSTOMER_SERVICE_URL=http://customer-service:8081
+    depends_on:
+      customer-service:
+          condition: service_healthy
+      product-service:
+        condition: service_healthy

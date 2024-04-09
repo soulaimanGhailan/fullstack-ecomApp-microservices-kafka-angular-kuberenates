@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {GetProductItemAction} from "../../ngrx/Product-item-State/productItem.actions";
 import {AddProductToCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
 import {AddItemRequest} from "../../models/ShoppingCart";
-import {Auth_Test_Customer} from "../../envirments/env";
+import {Auth_Test_Customer} from "../../envirements/env";
 
 @Component({
   selector: 'app-single-product',

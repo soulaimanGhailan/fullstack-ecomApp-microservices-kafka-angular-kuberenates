@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AddItemRequest, ShoppingCart} from "../../models/ShoppingCart";
-import {Hosts} from "../../envirments/env";
+import {Hosts} from "../../envirements/env";
 import {DeleteProductReq} from "../../models/common.model";
 
 @Injectable({
