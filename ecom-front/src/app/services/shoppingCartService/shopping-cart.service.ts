@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AddItemRequest, ShoppingCart} from "../../models/ShoppingCart";
-import {Hosts} from "../../envirements/env";
 import {DeleteProductReq} from "../../models/common.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
-
+  private customerService:string =environment.customerService
   constructor(private http : HttpClient) { }
 
   getShoppingCartOfCustomer(customerId: string):Observable<ShoppingCart> {
-        return  this.http.get<ShoppingCart>(Hosts.customerService + "/customers/"+ customerId +"/shoppingCart") ;
+        return  this.http.get<ShoppingCart>(this.customerService + "/customers/"+ customerId +"/shoppingCart") ;
   }
 
   calcTotalPrice(cart :ShoppingCart):number {
@@ -25,10 +25,10 @@ export class ShoppingCartService {
   }
 
   addProductToShoppingCart(addProductReq: AddItemRequest):Observable<ShoppingCart> {
-    return  this.http.post<ShoppingCart>(Hosts.customerService + "/api" , addProductReq) ;
+    return  this.http.post<ShoppingCart>(this.customerService + "/api" , addProductReq) ;
   }
 
   deleteItemFromCart(req: DeleteProductReq):Observable<ShoppingCart>{
-    return  this.http.delete<ShoppingCart>(Hosts.customerService + "/api/" +req.customerId+"/"+req.productId) ;
+    return  this.http.delete<ShoppingCart>(this.customerService + "/api/" +req.customerId+"/"+req.productId) ;
   }
 }

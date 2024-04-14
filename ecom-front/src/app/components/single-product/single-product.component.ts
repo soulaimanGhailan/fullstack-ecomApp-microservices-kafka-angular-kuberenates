@@ -5,7 +5,8 @@ import {Router} from "@angular/router";
 import {GetProductItemAction} from "../../ngrx/Product-item-State/productItem.actions";
 import {AddProductToCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
 import {AddItemRequest} from "../../models/ShoppingCart";
-import {Auth_Test_Customer} from "../../envirements/env";
+import {environment} from "../../../environments/environment";
+
 
 @Component({
   selector: 'app-single-product',
@@ -27,7 +28,7 @@ export class SingleProductComponent implements OnInit{
   }
 
   addProductToCart() {
-      let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : Auth_Test_Customer.customerId , increment:true }
+      let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : environment.Auth_Test_Customer.customerId  , increment:true }
     this.store.dispatch(new AddProductToCartAction(itemReq))
   }
 }

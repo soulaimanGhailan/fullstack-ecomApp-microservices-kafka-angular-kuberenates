@@ -11,8 +11,8 @@ import {
 import {map, Observable} from "rxjs";
 import {ShoppingCartState} from "../../ngrx/ShoppingCartState/cart.reducer";
 import {GetShoppingCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
-import {Auth_Test_Customer} from "../../envirements/env";
 import {DataStateEnum} from "../../ngrx/productsState/products.reducer";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-header',
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit{
     this.shoppingCart$ = this.store.pipe(
       map(state => state.shoppingCartState)
     )
-    this.store.dispatch(new GetShoppingCartAction(Auth_Test_Customer.customerId))
+    this.store.dispatch(new GetShoppingCartAction(environment.Auth_Test_Customer.customerId ))
   }
 
   onHome() {

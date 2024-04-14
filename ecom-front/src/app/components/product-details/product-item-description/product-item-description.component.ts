@@ -4,9 +4,9 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {AddProductToCartAction} from "../../../ngrx/ShoppingCartState/cart.actions";
 import {AddItemRequest} from "../../../models/ShoppingCart";
 import {Store} from "@ngrx/store";
-import {Auth_Test_Customer} from "../../../envirements/env";
 import {Router} from "@angular/router";
 import {EditProductAction, GetProductItemAction} from "../../../ngrx/Product-item-State/productItem.actions";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-product-item-description',
@@ -29,7 +29,7 @@ export class ProductItemDescriptionComponent implements OnInit{
   onAddProductToCart() {
     let quantity : number = this.addProductFrom.value.quantity;
     let color : string = this.addProductFrom.value.color;
-    this.store.dispatch(new AddProductToCartAction({productId :this.product?.productId , quantity: quantity ,customerId :Auth_Test_Customer.customerId ,pickedColor:color  ,increment:false}))
+    this.store.dispatch(new AddProductToCartAction({productId :this.product?.productId , quantity: quantity ,customerId :environment.Auth_Test_Customer.customerId ,pickedColor:color  ,increment:false}))
   }
 
   onEditProduct() {

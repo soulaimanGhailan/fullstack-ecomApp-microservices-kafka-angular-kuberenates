@@ -22,49 +22,49 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=password
       - ME_CONFIG_MONGODB_SERVER=mongodb
 
-  product-service:
-    build: ./ecom-backend/product-service
-    container_name: product-service
-    ports:
-      - '8080:8080'
-    expose:
-      - '8080'
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-      interval: 10s
-      retries: 4
-    depends_on:
-        - mongodb
-    environment:
-      - MONGODB_HOST=mongodb
-  customer-service:
-    build: ./ecom-backend/customer-service
-    container_name: customer-service
-    ports:
-      - '8081:8081'
-    expose:
-      - '8081'
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
-      interval: 10s
-      retries: 4
-    depends_on:
-        - mongodb
-    environment:
-      - PRODUCT_SERVICE_URL=http://product-service:8080
-      - MONGODB_HOST=mongodb
-  ecom-fron:
-    build: ./ecom-front
-    container_name: ecom-front
-    ports:
-      - '4200:80'
-    expose:
-        - '4200'
+#  product-service:
+#    image: soulaimandockerhub/ecom-backend-product-service:v1
+#    container_name: product-service
+#    ports:
+#      - '8080:8080'
+#    expose:
+#      - '8080'
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+#      interval: 10s
+#      retries: 20
+#    depends_on:
+#        - mongodb
+#    environment:
+#      - MONGODB_HOST=mongodb
+#  customer-service:
+#    image: soulaimandockerhub/ecom-backend-customer-service:v1
+#    container_name: customer-service
+#    ports:
+#      - '8081:8081'
+#    expose:
+#      - '8081'
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
+#      interval: 10s
+#      retries: 20
+#    depends_on:
+#        - mongodb
 #    environment:
 #      - PRODUCT_SERVICE_URL=http://product-service:8080
-#      - CUSTOMER_SERVICE_URL=http://customer-service:8081
-    depends_on:
-      customer-service:
-          condition: service_healthy
-      product-service:
-        condition: service_healthy
+#      - MONGODB_HOST=mongodb
+#  ecom-fron:
+#    build: ./ecom-front
+#    container_name: ecom-front
+#    ports:
+#      - '4200:80'
+#    expose:
+#        - '4200'
+#    environment:
+#      - productService=http://product-service:8080
+#      - customerService=http://customer-service:8081
+#    depends_on:
+#      customer-service:
+#          condition: service_healthy
+#      product-service:
+#        condition: service_healthy

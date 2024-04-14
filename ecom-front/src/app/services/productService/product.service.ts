@@ -1,24 +1,26 @@
 import {Injectable, OnInit} from '@angular/core';
 import {map, Observable, switchMap} from "rxjs";
 import {ActionPayload, CreatedProduct, Product, ProductPrice, ProductsPage} from "../../models/product.model";
-import {Hosts} from "../../envirements/env";
 import {HttpClient} from "@angular/common/http";
 import {PageSize} from "../../models/common.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService implements OnInit{
+
+  private productService:string =environment.productService
   ngOnInit(): void {
   }
 
   constructor(private http : HttpClient) { }
 
   public getAllProducts():Observable<Product[]>{
-     return  this.http.get<Product[]>(Hosts.productService + "/products")
+     return  this.http.get<Product[]>(this.productService + "/products")
   }
   public getProductsPage(pageSize : PageSize): Observable<Product[]> {
-    return this.http.get<Product[]>(Hosts.productService + "/products?page=" + pageSize.page + "&size=" + pageSize.size)
+    return this.http.get<Product[]>(this.productService + "/products?page=" + pageSize.page + "&size=" + pageSize.size)
   }
 
 
@@ -37,26 +39,26 @@ export class ProductService implements OnInit{
 
 
   public getSelectedProducts(pageSize : PageSize): Observable<Product[]> {
-    return this.http.get<Product[]>(Hosts.productService + "/products/search/findBySelected?selected=true&page=" + pageSize.page +"&size="+pageSize.size)
+    return this.http.get<Product[]>(this.productService + "/products/search/findBySelected?selected=true&page=" + pageSize.page +"&size="+pageSize.size)
   }
   public getProductsPageByKeyword(payload : ActionPayload<String>): Observable<Product[]> {
-    return this.http.get<Product[]>(Hosts.productService + "/products/search/findByNameContainsIgnoreCase?keyword=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
+    return this.http.get<Product[]>(this.productService + "/products/search/findByNameContainsIgnoreCase?keyword=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
   }
 
   public getProductsPageByCategory(payload : ActionPayload<String>): Observable<Product[]> {
-    return this.http.get<Product[]>(Hosts.productService + "/products/search/findByCategory?category=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
+    return this.http.get<Product[]>(this.productService + "/products/search/findByCategory?category=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
   }
 
   public getProductItem(productId : string):Observable<Product>{
-    return  this.http.get<Product>(Hosts.productService + "/products/"+productId) ;
+    return  this.http.get<Product>(this.productService + "/products/"+productId) ;
   }
 
   public saveProduct(product : CreatedProduct):Observable<Product>{
-    return this.http.post<Product>(Hosts.productService + "/api/products" , product) ;
+    return this.http.post<Product>(this.productService + "/api/products" , product) ;
   }
 
   public editProduct(product : CreatedProduct):Observable<Product>{
-    return this.http.put<Product>(Hosts.productService + "/api/products" , product) ;
+    return this.http.put<Product>(this.productService + "/api/products" , product) ;
   }
 
   public getDate(product : Product){

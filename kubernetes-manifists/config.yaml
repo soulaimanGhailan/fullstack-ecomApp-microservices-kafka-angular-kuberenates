@@ -1,0 +1,242 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongodb-dep
+  name: mongodb-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb-pod
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mongodb-pod
+    spec:
+      volumes:
+        - name: data
+          emptyDir: {}
+      containers:
+        - image: mongo:latest
+          name: mongodb-container
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "admin"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "password"
+          resources:
+            limits:
+              memory: 400Mi
+              cpu: 125m
+            requests:
+              cpu: 70m
+              memory: 200Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongodb-svc
+  name: mongodb-svc
+spec:
+  ports:
+    - port: 27017
+      protocol: TCP
+      targetPort: 27017
+  selector:
+    app: mongodb-pod
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongo-express-dep
+  name: mongo-express-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-express-pod
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mongo-express-pod
+    spec:
+      containers:
+        - image: mongo-express:latest
+          name: mongo-express-container
+          ports:
+            - containerPort: 8081
+          env:
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              value: "admin"
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              value: "password"
+            - name: ME_CONFIG_MONGODB_SERVER
+              value: "mongodb-svc"
+            - name: ME_CONFIG_MONGODB_PORT
+              value: "27017"
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongo-express-svc
+  name: mongo-express-svc
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    app: mongo-express-pod
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: product-service-dep
+  name: product-service-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service-pod
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: product-service-pod
+    spec:
+      containers:
+        - image: soulaimandockerhub/ecom-backend-product-service:v1.1
+          name: product-service-container
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 20
+            httpGet:
+              port: 8080
+              path: "/actuator/health"
+            periodSeconds: 10
+          livenessProbe:
+            initialDelaySeconds: 20
+            httpGet:
+              port: 8080
+              path: "/actuator/health"
+            periodSeconds: 10
+          env:
+            - name: MONGODB_HOST
+              value: "mongodb-svc"
+            - name: MONGODB_PORT
+              value: "27017"
+            - name: SERVER_PORT
+              value: "8080"
+            - name: MONGODB_USERNAME
+              value: "admin"
+            - name: MONGODB_PASSWORD
+              value: "password"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: product-service-svc
+  name: product-service-svc
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: product-service-pod
+  type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: customer-service-dep
+  name: customer-service-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-service-pod
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: customer-service-pod
+    spec:
+      containers:
+        - image: soulaimandockerhub/ecom-backend-customer-service:v1.1
+          name: customer-service-container
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 20
+            httpGet:
+              port: 8080
+              path: "/actuator/health"
+            periodSeconds: 10
+          livenessProbe:
+              initialDelaySeconds: 20
+              httpGet:
+                port: 8080
+                path: "/actuator/health"
+              periodSeconds: 10
+          env:
+            - name: MONGODB_HOST
+              value: "mongodb-svc"
+            - name: MONGODB_PORT
+              value: "27017"
+            - name: SERVER_PORT
+              value: "8080"
+            - name: MONGODB_USERNAME
+              value: "admin"
+            - name: MONGODB_PASSWORD
+              value: "password"
+            - name: PRODUCT_SERVICE_URL
+              value: "product-service-svc:8080"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: customer-service-svc
+  name: customer-service-svc
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: customer-service-pod
+  type: NodePort
+
+---

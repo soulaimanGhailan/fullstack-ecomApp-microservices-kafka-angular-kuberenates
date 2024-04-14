@@ -4,10 +4,10 @@ import {ShoppingCart} from "../../../models/ShoppingCart";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ShoppingCartService} from "../../../services/shoppingCartService/shopping-cart.service";
 import {DeleteProductFromCartAction} from "../../../ngrx/ShoppingCartState/cart.actions";
-import {Auth_Test_Customer} from "../../../envirements/env";
 import {Product} from "../../../models/product.model";
 import {GetProductItemAction} from "../../../ngrx/Product-item-State/productItem.actions";
 import {Router} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-shopping-cart-items',
@@ -26,7 +26,7 @@ export class ShoppingCartItemsComponent implements OnInit{
   onDeleteItem(product: Product) {
     let confirmation: boolean = confirm("you sure you want to delete this product of name { "+ product.name + " }")
     if(confirmation == true)
-        this.store.dispatch(new DeleteProductFromCartAction({productId : product.productId , customerId:Auth_Test_Customer.customerId}))
+        this.store.dispatch(new DeleteProductFromCartAction({productId : product.productId , customerId:environment.Auth_Test_Customer.customerId }))
   }
 
   goToProduct(product: Product) {
