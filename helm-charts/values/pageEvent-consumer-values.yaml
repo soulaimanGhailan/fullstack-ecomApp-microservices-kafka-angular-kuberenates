@@ -1,9 +1,9 @@
-depName: product-service-dep
+depName: page-event-consumer-dep
 replicasNum: 1
-podName: product-service-pod
-imageName: soulaimandockerhub/ecom-backend-product-service
-imageVersion: v1.2
-containerName: product-service-container
+podName: page-event-consumer-pod
+imageName: soulaimandockerhub/page-event-consumer-service
+imageVersion: v1
+containerName: page-event-consumer-container
 containerPort: 8080
 containerEnvVar:
   - name: MONGODB_HOST
@@ -20,7 +20,7 @@ containerEnvVar:
     value: "kafka-svc"
   - name: BOOTSRAP_KAFKA_PORT
     value: "9092"
-serviceName: product-service-svc
+serviceName: page-event-consumer-svc
 servicePort: 8080
 serviceType: NodePort
-nodePort: 30010
+nodePort: 30030

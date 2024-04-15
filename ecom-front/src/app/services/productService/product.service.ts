@@ -49,8 +49,11 @@ export class ProductService implements OnInit{
     return this.http.get<Product[]>(this.productService + "/products/search/findByCategory?category=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
   }
 
-  public getProductItem(productId : string):Observable<Product>{
-    return  this.http.get<Product>(this.productService + "/products/"+productId) ;
+  public getProductItem(productId : string){
+      this.http.get<Product>(this.productService + "/api/products/find/"+productId).subscribe(value =>
+      {
+        return value ;
+      })
   }
 
   public saveProduct(product : CreatedProduct):Observable<Product>{

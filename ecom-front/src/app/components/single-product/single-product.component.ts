@@ -6,6 +6,7 @@ import {GetProductItemAction} from "../../ngrx/Product-item-State/productItem.ac
 import {AddProductToCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
 import {AddItemRequest} from "../../models/ShoppingCart";
 import {environment} from "../../../environments/environment";
+import {ProductService} from "../../services/productService/product.service";
 
 
 @Component({
@@ -15,7 +16,7 @@ import {environment} from "../../../environments/environment";
 })
 export class SingleProductComponent implements OnInit{
   @Input() product!: Product ;
-  constructor(private store : Store<any>, private router: Router) {
+  constructor(private store : Store<any>, private router: Router , private productService: ProductService) {
 
   }
   ngOnInit(): void {
@@ -23,7 +24,9 @@ export class SingleProductComponent implements OnInit{
   }
 
   onProductItem() {
+    this.productService.getProductItem(this.product.productId) ;
     this.store.dispatch(new GetProductItemAction(this.product)) ;
+    console.log("product")
     this.router.navigateByUrl("/product-details") ;
   }
 

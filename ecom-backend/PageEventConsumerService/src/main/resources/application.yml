@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: pageEventConsumer;
+      bindings:
+        pageEventConsumer-in-0:
+          destination: R1
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: "${BOOTSRAP_KAFKA_SERVER:10.10.9.142}:${BOOTSRAP_KAFKA_PORT:9092}"
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring.json.trusted.packages: com.learning.events # change this with your event packages
+    bootstrap-servers: "${BOOTSRAP_KAFKA_SERVER:10.10.9.142}:${BOOTSRAP_KAFKA_PORT:9092}"

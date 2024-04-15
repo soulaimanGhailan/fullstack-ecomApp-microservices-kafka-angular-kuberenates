@@ -1,0 +1,8 @@
+spring:
+  kafka:
+    producer:
+      acks: -1
+      bootstrap-servers: "${BOOTSRAP_KAFKA_SERVER:10.10.9.142}:${BOOTSRAP_KAFKA_PORT:9092}"
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    bootstrap-servers: "${BOOTSRAP_KAFKA_SERVER:10.10.9.142}:${BOOTSRAP_KAFKA_PORT:9092}"

@@ -1,0 +1,8 @@
+depName: zookeeper-dep
+replicasNum: 1
+podName: zookeeper-pod
+imageName: wurstmeister/zookeeper
+containerName: zookeeper-container
+containerPort: 2181
+serviceName: zookeeper-svc
+servicePort: 2181

@@ -25,13 +25,15 @@ spec:
             httpGet:
               port: {{ .Values.containerPort }}
               path: "/actuator/health"
-            periodSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 20
           livenessProbe:
             initialDelaySeconds: 20
             httpGet:
               port: {{ .Values.containerPort }}
               path: "/actuator/health"
-            periodSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 20
           env:
           {{- range .Values.containerEnvVar}}
           - name: {{ .name }}
