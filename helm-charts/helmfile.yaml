@@ -1,0 +1,20 @@
+releases:
+  - name: mongodb
+    chart: mongo-chart
+    values:
+      - values/mongodb-values.yaml
+
+  - name: mongo-express
+    chart: mongo-chart
+    values:
+      - values/mongo-express-values.yaml
+
+  - name: product-service
+    chart: backend-chart
+    values:
+      - values/product-service-values.yaml
+
+  - name: customer-service
+    chart: backend-chart
+    values:
+      - values/customer-service-values.yaml

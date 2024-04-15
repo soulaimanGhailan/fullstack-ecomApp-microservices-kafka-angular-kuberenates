@@ -168,6 +168,7 @@ spec:
     - port: 8080
       protocol: TCP
       targetPort: 8080
+      nodePort: 30010
   selector:
     app: product-service-pod
   type: NodePort
@@ -235,6 +236,7 @@ spec:
     - port: 8080
       protocol: TCP
       targetPort: 8080
+      nodePort: 30020
   selector:
     app: customer-service-pod
   type: NodePort

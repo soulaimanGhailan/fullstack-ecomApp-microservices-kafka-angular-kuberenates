@@ -1,0 +1,19 @@
+depName: mongodb-dep
+replicasNum: 1
+podName: mongodb-pod
+imageName: mongo
+imageVersion: latest
+containerName: mongodb-container
+containerPort: 27017
+containerEnvVar:
+  - name: MONGO_INITDB_ROOT_USERNAME
+    value: "admin"
+  - name: MONGO_INITDB_ROOT_PASSWORD
+    value: "password"
+maxMemory: 400Mi
+maxCpu: 125m
+memory: 200Mi
+cpu: 70m
+serviceName: mongodb-svc
+servicePort: 27017
+serviceType: ClusterIP

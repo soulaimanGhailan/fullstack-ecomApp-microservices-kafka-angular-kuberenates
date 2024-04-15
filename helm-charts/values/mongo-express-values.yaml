@@ -1,0 +1,23 @@
+depName: mongodb-express-dep
+replicasNum: 1
+podName: mongodb-express-pod
+imageName: mongo-express
+imageVersion: latest
+containerName: mongodb-express-container
+containerPort: 8081
+containerEnvVar:
+  - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+    value: "admin"
+  - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+    value: "password"
+  - name: ME_CONFIG_MONGODB_SERVER
+    value: "mongodb-svc"
+  - name: ME_CONFIG_MONGODB_PORT
+    value: "27017"
+maxMemory: 150Mi
+maxCpu: 125m
+memory: 80Mi
+cpu: 70m
+serviceName: mongodb-express-svc
+servicePort: 8081
+serviceType: NodePort

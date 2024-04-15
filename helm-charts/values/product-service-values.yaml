@@ -1,0 +1,22 @@
+depName: product-service-dep
+replicasNum: 1
+podName: product-service-pod
+imageName: soulaimandockerhub/ecom-backend-product-service
+imageVersion: v1.1
+containerName: product-service-container
+containerPort: 8080
+containerEnvVar:
+  - name: MONGODB_HOST
+    value: "mongodb-svc"
+  - name: MONGODB_PORT
+    value: "27017"
+  - name: SERVER_PORT
+    value: "8080"
+  - name: MONGODB_USERNAME
+    value: "admin"
+  - name: MONGODB_PASSWORD
+    value: "password"
+serviceName: product-service-svc
+servicePort: 8080
+serviceType: NodePort
+nodePort: 30010

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.depName}}
+  name: {{ .Values.depName }}
+spec:
+  replicas: {{ .Values.replicasNum }}
+  selector:
+    matchLabels:
+      app: {{ .Values.podName }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.podName }}
+    spec:
+      containers:
+        - image: "{{ .Values.imageName }}:{{ .Values.imageVersion }}"
+          name: {{ .Values.containerName }}
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+          readinessProbe:
+            initialDelaySeconds: 20
+            httpGet:
+              port: {{ .Values.containerPort }}
+              path: "/actuator/health"
+            periodSeconds: 10
+          livenessProbe:
+            initialDelaySeconds: 20
+            httpGet:
+              port: {{ .Values.containerPort }}
+              path: "/actuator/health"
+            periodSeconds: 10
+          env:
+          {{- range .Values.containerEnvVar}}
+          - name: {{ .name }}
+            value: {{ .value | quote }}
+          {{- end}}
