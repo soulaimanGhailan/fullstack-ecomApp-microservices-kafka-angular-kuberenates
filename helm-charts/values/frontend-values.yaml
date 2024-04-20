@@ -1,0 +1,11 @@
+depName: frontend-dep
+replicasNum: 1
+podName: frontend-pod
+imageName: soulaimandockerhub/ecom-front-end-angular
+imageVersion: v3
+containerName: frontend-container
+containerPort: 80
+serviceName: frontend-svc
+servicePort: 80
+serviceType: NodePort
+nodePort: 30050

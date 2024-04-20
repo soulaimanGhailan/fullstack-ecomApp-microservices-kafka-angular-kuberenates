@@ -24,9 +24,7 @@ export class SingleProductComponent implements OnInit{
   }
 
   onProductItem() {
-    this.productService.getProductItem(this.product.productId) ;
     this.store.dispatch(new GetProductItemAction(this.product)) ;
-    console.log("product")
     this.router.navigateByUrl("/product-details") ;
   }
 

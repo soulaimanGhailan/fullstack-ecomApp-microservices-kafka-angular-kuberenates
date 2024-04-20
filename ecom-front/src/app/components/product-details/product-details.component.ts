@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {map, Observable} from "rxjs";
 import {ProductItemState} from "../../ngrx/Product-item-State/productItem.reducers";
+import {ProductService} from "../../services/productService/product.service";
+import {DataStateEnum, FetchMethode} from "../../ngrx/productsState/products.reducer";
+import {EventType} from "../../models/common.model";
 
 @Component({
   selector: 'app-product-details',
@@ -10,12 +13,23 @@ import {ProductItemState} from "../../ngrx/Product-item-State/productItem.reduce
 })
 export class ProductDetailsComponent implements OnInit{
   productItem$?:Observable<ProductItemState>
-  constructor(private store:Store<any>) {
+  constructor(private store:Store<any> , private productService : ProductService) {
   }
   ngOnInit(): void {
     this.productItem$ = this.store.pipe(
       map(state => state.productItemState )
     )
+
+    this.store.subscribe(
+      s => {
+        if(s.productItemState.dataState == DataStateEnum.LOADED) {
+          if(s.productItemState.product){
+            this.productService.publishEvent(s.productItemState.product.productId , EventType.CLICK_PRODUCT)
+          }
+        }
+      })
   }
+
+
 
 }

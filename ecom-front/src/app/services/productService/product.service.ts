@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {map, Observable, switchMap} from "rxjs";
 import {ActionPayload, CreatedProduct, Product, ProductPrice, ProductsPage} from "../../models/product.model";
 import {HttpClient} from "@angular/common/http";
-import {PageSize} from "../../models/common.model";
+import {EventType, PageSize} from "../../models/common.model";
 import {environment} from "../../../environments/environment";
 
 @Injectable({
@@ -49,10 +49,9 @@ export class ProductService implements OnInit{
     return this.http.get<Product[]>(this.productService + "/products/search/findByCategory?category=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
   }
 
-  public getProductItem(productId : string){
-      this.http.get<Product>(this.productService + "/api/products/find/"+productId).subscribe(value =>
+  public publishEvent(productId : string , eventType : EventType){
+      this.http.get<void>(this.productService + "/api/products/event/"+productId + "/" + eventType.toString()).subscribe(value =>
       {
-        return value ;
       })
   }
 
@@ -67,4 +66,5 @@ export class ProductService implements OnInit{
   public getDate(product : Product){
     return product.addingDate.slice(0 ,10);
   }
+
 }

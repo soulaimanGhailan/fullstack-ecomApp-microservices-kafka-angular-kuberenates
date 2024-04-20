@@ -22,6 +22,21 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=password
       - ME_CONFIG_MONGODB_SERVER=mongodb
 
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+      image: wurstmeister/kafka
+      container_name: kafka
+      ports:
+        - "9092:9092"
+      environment:
+        KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+        KAFKA_ADVERTISED_HOST_NAME: 10.10.9.142
+        KAFKA_CREATE_TOPICS: "R1"
+
 #  product-service:
 #    image: soulaimandockerhub/ecom-backend-product-service:v1
 #    container_name: product-service

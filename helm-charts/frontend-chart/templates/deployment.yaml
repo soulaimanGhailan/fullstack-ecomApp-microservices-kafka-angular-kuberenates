@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Values.depName }}
+    app: {{ .Values.depName}}
   name: {{ .Values.depName }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicasNum }}
   selector:
     matchLabels:
       app: {{ .Values.podName }}
@@ -16,7 +16,7 @@ spec:
         app: {{ .Values.podName }}
     spec:
       containers:
-        - image: {{ .Values.imageName }}
+        - image: "{{ .Values.imageName }}:{{ .Values.imageVersion }}"
           name: {{ .Values.containerName }}
           ports:
             - containerPort: {{ .Values.containerPort }}
@@ -25,10 +25,3 @@ spec:
           - name: {{ .name }}
             value: {{ .value | quote }}
           {{- end}}
-          resources:
-            limits:
-              memory: 1Gi
-              cpu: 200m
-            requests:
-              cpu: 70m
-              memory: 200Mi

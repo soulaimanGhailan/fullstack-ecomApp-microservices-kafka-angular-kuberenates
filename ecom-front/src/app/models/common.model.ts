@@ -28,3 +28,8 @@ export enum Currency {
   EUR = "EUR",
 
 }
+export enum EventType {
+  SEARCH_BY_CATEGORY ="SEARCH_BY_CATEGORY" ,
+  SEARCH_BY_KEYWORD = "SEARCH_BY_KEYWORD" ,
+  CLICK_PRODUCT = "CLICK_PRODUCT"
+}

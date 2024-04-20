@@ -2,7 +2,7 @@ depName: product-service-dep
 replicasNum: 1
 podName: product-service-pod
 imageName: soulaimandockerhub/ecom-backend-product-service
-imageVersion: v1.2
+imageVersion: v2
 containerName: product-service-container
 containerPort: 8080
 containerEnvVar:

@@ -10,8 +10,8 @@ containerEnvVar:
     value: "admin"
   - name: MONGO_INITDB_ROOT_PASSWORD
     value: "password"
-maxMemory: 400Mi
-maxCpu: 125m
+maxMemory: 1Gi
+maxCpu: 180m
 memory: 200Mi
 cpu: 70m
 serviceName: mongodb-svc

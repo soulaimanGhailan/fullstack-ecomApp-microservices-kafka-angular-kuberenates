@@ -30,15 +30,6 @@ public class ProductRestController {
 
     @GetMapping("find/{productId}")
     public Product getProductById(@PathVariable String productId){
-        PageEvent event = PageEvent.builder()
-                .productId(productId)
-                .type(PageEventType.CLICK_PRODUCT)
-                .date(new Date())
-                .duration(1L)
-                .pageEventId(UUID.randomUUID().toString())
-                .userId("test-customer")
-                .build();
-        this.streamBridge.send("R1" , event) ;
         return this.productService.getProductById(productId);
     }
 
@@ -49,5 +40,18 @@ public class ProductRestController {
     @PutMapping
     public Product update(@RequestBody Product product){
         return this.productService.updateProduct(product);
+    }
+
+    @GetMapping("event/{productId}/{eventType}")
+    public void catchEventType(@PathVariable String productId , @PathVariable String eventType){
+        PageEvent event = PageEvent.builder()
+                .productId(productId)
+                .type(PageEventType.valueOf(eventType))
+                .date(new Date())
+                .duration(1L)
+                .pageEventId(UUID.randomUUID().toString())
+                .userId("test-customer")
+                .build();
+        this.streamBridge.send("R1" , event) ;
     }
 }

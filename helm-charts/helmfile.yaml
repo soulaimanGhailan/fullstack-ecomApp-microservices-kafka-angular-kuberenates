@@ -47,3 +47,8 @@ releases:
     needs:
       - mongodb
       - kafka
+
+  - name: frontend
+    chart: frontend-chart
+    values:
+          - values/frontend-values.yaml

@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {map, Observable} from "rxjs";
-import {FetchMethode, ProductState, DataStateEnum} from "../../ngrx/productsState/products.reducer";
+import {DataStateEnum, FetchMethode, ProductState} from "../../ngrx/productsState/products.reducer";
+import {ProductService} from "../../services/productService/product.service";
+import {EventType} from "../../models/common.model";
 
 @Component({
   selector: 'app-searched-products-list',
@@ -12,12 +14,24 @@ export class SearchedProductsListComponent implements OnInit{
     productState$? : Observable<ProductState> ;
   public readonly ProductStateEnum = DataStateEnum ;
   public readonly fetchMethode = FetchMethode ;
-    constructor(private store:Store<any>) {
+    constructor(private store:Store<any> , private productService : ProductService) {
     }
 
     ngOnInit(): void {
       this.productState$ = this.store.pipe(
         map(state => state.productState)
       )
+
+      this.store.subscribe(
+        s => {
+          if(s.productState.dataState == this.ProductStateEnum.LOADED) {
+           if(s.productState.products[0]){
+             if(s.productState.fetchMethode == FetchMethode.SEARCH_BY_CATEGORY)
+               this.productService.publishEvent(s.productState.products[0].productId , EventType.SEARCH_BY_CATEGORY)
+             if(s.productState.fetchMethode == FetchMethode.SEARCH_BY_KEYWORD)
+               this.productService.publishEvent(s.productState.products[0].productId , EventType.SEARCH_BY_KEYWORD)
+           }
+          }
+        })
     }
 }
