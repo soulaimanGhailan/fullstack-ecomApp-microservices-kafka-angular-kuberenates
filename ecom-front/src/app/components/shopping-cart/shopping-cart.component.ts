@@ -5,6 +5,7 @@ import {map, Observable} from "rxjs";
 import {ShoppingCartState} from "../../ngrx/ShoppingCartState/cart.reducer";
 import {DataStateEnum} from "../../ngrx/productsState/products.reducer";
 import {environment} from "../../../environments/environment";
+import {SecurityService} from "../../security/security.service";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,13 +15,15 @@ import {environment} from "../../../environments/environment";
 export class ShoppingCartComponent implements OnInit{
   shoppingCart$?:Observable<ShoppingCartState>
   public readonly cartDataState = DataStateEnum;
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any> , private secService : SecurityService) {
   }
   ngOnInit(): void {
-    this.store.dispatch(new GetShoppingCartAction(environment.Auth_Test_Customer.customerId ));
-    this.shoppingCart$= this.store.pipe(
-      map(state => state.shoppingCartState)
-    )
+    if(this.secService.profile.id) {
+      this.store.dispatch(new GetShoppingCartAction(this.secService.profile.id));
+      this.shoppingCart$ = this.store.pipe(
+        map(state => state.shoppingCartState)
+      )
+    }
   }
 
 }

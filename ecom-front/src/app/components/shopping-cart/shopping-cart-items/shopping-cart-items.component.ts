@@ -8,6 +8,7 @@ import {Product} from "../../../models/product.model";
 import {GetProductItemAction} from "../../../ngrx/Product-item-State/productItem.actions";
 import {Router} from "@angular/router";
 import {environment} from "../../../../environments/environment";
+import {SecurityService} from "../../../security/security.service";
 
 @Component({
   selector: 'app-shopping-cart-items',
@@ -17,7 +18,8 @@ import {environment} from "../../../../environments/environment";
 export class ShoppingCartItemsComponent implements OnInit{
   @Input() shoppingCart? : ShoppingCart ;
 
-  constructor(private router: Router ,private fb: FormBuilder , public shoppingCartService : ShoppingCartService , private store : Store<any>) {
+  constructor(private router: Router ,private fb: FormBuilder , public shoppingCartService : ShoppingCartService ,
+              private store : Store<any> , private secService : SecurityService) {
   }
   ngOnInit(): void {
 
@@ -25,8 +27,8 @@ export class ShoppingCartItemsComponent implements OnInit{
 
   onDeleteItem(product: Product) {
     let confirmation: boolean = confirm("you sure you want to delete this product of name { "+ product.name + " }")
-    if(confirmation == true)
-        this.store.dispatch(new DeleteProductFromCartAction({productId : product.productId , customerId:environment.Auth_Test_Customer.customerId }))
+    if(confirmation == true && this.secService.profile.id)
+        this.store.dispatch(new DeleteProductFromCartAction({productId : product.productId , customerId:this.secService.profile.id }))
   }
 
   goToProduct(product: Product) {

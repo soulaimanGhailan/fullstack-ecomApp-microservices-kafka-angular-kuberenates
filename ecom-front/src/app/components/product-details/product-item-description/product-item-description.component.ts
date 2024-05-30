@@ -7,6 +7,7 @@ import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
 import {EditProductAction, GetProductItemAction} from "../../../ngrx/Product-item-State/productItem.actions";
 import {environment} from "../../../../environments/environment";
+import {SecurityService} from "../../../security/security.service";
 
 @Component({
   selector: 'app-product-item-description',
@@ -16,7 +17,7 @@ import {environment} from "../../../../environments/environment";
 export class ProductItemDescriptionComponent implements OnInit{
   @Input() product: Product|null =null;
   addProductFrom!: FormGroup ;
-  constructor(private fb:FormBuilder , private store: Store<any> , private router: Router) {
+  constructor(private fb:FormBuilder , private store: Store<any> , private router: Router , private secService : SecurityService) {
     this.addProductFrom = this.fb.group({
       quantity:[0],
       color:[""]
@@ -29,7 +30,8 @@ export class ProductItemDescriptionComponent implements OnInit{
   onAddProductToCart() {
     let quantity : number = this.addProductFrom.value.quantity;
     let color : string = this.addProductFrom.value.color;
-    this.store.dispatch(new AddProductToCartAction({productId :this.product?.productId , quantity: quantity ,customerId :environment.Auth_Test_Customer.customerId ,pickedColor:color  ,increment:false}))
+    if(this.secService.profile  && this.secService.profile.id)
+        this.store.dispatch(new AddProductToCartAction({productId :this.product?.productId , quantity: quantity ,customerId :this.secService.profile.id ,pickedColor:color  ,increment:false}))
   }
 
   onEditProduct() {

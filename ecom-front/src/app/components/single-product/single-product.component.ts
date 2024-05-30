@@ -7,6 +7,7 @@ import {AddProductToCartAction} from "../../ngrx/ShoppingCartState/cart.actions"
 import {AddItemRequest} from "../../models/ShoppingCart";
 import {environment} from "../../../environments/environment";
 import {ProductService} from "../../services/productService/product.service";
+import {SecurityService} from "../../security/security.service";
 
 
 @Component({
@@ -16,7 +17,8 @@ import {ProductService} from "../../services/productService/product.service";
 })
 export class SingleProductComponent implements OnInit{
   @Input() product!: Product ;
-  constructor(private store : Store<any>, private router: Router , private productService: ProductService) {
+  constructor(private store : Store<any>, private router: Router ,
+              private productService: ProductService , private secService: SecurityService) {
 
   }
   ngOnInit(): void {
@@ -29,7 +31,9 @@ export class SingleProductComponent implements OnInit{
   }
 
   addProductToCart() {
-      let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : environment.Auth_Test_Customer.customerId  , increment:true }
-    this.store.dispatch(new AddProductToCartAction(itemReq))
+     if(this.secService.profile.id){
+       let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : this.secService.profile.id  , increment:true }
+       this.store.dispatch(new AddProductToCartAction(itemReq))
+     }
   }
 }

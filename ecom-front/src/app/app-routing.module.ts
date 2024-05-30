@@ -7,19 +7,19 @@ import {ContactComponent} from "./components/contact/contact.component";
 import {SearchedProductsListComponent} from "./components/searched-products-list/searched-products-list.component";
 import {AdminDashboardComponent} from "./components/admin-dashboard/admin-dashboard.component";
 import {AddProductComponent} from "./components/add-product/add-product.component";
-import {EditProductAction} from "./ngrx/Product-item-State/productItem.actions";
 import {EditProductComponent} from "./components/edit-product/edit-product.component";
+import {AuthGuard} from "./security/guards/sec.guard";
 
 const routes: Routes = [
-  {path : "cart" , component:ShoppingCartComponent},
-  {path : "product-details" , component:ProductDetailsComponent},
-  {path : "searched-products" , component:SearchedProductsListComponent},
-  {path : "contact" , component:ContactComponent},
-  {path : "admin" , component:AdminDashboardComponent},
-  {path : "addProduct" , component:AddProductComponent},
-  {path : "edit-product" , component:EditProductComponent},
-  {path : "home" , component:HomeComponent},
-  {path : "" , component:HomeComponent},
+  {path : "cart" , component:ShoppingCartComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "product-details" , component:ProductDetailsComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "searched-products" , component:SearchedProductsListComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "contact" , component:ContactComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "admin" , component:AdminDashboardComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "addProduct" , component:AddProductComponent ,canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "edit-product" , component:EditProductComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "home" , component:HomeComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "" , component:HomeComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
 ];
 
 @NgModule({

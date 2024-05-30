@@ -13,6 +13,7 @@ import {ShoppingCartState} from "../../ngrx/ShoppingCartState/cart.reducer";
 import {GetShoppingCartAction} from "../../ngrx/ShoppingCartState/cart.actions";
 import {DataStateEnum} from "../../ngrx/productsState/products.reducer";
 import {environment} from "../../../environments/environment";
+import {SecurityService} from "../../security/security.service";
 
 @Component({
   selector: 'app-header',
@@ -25,7 +26,9 @@ export class HeaderComponent implements OnInit{
   searchFormGroup? : FormGroup
   shoppingCart$? : Observable<ShoppingCartState>
   public readonly CartDataState = DataStateEnum ;
-  constructor(private router : Router , private fb : FormBuilder , private store :Store<any>) {
+  constructor(private router : Router , private fb : FormBuilder , private store :Store<any> ,
+              public securityService: SecurityService
+              ) {
   }
 
   ngOnInit(): void {
@@ -38,7 +41,10 @@ export class HeaderComponent implements OnInit{
     this.shoppingCart$ = this.store.pipe(
       map(state => state.shoppingCartState)
     )
-    this.store.dispatch(new GetShoppingCartAction(environment.Auth_Test_Customer.customerId ))
+    // if(this.securityService.profile){
+      // console.log(this.securityService.profile.id)
+      this.store.dispatch(new GetShoppingCartAction("16b80211-810b-4663-b005-1b6310108c29" ))
+    // }
   }
 
   onHome() {
@@ -74,4 +80,10 @@ export class HeaderComponent implements OnInit{
   onAdmin() {
     this.router.navigateByUrl("/admin")
   }
+
+  loging() {
+
+  }
+
+
 }

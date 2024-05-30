@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +43,27 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { ProductPickedImagesComponent } from './components/add-product/product-picked-images/product-picked-images.component';
 import {ProductItemEffect} from "./ngrx/Product-item-State/productItem.effects";
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+
+export function initKeyClock(kcSecurity : KeycloakService) {
+  return () =>
+    kcSecurity.init({
+      config: {
+        url: 'http://localhost:8080/',
+        realm: 'ecome-realm',
+        clientId: 'ecom-app' ,
+
+      },
+      initOptions: {
+        // onLoad: 'login-required',
+        onLoad: 'check-sso',
+        checkLoginIframe : true
+        // silentCheckSsoRedirectUri:
+        //   window.location.origin
+      }
+    });
+
+}
 
 
 @NgModule({
@@ -84,9 +105,10 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     StoreModule.forRoot({productState : productReducer , selectedProductsState: SelectedProductsReducer
       , productItemState:ProductItemReducer , shoppingCartState : ShoppingCartReducer}) ,
     EffectsModule.forRoot([ProductsEffects , SelectedProductEffects , ShoppingCartEffect , ProductItemEffect]),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument() ,
+    KeycloakAngularModule,
   ],
-  providers: [],
+  providers: [{provide : APP_INITIALIZER , deps:[KeycloakService] , useFactory:initKeyClock , multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
