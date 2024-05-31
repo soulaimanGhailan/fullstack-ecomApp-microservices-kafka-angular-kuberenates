@@ -5,6 +5,7 @@ import {ProductItemState} from "../../ngrx/Product-item-State/productItem.reduce
 import {ProductService} from "../../services/productService/product.service";
 import {DataStateEnum, FetchMethode} from "../../ngrx/productsState/products.reducer";
 import {EventType} from "../../models/common.model";
+import {SecurityService} from "../../security/security.service";
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +14,7 @@ import {EventType} from "../../models/common.model";
 })
 export class ProductDetailsComponent implements OnInit{
   productItem$?:Observable<ProductItemState>
-  constructor(private store:Store<any> , private productService : ProductService) {
+  constructor(private store:Store<any> , private productService : ProductService , private secService: SecurityService) {
   }
   ngOnInit(): void {
     this.productItem$ = this.store.pipe(
@@ -23,8 +24,8 @@ export class ProductDetailsComponent implements OnInit{
     this.store.subscribe(
       s => {
         if(s.productItemState.dataState == DataStateEnum.LOADED) {
-          if(s.productItemState.product){
-            this.productService.publishEvent(s.productItemState.product.productId , EventType.CLICK_PRODUCT)
+          if(s.productItemState.product && this.secService.profile.id){
+            this.productService.publishEvent(s.productItemState.product.productId , EventType.CLICK_PRODUCT , this.secService.profile.id)
           }
         }
       })

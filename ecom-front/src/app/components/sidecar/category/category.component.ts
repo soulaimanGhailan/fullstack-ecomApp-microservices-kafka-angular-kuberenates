@@ -7,6 +7,8 @@ import {map, Observable} from "rxjs";
 import {ShoppingCartState} from "../../../ngrx/ShoppingCartState/cart.reducer";
 import {DataStateEnum} from "../../../ngrx/productsState/products.reducer";
 import {ShoppingCartService} from "../../../services/shoppingCartService/shopping-cart.service";
+import {SecurityService} from "../../../security/security.service";
+import {GetShoppingCartAction} from "../../../ngrx/ShoppingCartState/cart.actions";
 
 @Component({
   selector: 'app-category',
@@ -18,13 +20,18 @@ export class CategoryComponent implements OnInit{
   categories : string[] =  Object.values(ProductsCategory).map((color) => String(color));
   shoppingCart$? : Observable<ShoppingCartState>
   public readonly CartDataState = DataStateEnum ;
-  constructor(private store:Store<any> , private router: Router , public shoppingCartService:ShoppingCartService) {
+  constructor(private store:Store<any> , private router: Router , public shoppingCartService:ShoppingCartService , private secService: SecurityService) {
   }
 
   ngOnInit(): void {
-    this.shoppingCart$ = this.store.pipe(
-      map(state => state.shoppingCartState)
-    )
+    if(this.secService.profile){
+      if(this.secService.profile.id){
+        this.store.dispatch(new GetShoppingCartAction(this.secService.profile.id))
+        this.shoppingCart$ = this.store.pipe(
+          map(state => state.shoppingCartState)
+        )
+      }
+    }
   }
   onSearchByCategory(cat: string) {
     this.store.dispatch(new GetProductsPageByCategoryAction({pageSize:{page:0 , size:6} ,data:cat}))

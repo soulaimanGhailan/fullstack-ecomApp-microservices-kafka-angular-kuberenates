@@ -1,7 +1,11 @@
 <div id="header">
   <div class="container">
     <div id="welcomeLine" class="row">
-      <div class="span6">Welcome!<strong> User</strong></div>
+      <div class="span6">Welcome!
+        <ng-container *ngIf="securityService.profile">
+          <strong> {{securityService.profile.firstName}} {{securityService.profile.id}}</strong>
+        </ng-container>
+      </div>
       <div class="span6">
         <div class="pull-right">
           <a href="product_summary.html"><span class="">Fr</span></a>
@@ -26,7 +30,7 @@
         <span class="icon-bar"></span>
       </a>
       <div class="navbar-inner">
-        <a class="brand" href="index.html"><img src="assets/template/themes/images/logo.png" alt="Bootsshop"/></a>
+        <a style="cursor: pointer" class="brand" (click)="onHome()"><img src="assets/template/themes/images/logo.png" alt="Bootsshop"/></a>
 
         <form *ngIf="searchFormGroup" [formGroup]="searchFormGroup" class="form-inline navbar-search"  >
           <input id="srchFld" class="srchTxt" type="text" formControlName="keyword"/>
@@ -41,7 +45,9 @@
           <li class=""><a style="cursor: pointer" (click)="onHome()">Home</a></li>
           <li class=""><a style="cursor: pointer" (click)="onContact()">Contact</a></li>
           <li class="">
-            <a (click)="onAdmin()" role="button" data-toggle="modal" style="padding-right:0 ; cursor: pointer"><span class="btn btn-large btn-primary">ADMIN</span></a>
+            <ng-container *ngIf="securityService.hasRoleIn(['ADMIN'])">
+              <a (click)="onAdmin()" role="button" data-toggle="modal" style="padding-right:0 ; cursor: pointer"><span class="btn btn-large btn-primary">ADMIN</span></a>
+            </ng-container>
           </li>
           <li class="">
             <a  role="button" data-toggle="modal" style="padding-right:0">

@@ -2,6 +2,7 @@ package devops.ecom.productservice.security;
 
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +31,8 @@ public class SpringSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.csrf().disable();
         http.authorizeRequests()
-//                .antMatchers("/products/*").permitAll()
+                .antMatchers(HttpMethod.GET , "/products").permitAll()
+                .antMatchers(HttpMethod.GET , "/products/search/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

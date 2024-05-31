@@ -18,7 +18,7 @@ import {SecurityService} from "../../security/security.service";
 export class SingleProductComponent implements OnInit{
   @Input() product!: Product ;
   constructor(private store : Store<any>, private router: Router ,
-              private productService: ProductService , private secService: SecurityService) {
+              private productService: ProductService , public secService: SecurityService) {
 
   }
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class SingleProductComponent implements OnInit{
 
   addProductToCart() {
      if(this.secService.profile.id){
-       let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : this.secService.profile.id  , increment:true }
+       let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : this.secService.profile.id  }
        this.store.dispatch(new AddProductToCartAction(itemReq))
      }
   }

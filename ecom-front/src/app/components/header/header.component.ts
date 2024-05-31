@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
     this.searchFormGroup=this.fb.group(
       {
         keyword: [""],
@@ -41,9 +42,14 @@ export class HeaderComponent implements OnInit{
     this.shoppingCart$ = this.store.pipe(
       map(state => state.shoppingCartState)
     )
+
+    // if(this.securityService.profile){
+    //   if(this.securityService.profile.id)
+    //     this.store.dispatch(new GetShoppingCartAction(this.securityService.profile.id )) ;
+    // }
     // if(this.securityService.profile){
       // console.log(this.securityService.profile.id)
-      this.store.dispatch(new GetShoppingCartAction("16b80211-810b-4663-b005-1b6310108c29" ))
+
     // }
   }
 

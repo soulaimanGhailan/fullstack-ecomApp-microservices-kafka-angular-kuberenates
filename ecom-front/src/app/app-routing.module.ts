@@ -11,15 +11,17 @@ import {EditProductComponent} from "./components/edit-product/edit-product.compo
 import {AuthGuard} from "./security/guards/sec.guard";
 
 const routes: Routes = [
+  {path : "cart" , component:ShoppingCartComponent , canActivate:[AuthGuard]  , data : {roles : ['ADMIN' , 'USER']}},
+  {path : "cart" , component:ShoppingCartComponent , canActivate:[AuthGuard]  , data : {roles : ['ADMIN']}},
   {path : "cart" , component:ShoppingCartComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
-  {path : "product-details" , component:ProductDetailsComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
-  {path : "searched-products" , component:SearchedProductsListComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
-  {path : "contact" , component:ContactComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
-  {path : "admin" , component:AdminDashboardComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
-  {path : "addProduct" , component:AddProductComponent ,canActivate:[AuthGuard]  , data : {roles : ['USER']}},
-  {path : "edit-product" , component:EditProductComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
-  {path : "home" , component:HomeComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
-  {path : "" , component:HomeComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "product-details" , component:ProductDetailsComponent },
+  {path : "searched-products" , component:SearchedProductsListComponent},
+  {path : "contact" , component:ContactComponent },
+  {path : "admin" , component:AdminDashboardComponent , canActivate:[AuthGuard]  , data : {roles : ['ADMIN']}},
+  {path : "addProduct" , component:AddProductComponent ,canActivate:[AuthGuard]  , data : {roles : ['ADMIN']}},
+  {path : "edit-product" , component:EditProductComponent , canActivate:[AuthGuard]  , data : {roles : ['ADMIN']}},
+  {path : "home" , component:HomeComponent},
+  {path : "" , component:HomeComponent},
 ];
 
 @NgModule({

@@ -31,7 +31,7 @@ export class ProductItemDescriptionComponent implements OnInit{
     let quantity : number = this.addProductFrom.value.quantity;
     let color : string = this.addProductFrom.value.color;
     if(this.secService.profile  && this.secService.profile.id)
-        this.store.dispatch(new AddProductToCartAction({productId :this.product?.productId , quantity: quantity ,customerId :this.secService.profile.id ,pickedColor:color  ,increment:false}))
+        this.store.dispatch(new AddProductToCartAction({productId :this.product?.productId , quantity: quantity ,customerId :this.secService.profile.id ,pickedColor:color  }))
   }
 
   onEditProduct() {

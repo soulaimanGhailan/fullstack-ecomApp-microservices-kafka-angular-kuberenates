@@ -14,5 +14,4 @@ export interface AddItemRequest{
   customerId: string ,
   quantity? : number
   pickedColor?: string ,
-  increment: boolean;
 }

@@ -19,7 +19,7 @@ export class ShoppingCartComponent implements OnInit{
   }
   ngOnInit(): void {
     if(this.secService.profile.id) {
-      this.store.dispatch(new GetShoppingCartAction(this.secService.profile.id));
+      // this.store.dispatch(new GetShoppingCartAction(this.secService.profile.id));
       this.shoppingCart$ = this.store.pipe(
         map(state => state.shoppingCartState)
       )

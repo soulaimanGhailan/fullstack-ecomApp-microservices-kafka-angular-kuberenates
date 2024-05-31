@@ -42,15 +42,15 @@ public class ProductRestController {
         return this.productService.updateProduct(product);
     }
 
-    @GetMapping("event/{productId}/{eventType}")
-    public void catchEventType(@PathVariable String productId , @PathVariable String eventType){
+    @GetMapping("event/{productId}/{customerId}/{eventType}")
+    public void catchEventType(@PathVariable String productId , @PathVariable String customerId,  @PathVariable String eventType){
         PageEvent event = PageEvent.builder()
                 .productId(productId)
                 .type(PageEventType.valueOf(eventType))
                 .date(new Date())
                 .duration(1L)
                 .pageEventId(UUID.randomUUID().toString())
-                .userId("test-customer")
+                .userId(customerId)
                 .build();
         this.streamBridge.send("R1" , event) ;
     }

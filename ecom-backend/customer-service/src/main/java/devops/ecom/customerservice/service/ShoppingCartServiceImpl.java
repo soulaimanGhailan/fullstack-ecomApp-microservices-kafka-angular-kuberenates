@@ -35,8 +35,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 //        Price productPrice = this.productRestClient.getProductPrice(addItemRequest.getProductId());
 //        p.setProductPrice(productPrice);
         p.setPickedColor(addItemRequest.getPickedColor());
-        if(!addItemRequest.isIncrement())
-            quantity = addItemRequest.getQuantity();
         return ShoppingCartItem.builder()
                 .product(p)
                 .quantity(quantity)
@@ -80,10 +78,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart updateItemInCart(ShoppingCartItem item, AddItemRequest addItemRequest, ShoppingCart cart)   {
         int index = cart.getItems().indexOf(item) ;
-        if(addItemRequest.isIncrement())
-            cart.getItems().get(index).setQuantity(item.getQuantity() + 1);
-        else
-            cart.getItems().get(index).setQuantity(addItemRequest.getQuantity());
+        cart.getItems().get(index).setQuantity(item.getQuantity() + 1);
         cart.getItems().get(index).getProduct().setPickedColor(addItemRequest.getPickedColor());
         return this.shoppingCartRepo.save(cart);
 

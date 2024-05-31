@@ -49,8 +49,8 @@ export class ProductService implements OnInit{
     return this.http.get<Product[]>(this.productService + "/products/search/findByCategory?category=" + payload.data +"&page=" + payload.pageSize.page +"&size="+payload.pageSize.size)
   }
 
-  public publishEvent(productId : string , eventType : EventType){
-      this.http.get<void>(this.productService + "/api/products/event/"+productId + "/" + eventType.toString()).subscribe(value =>
+  public publishEvent(productId : string , eventType : EventType , customerId : string){
+      this.http.get<void>(this.productService + "/api/products/event/"+productId +"/" + customerId + "/" + eventType.toString()).subscribe(value =>
       {
       })
   }
