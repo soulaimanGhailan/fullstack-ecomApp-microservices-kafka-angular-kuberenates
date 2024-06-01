@@ -37,6 +37,51 @@ services:
         KAFKA_ADVERTISED_HOST_NAME: 10.10.9.142
         KAFKA_CREATE_TOPICS: "R1"
 
+  postgres-service:
+    image: postgres
+    container_name: postgres-service
+    environment:
+     POSTGRES_DB: keycloak_db
+     POSTGRES_USER: keycloak
+     POSTGRES_PASSWORD: k1234
+    ports:
+    - '5432:5432'
+    expose:
+     - '5432'
+    healthcheck:
+     test: "exit 0"
+#  pgadmin4:
+#    image: dpage/pgadmin4
+#    container_name: pgadmin4
+#    restart: always
+#    ports:
+#      - "8888:80"
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: xxxx@gmail.com
+#      PGADMIN_DEFAULT_PASSWORD: azer
+#    volumes:
+#      - pgadmin_data:/var/lib/pgadmin
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres-service:5432/keycloak_db
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: k1234
+      KEYCLOAK_ADMIN: admin
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+    restart: always
+    ports:
+      - '8080:8080'
+    expose:
+      - '8080'
+    depends_on:
+      - postgres-service
+
 #  product-service:
 #    image: soulaimandockerhub/ecom-backend-product-service:v1
 #    container_name: product-service
