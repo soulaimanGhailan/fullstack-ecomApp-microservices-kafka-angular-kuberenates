@@ -63,6 +63,11 @@ export class ProductService implements OnInit{
     return this.http.put<Product>(this.productService + "/api/products" , product) ;
   }
 
+  public deleteProduct(productId : string):Observable<Product>{
+     return this.http.delete<Product>(this.productService + "/products/" + productId) ;
+  }
+
+
   public getDate(product : Product){
     return product.addingDate.slice(0 ,10);
   }

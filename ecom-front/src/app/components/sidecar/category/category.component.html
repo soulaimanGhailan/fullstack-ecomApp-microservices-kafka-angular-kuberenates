@@ -4,9 +4,11 @@
         <a id="myCart" (click)="goToShCart()" style="cursor: pointer">
             <img src="assets/template/themes/images/ico-cart.png" alt="cart">
               {{state.shoppingCart.items.length}} Items in your cart
-            <span *ngIf="state.shoppingCart" class="badge badge-warning pull-right">
+              <ng-container *ngIf="state.shoppingCart">
+                <span *ngIf="state.shoppingCart.items[0].product" class="badge badge-warning pull-right">
               {{state.shoppingCart.items[0].product.productPrice.symbol}}{{shoppingCartService.calcTotalPrice(state.shoppingCart)}} </span>
-        </a>
+              </ng-container>
+             </a>
       </ng-container>
     </ng-container>
 </div>

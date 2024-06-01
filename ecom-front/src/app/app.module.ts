@@ -44,14 +44,15 @@ import { ProductPickedImagesComponent } from './components/add-product/product-p
 import {ProductItemEffect} from "./ngrx/Product-item-State/productItem.effects";
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {environment} from "../environments/environment";
 
 export function initKeyClock(kcSecurity : KeycloakService) {
   return () =>
     kcSecurity.init({
       config: {
-        url: 'http://localhost:8080/',
-        realm: 'ecome-realm',
-        clientId: 'ecom-app' ,
+        url: environment.KEYCLOAK_SERVER_URL,
+        realm: environment.KEYCLOAK_REALM,
+        clientId: environment.KEYCLOAK_CLIENT_ID ,
 
       },
       initOptions: {

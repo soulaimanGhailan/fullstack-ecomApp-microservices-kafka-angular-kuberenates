@@ -6,7 +6,7 @@
       <h4 style="text-align:center">
 <!--        check if admin-->
         <ng-container *ngIf="secService.hasRoleIn(['ADMIN'])">
-          <a class="btn">
+          <a (click)="deleteProduct()" class="btn">
             <i class="icon-trash" ></i>
           </a>
         </ng-container>

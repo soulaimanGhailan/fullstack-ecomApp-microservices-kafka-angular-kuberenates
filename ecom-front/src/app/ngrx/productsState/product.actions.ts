@@ -18,6 +18,10 @@ export enum ProductsActionType  {
   GET_PRODUCTS_PAGE_BY_CATEGORY = "*PRODUCTS* GET  PRODUCTS PAGE BY_CATEGORY ",
   GET_PRODUCT_PAGE_BY_CATEGORY_SUCCESS = "*PRODUCTS* GET  PRODUCTS PAGE BY_CATEGORY [SUCCESS]",
   GET_PRODUCTS_PAGE_BY_CATEGORY_ERROR = "*PRODUCTS* GET  PRODUCTS PAGE BY_CATEGORY [ERROR]  ",
+
+  DELETE_PRODUCT = "*PRODUCTS* DELETE_PRODUCT ",
+  DELETE_PRODUCT_SUCCESS = "*PRODUCTS* DELETE_PRODUCT [SUCCESS]",
+  DELETE_PRODUCT_ERROR = "*PRODUCTS* DELETE_PRODUCT [ERROR]  ",
 }
 
 /** GetAllProductAction **/
@@ -89,8 +93,26 @@ export class GetProductsPageByCategoryActionError implements Action{
   }
 }
 
+
+// /** delete product by id **/
+// export class DeleteProductAction implements Action{
+//   type: ProductsActionType = ProductsActionType.DELETE_PRODUCT;
+//   constructor(public payload : string) {
+//   }
+// }
+// export class DeleteProductActionSuccess implements Action{
+//   type: ProductsActionType = ProductsActionType.DELETE_PRODUCT_SUCCESS;
+//   constructor(public payload : any) {
+//   }
+// }
+// export class DeleteProductActionError implements Action{
+//   type: ProductsActionType = ProductsActionType.DELETE_PRODUCT_ERROR;
+//   constructor(public payload : string) {
+//   }
+// }
 export type ProductAction = GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError |
    GetProductsPageAction | GetProductsPageActionSuccess | GetProductsPageActionError |
    GetProductsPageByKeyWordAction | GetProductsPageByKeyWordActionSuccess | GetProductsPageByKeyWordActionError |
    GetProductsPageByCategoryAction | GetProductsPageByCategoryActionSuccess | GetProductsPageByCategoryActionError
+   // |  DeleteProductAction | DeleteProductActionSuccess | DeleteProductActionError
 ;

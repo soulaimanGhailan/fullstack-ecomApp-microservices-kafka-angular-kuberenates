@@ -8,6 +8,7 @@ import {AddItemRequest} from "../../models/ShoppingCart";
 import {environment} from "../../../environments/environment";
 import {ProductService} from "../../services/productService/product.service";
 import {SecurityService} from "../../security/security.service";
+import {GetProductsPageAction} from "../../ngrx/productsState/product.actions";
 
 
 @Component({
@@ -35,5 +36,16 @@ export class SingleProductComponent implements OnInit{
        let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : this.secService.profile.id  }
        this.store.dispatch(new AddProductToCartAction(itemReq))
      }
+  }
+
+  deleteProduct() {
+    let confirmation : boolean = confirm("you sure you want to delete the product * "+ this.product.name + " *")
+    if(confirmation == true){
+      this.productService.deleteProduct(this.product.productId).subscribe({
+        next : value => {
+          this.router.navigateByUrl("/home")  ;
+        }
+      }) ;
+    }
   }
 }
