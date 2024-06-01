@@ -1,0 +1,33 @@
+depName: keycloak-dep
+replicasNum: 1
+podName: keycloak-pod
+imageName: quay.io/keycloak/keycloak
+imageVersion: 24.0.4
+containerName: keycloak-container
+containerPort: 8080
+containerEnvVar:
+    - name: KC_DB
+      value: "postgres"
+    - name: KC_DB_URL
+      value: "jdbc:postgresql://postgres-svc:5432/keycloak_db"
+    - name: KC_DB_USERNAME
+      value: "keycloak"
+    #      KC_HOSTNAME: 0.0.0.0
+    - name: KC_DB_PASSWORD
+      value: "k1234"
+    - name: KEYCLOAK_ADMIN
+      value: "admin"
+    - name: KC_HTTP_ENABLED
+      value: "true"
+    - name: KC_HOSTNAME_STRICT_HTTPS
+      value: "false"
+    - name: KEYCLOAK_ADMIN_PASSWORD
+      value: "admin"
+maxMemory: 500Mi
+maxCpu: 300m
+memory: 300Mi
+cpu: 180m
+serviceName: keycloak-svc
+servicePort: 8080
+serviceType: NodePort
+nodePort: 30080

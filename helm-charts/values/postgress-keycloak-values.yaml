@@ -1,0 +1,21 @@
+depName: postgres-dep
+replicasNum: 1
+podName: postgres-pod
+imageName: postgres
+imageVersion: 16-alpine
+containerName: postgres-container
+containerPort: 5432
+containerEnvVar:
+  - name: POSTGRES_DB
+    value: "keycloak_db"
+  - name: POSTGRES_USER
+    value: "keycloak"
+  - name: POSTGRES_PASSWORD
+    value: "k1234"
+maxMemory: 1Gi
+maxCpu: 180m
+memory: 200Mi
+cpu: 70m
+serviceName: postgres-svc
+servicePort: 5432
+serviceType: ClusterIP

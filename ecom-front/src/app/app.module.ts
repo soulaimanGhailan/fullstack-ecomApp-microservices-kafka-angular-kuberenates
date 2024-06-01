@@ -56,11 +56,10 @@ export function initKeyClock(kcSecurity : KeycloakService) {
 
       },
       initOptions: {
-        // onLoad: 'login-required',
         onLoad: 'check-sso',
-        checkLoginIframe : true
-        // silentCheckSsoRedirectUri:
-        //   window.location.origin
+        checkLoginIframe : false,
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
       }
     });
 

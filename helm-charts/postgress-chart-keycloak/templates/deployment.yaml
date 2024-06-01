@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.depName}}
+  name: {{ .Values.depName }}
+spec:
+  replicas: {{ .Values.replicasNum }}
+  selector:
+    matchLabels:
+      app: {{ .Values.podName }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.podName }}
+    spec:
+      volumes:
+        - name: data
+          emptyDir: {}
+      containers:
+        - image: "{{ .Values.imageName }}:{{ .Values.imageVersion }}"
+          name: {{ .Values.containerName }}
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          env:
+          {{- range .Values.containerEnvVar}}
+          - name: {{ .name }}
+            value: {{ .value | quote }}
+          {{- end}}
+          resources:
+            limits:
+              memory: {{ .Values.maxMemory }}
+              cpu: {{ .Values.maxCpu }}
+            requests:
+              cpu: {{ .Values.cpu }}
+              memory: {{ .Values.memory }}
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "pg_isready -U postgres"
+            initialDelaySeconds: 5
+            periodSeconds: 10
