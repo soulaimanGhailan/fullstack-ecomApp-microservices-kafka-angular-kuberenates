@@ -2,7 +2,7 @@ depName: customer-service-dep
 replicasNum: 1
 podName: customer-service-pod
 imageName: soulaimandockerhub/ecom-backend-customer-service
-imageVersion: secured-v2
+imageVersion: secured-v1.1
 containerName: customer-service-container
 containerPort: 8080
 containerEnvVar:

@@ -53,14 +53,14 @@ releases:
     values:
           - values/frontend-values.yaml
 
-  - name: postgres
-    chart: postgress-chart-keycloak
-    values:
-      - values/postgress-keycloak-values.yaml
-
-  - name: keycloak
-    chart: keycloak-chart
-    values:
-          - values/keycloak-values.yaml
-    needs:
-      - postgres
+#  - name: postgres
+#    chart: postgress-chart-keycloak
+#    values:
+#      - values/postgress-keycloak-values.yaml
+#
+#  - name: keycloak
+#    chart: keycloak-chart
+#    values:
+#          - values/keycloak-values.yaml
+#    needs:
+#      - postgres
