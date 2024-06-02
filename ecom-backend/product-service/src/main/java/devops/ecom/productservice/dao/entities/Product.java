@@ -23,6 +23,7 @@ public class Product {
     private String name;
     private Date addingDate ;
     private String brand ;
+    private int quantity ;
     private String description ;
     @Field
     private ProductCategory category;

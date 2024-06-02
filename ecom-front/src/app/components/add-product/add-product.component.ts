@@ -34,6 +34,7 @@ export class AddProductComponent implements OnInit{
       productPrice : ["" , Validators.required],
       productCurrency : ["" , Validators.required],
       productColors : [[] , Validators.required],
+      productQuantity : [0 , Validators.required],
       productSelected : [false , Validators.required],
       productDescription : ["" , Validators.required],
       productHeight: [0,  Validators.required],
@@ -71,6 +72,7 @@ export class AddProductComponent implements OnInit{
     if(this.addProductFormGroup.invalid) return ;
     let product: CreatedProduct ={
       name : this.addProductFormGroup.get("productName")?.value ,
+      quantity: this.addProductFormGroup.get("productQuantity")?.value ,
       category: this.addProductFormGroup.get("productCategory")?.value ,
       description: this.addProductFormGroup.get("productDescription")?.value ,
       productPrice : {price :this.addProductFormGroup.get("productPrice")?.value ,

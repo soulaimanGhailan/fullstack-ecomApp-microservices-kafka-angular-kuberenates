@@ -36,6 +36,7 @@ export class EditProductComponent implements OnInit{
             this.productImages = s.productItemState.product.productImagesBas64 ;
             this.editProductFormGroup=this.fb.group({
               productName : [s.productItemState.product.name , Validators.required],
+              productQuantity : [s.productItemState.product.quantity , Validators.required],
               productImage1 : [null],
               productImage2 : [null],
               productImage3 : [null],
@@ -95,6 +96,7 @@ export class EditProductComponent implements OnInit{
     let product: CreatedProduct ={
       productId: this.productState?.product?.productId ,
       name : this.editProductFormGroup.get("productName")?.value ,
+      quantity : this.editProductFormGroup.get("productQuantity")?.value ,
       category: this.editProductFormGroup.get("productCategory")?.value ,
       description: this.editProductFormGroup.get("productDescription")?.value ,
       productPrice : {price :this.editProductFormGroup.get("productPrice")?.value ,

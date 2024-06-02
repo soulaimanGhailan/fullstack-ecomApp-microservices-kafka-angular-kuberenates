@@ -29,7 +29,9 @@
     <p>
       {{product.description}}
     </p>
-    <button (click)="onEditProduct()" class="btn btn-large btn-danger pull-right"> Edit product <i class=" icon-edit"></i></button>
+    <ng-container *ngIf="secService.hasRoleIn(['ADMIN'])">
+       <button (click)="onEditProduct()" class="btn btn-large btn-danger pull-right"> Edit product <i class=" icon-edit"></i></button>
+    </ng-container>
     <br class="clr"/>
     <a href="#" name="detail"></a>
     <hr class="soft"/>

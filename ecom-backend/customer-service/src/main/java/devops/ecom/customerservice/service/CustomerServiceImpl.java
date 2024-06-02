@@ -27,17 +27,20 @@ public class CustomerServiceImpl implements CustomerService {
     private  String ADMIN_PASSWORD ;
     private  String ADMIN_USERNAME ;
     private  String KEYCLOAK_URL ;
+    private String keycloakRealm ;
     private Keycloak keycloak ;
 
     public CustomerServiceImpl(CustomerRepo customerRepo, ShoppingCartRepo shoppingCartRepo ,
                                @Value("${keycloak.auth-server-url}") String KEYCLOAK_URL ,
                                @Value("${admin.password}") String ADMIN_PASSWORD ,
-                               @Value("${admin.username}") String ADMIN_USERNAME ) {
+                               @Value("${admin.username}") String ADMIN_USERNAME  ,
+                               @Value("${keycloak.realm}") String keycloakRealm) {
         this.customerRepo = customerRepo;
         this.shoppingCartRepo = shoppingCartRepo;
         this.KEYCLOAK_URL = KEYCLOAK_URL ;
         this.ADMIN_PASSWORD = ADMIN_PASSWORD ;
         this.ADMIN_USERNAME = ADMIN_USERNAME  ;
+        this.keycloakRealm = keycloakRealm ;
         this.keycloak = KeycloakBuilder.builder()
                 .serverUrl(this.KEYCLOAK_URL)
                 .realm("master")
@@ -62,7 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void syncKeycloakUsers() {
-        List<UserRepresentation> keycloakUsers = keycloak.realm("ecome-realm").users().list();
+        List<UserRepresentation> keycloakUsers = keycloak.realm(keycloakRealm).users().list();
         for (UserRepresentation keycloakUser : keycloakUsers) {
             Optional<Customer> optionalUser = customerRepo.findById(keycloakUser.getId());
             Customer customer ;

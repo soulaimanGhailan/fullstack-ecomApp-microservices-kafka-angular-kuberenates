@@ -25,6 +25,14 @@
               </div>
 
               <div class="control-group">
+                <input  formControlName="productQuantity" type="text" placeholder="product name" class="input-xlarge"
+                        [ngClass]="{'is-invalid' : submitted && editProductFormGroup.controls['productQuantity'].errors}"/>
+                <div *ngIf="submitted && editProductFormGroup.controls['productQuantity'].errors" class="invalid-feedback">
+                  <div style="color: red"> title is Required</div>
+                </div>
+              </div>
+
+              <div class="control-group">
                 <label for="image1">product image num 1</label>
                 <input (change)="onFileSelected($event , 1)" formControlName="productImage1" id="image1" type="file" placeholder="product name" class="input-xlarge"
                        [ngClass]="{'is-invalid' : submitted && editProductFormGroup.controls['productImage1'].errors}"/>

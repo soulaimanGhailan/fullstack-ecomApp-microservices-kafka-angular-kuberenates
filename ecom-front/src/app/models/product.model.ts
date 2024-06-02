@@ -10,6 +10,7 @@ export interface Product {
   category:string ,
   status:string ,
   brand:string ;
+  quantity:number
   colors: string[],
   productPrice: ProductPrice ;
   dimension: Dimension ;
@@ -43,6 +44,7 @@ export interface CreatedProduct{
   category:string ,
   status?:string ,
   brand:string ;
+  quantity: number ,
   colors: string[],
   productPrice: ProductPrice ;
   dimension: Dimension ;

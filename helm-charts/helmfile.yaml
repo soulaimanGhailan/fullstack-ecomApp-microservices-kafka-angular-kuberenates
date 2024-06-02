@@ -1,57 +1,57 @@
 releases:
-#  - name: mongodb
-#    chart: mongo-chart
-#    values:
-#      - values/mongodb-values.yaml
-#
-#  - name: mongo-express
-#    chart: mongo-chart
-#    values:
-#      - values/mongo-express-values.yaml
-#    needs:
-#      - mongodb
-#
-#  - name: zookeeper
-#    chart: kafka-chart
-#    values:
-#      - values/zookipper-values.yaml
-#
-#  - name: kafka
-#    chart: kafka-chart
-#    values:
-#      - values/kafka-values.yaml
-#    needs:
-#      - zookeeper
-#
-#
-#  - name: product-service
-#    chart: backend-chart
-#    values:
-#      - values/product-service-values.yaml
-#    needs:
-#      - mongodb
-#      - kafka
-#
-#  - name: customer-service
-#    chart: backend-chart
-#    values:
-#      - values/customer-service-values.yaml
-#    needs:
-#      - mongodb
-#      - kafka
-#
-#  - name: event-consumer-service
-#    chart: backend-chart
-#    values:
-#      - values/pageEvent-consumer-values.yaml
-#    needs:
-#      - mongodb
-#      - kafka
-#
-#  - name: frontend
-#    chart: frontend-chart
-#    values:
-#          - values/frontend-values.yaml
+  - name: mongodb
+    chart: mongo-chart
+    values:
+      - values/mongodb-values.yaml
+
+  - name: mongo-express
+    chart: mongo-chart
+    values:
+      - values/mongo-express-values.yaml
+    needs:
+      - mongodb
+
+  - name: zookeeper
+    chart: kafka-chart
+    values:
+      - values/zookipper-values.yaml
+
+  - name: kafka
+    chart: kafka-chart
+    values:
+      - values/kafka-values.yaml
+    needs:
+      - zookeeper
+
+
+  - name: product-service
+    chart: backend-chart
+    values:
+      - values/product-service-values.yaml
+    needs:
+      - mongodb
+      - kafka
+
+  - name: customer-service
+    chart: backend-chart
+    values:
+      - values/customer-service-values.yaml
+    needs:
+      - mongodb
+      - kafka
+
+  - name: event-consumer-service
+    chart: backend-chart
+    values:
+      - values/pageEvent-consumer-values.yaml
+    needs:
+      - mongodb
+      - kafka
+
+  - name: frontend
+    chart: frontend-chart
+    values:
+          - values/frontend-values.yaml
 
   - name: postgres
     chart: postgress-chart-keycloak

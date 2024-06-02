@@ -2,7 +2,7 @@ depName: customer-service-dep
 replicasNum: 1
 podName: customer-service-pod
 imageName: soulaimandockerhub/ecom-backend-customer-service
-imageVersion: v1.1
+imageVersion: secured-v2
 containerName: customer-service-container
 containerPort: 8080
 containerEnvVar:
@@ -18,6 +18,17 @@ containerEnvVar:
     value: "password"
   - name: PRODUCT_SERVICE_URL
     value: "product-service-svc:8080"
+  - name: KEYCLOAK_SERVER
+    value: "http://10.10.9.133:30080"
+  - name: KEYCLOAK_REALM
+    value: "ecom-realm"
+  - name: KEYCLOAK_CLIENT
+    value: "ecom-app"
+  - name: KEYCLOAK_ADMIN_USERNAME
+    value: "admin"
+  - name: KEYCLOAK_ADMIN_PASSWORD
+    value: "admin"
+
 serviceName: customer-service-svc
 servicePort: 80
 serviceType: NodePort

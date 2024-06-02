@@ -17,7 +17,8 @@ import {SecurityService} from "../../../security/security.service";
 export class ProductItemDescriptionComponent implements OnInit{
   @Input() product: Product|null =null;
   addProductFrom!: FormGroup ;
-  constructor(private fb:FormBuilder , private store: Store<any> , private router: Router , private secService : SecurityService) {
+  constructor(private fb:FormBuilder , private store: Store<any> , private router: Router
+              , public secService : SecurityService) {
     this.addProductFrom = this.fb.group({
       quantity:[0],
       color:[""]

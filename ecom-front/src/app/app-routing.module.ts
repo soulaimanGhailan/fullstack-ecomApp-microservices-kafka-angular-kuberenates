@@ -11,9 +11,7 @@ import {EditProductComponent} from "./components/edit-product/edit-product.compo
 import {AuthGuard} from "./security/guards/sec.guard";
 
 const routes: Routes = [
-  {path : "cart" , component:ShoppingCartComponent , canActivate:[AuthGuard]  , data : {roles : ['ADMIN' , 'USER']}},
-  {path : "cart" , component:ShoppingCartComponent , canActivate:[AuthGuard]  , data : {roles : ['ADMIN']}},
-  {path : "cart" , component:ShoppingCartComponent , canActivate:[AuthGuard]  , data : {roles : ['USER']}},
+  {path : "cart" , component:ShoppingCartComponent , canActivate:[AuthGuard]  , data : {roles : ['USER' , 'ADMIN']}},
   {path : "product-details" , component:ProductDetailsComponent },
   {path : "searched-products" , component:SearchedProductsListComponent},
   {path : "contact" , component:ContactComponent },

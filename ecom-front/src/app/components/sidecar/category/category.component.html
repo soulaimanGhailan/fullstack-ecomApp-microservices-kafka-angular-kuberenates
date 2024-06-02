@@ -1,16 +1,16 @@
 <div class="well well-small">
-    <ng-container *ngIf="shoppingCart$ | async  as state">
-      <ng-container *ngIf="state.dataState == CartDataState.LOADED && state.shoppingCart">
         <a id="myCart" (click)="goToShCart()" style="cursor: pointer">
             <img src="assets/template/themes/images/ico-cart.png" alt="cart">
-              {{state.shoppingCart.items.length}} Items in your cart
+        <ng-container *ngIf="shoppingCart$ | async  as state">
+          <ng-container *ngIf="state.dataState == CartDataState.LOADED && state.shoppingCart">
+                  {{state.shoppingCart.items.length}} Items in your cart
               <ng-container *ngIf="state.shoppingCart">
                 <span *ngIf="state.shoppingCart.items[0].product" class="badge badge-warning pull-right">
               {{state.shoppingCart.items[0].product.productPrice.symbol}}{{shoppingCartService.calcTotalPrice(state.shoppingCart)}} </span>
               </ng-container>
-             </a>
-      </ng-container>
-    </ng-container>
+          </ng-container>
+        </ng-container>
+        </a>
 </div>
 <ul id="sideManu" class="nav nav-tabs nav-stacked">
   <li style="cursor: pointer" (click)="onSearchByCategory(cat)" *ngFor="let cat of categories" class="subMenu open"><a> {{cat}}</a>

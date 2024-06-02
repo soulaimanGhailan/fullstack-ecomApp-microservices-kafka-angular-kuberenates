@@ -33,6 +33,7 @@ public class SpringSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET , "/products").permitAll()
                 .antMatchers(HttpMethod.GET , "/products/search/*").permitAll()
+                .antMatchers("/actuator/health").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

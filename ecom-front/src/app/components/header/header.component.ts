@@ -48,8 +48,7 @@ export class HeaderComponent implements OnInit{
     //     this.store.dispatch(new GetShoppingCartAction(this.securityService.profile.id )) ;
     // }
     // if(this.securityService.profile){
-      // console.log(this.securityService.profile.id)
-
+    //   console.log(this.securityService.profile.id)
     // }
   }
 

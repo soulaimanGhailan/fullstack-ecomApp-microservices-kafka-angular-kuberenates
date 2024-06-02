@@ -2,7 +2,7 @@ depName: product-service-dep
 replicasNum: 1
 podName: product-service-pod
 imageName: soulaimandockerhub/ecom-backend-product-service
-imageVersion: v2
+imageVersion: secured-v1
 containerName: product-service-container
 containerPort: 8080
 containerEnvVar:
@@ -20,6 +20,12 @@ containerEnvVar:
     value: "kafka-svc"
   - name: BOOTSRAP_KAFKA_PORT
     value: "9092"
+  - name: KEYCLOAK_SERVER
+    value: "http://10.10.9.133:30080"
+  - name: KEYCLOAK_REALM
+    value: "ecom-realm"
+  - name: KEYCLOAK_CLIENT
+    value: "ecom-app"
 serviceName: product-service-svc
 servicePort: 8080
 serviceType: NodePort

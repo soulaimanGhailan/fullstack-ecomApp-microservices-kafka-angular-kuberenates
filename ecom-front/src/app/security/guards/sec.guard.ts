@@ -36,7 +36,7 @@ export class AuthGuard extends KeycloakAuthGuard {
       return true;
     }
 
-    // Allow the user to proceed if all the required roles are present.
-    return requiredRoles.every((role) => this.roles.includes(role));
+    // Allow the user to proceed if all {some for one of them , every of all} the required roles are present.
+    return requiredRoles.some((role) => this.roles.includes(role));
   }
 }

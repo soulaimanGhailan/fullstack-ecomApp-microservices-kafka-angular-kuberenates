@@ -15,6 +15,7 @@ public interface ProductsProjection {
     String getProductId();
     String getName();
     Date getAddingDate();
+    int getQuantity() ;
     String getDescription();
     ProductCategory getCategory();
     ProductStatus getStatus();
