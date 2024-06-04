@@ -1,2 +1,2 @@
-![Diagramme sans nom drawio (20)](https://github.com/soulaimanGhailan/fullstack-ecomApp-microservices-kafka-angular-kuberenates/captures/99770237/ea1aa6ae-922f-4e86-a278-e68a3433925f)
+![Diagramme sans nom drawio (20)](https://github.com/soulaimanGhailan/fullstack-ecomApp-microservices-kafka-angular-kuberenates/assets/99770237/82a7f466-8998-4974-8460-1a48e9a16bca)
 
