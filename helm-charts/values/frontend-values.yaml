@@ -2,7 +2,7 @@ depName: frontend-dep
 replicasNum: 1
 podName: frontend-pod
 imageName: soulaimandockerhub/ecom-front-end-angular
-imageVersion: secured-v1.1
+imageVersion: secured-v1.2
 containerName: frontend-container
 containerPort: 80
 serviceName: frontend-svc
