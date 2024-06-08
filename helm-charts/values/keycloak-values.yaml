@@ -24,9 +24,9 @@ containerEnvVar:
     - name: KEYCLOAK_ADMIN_PASSWORD
       value: "admin"
 maxMemory: 500Mi
-maxCpu: 300m
+maxCpu: 500m
 memory: 300Mi
-cpu: 180m
+cpu: 250m
 serviceName: keycloak-svc
 servicePort: 8080
 serviceType: NodePort

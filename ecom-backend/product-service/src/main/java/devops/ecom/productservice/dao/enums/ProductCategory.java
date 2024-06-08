@@ -4,5 +4,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 public enum ProductCategory {
-    ELECTRONICS  , CLOTHES , FOOD , HEALTH_BEAUTY , SPORT ,BOOKS
+        ELECTRONICS  , CLOTHES , FOOD , HEALTH_BEAUTY , SPORT ,BOOKS
 }

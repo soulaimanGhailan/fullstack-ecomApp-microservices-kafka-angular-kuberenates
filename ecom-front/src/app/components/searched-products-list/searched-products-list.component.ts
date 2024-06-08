@@ -26,12 +26,13 @@ export class SearchedProductsListComponent implements OnInit{
       this.store.subscribe(
         s => {
           if(s.productState.dataState == this.ProductStateEnum.LOADED) {
-           if(s.productState.products[0] && this.secSecurity.profile.id){
+           if(s.productState.products[0] && this.secSecurity.profile){
+             if(this.secSecurity.profile.id){
              if(s.productState.fetchMethode == FetchMethode.SEARCH_BY_CATEGORY )
                this.productService.publishEvent(s.productState.products[0].productId , EventType.SEARCH_BY_CATEGORY , this.secSecurity.profile.id)
              if(s.productState.fetchMethode == FetchMethode.SEARCH_BY_KEYWORD)
                this.productService.publishEvent(s.productState.products[0].productId , EventType.SEARCH_BY_KEYWORD , this.secSecurity.profile.id)
-           }
+           }}
           }
         })
     }

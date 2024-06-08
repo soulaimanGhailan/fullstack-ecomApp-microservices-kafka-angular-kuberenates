@@ -32,9 +32,14 @@ export class SingleProductComponent implements OnInit{
   }
 
   addProductToCart() {
-     if(this.secService.profile.id){
-       let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : this.secService.profile.id  }
-       this.store.dispatch(new AddProductToCartAction(itemReq))
+     if( this.secService.profile){
+       if(this.secService.profile.id){
+         let itemReq : AddItemRequest = {productId: this.product.productId  ,customerId : this.secService.profile.id  }
+         this.store.dispatch(new AddProductToCartAction(itemReq))
+       }
+
+     }else {
+       this.secService.login() ;
      }
   }
 
