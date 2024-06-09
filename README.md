@@ -32,17 +32,23 @@ Each microservice is developed with Spring Boot and offers a RESTful API. They u
 - Integrated with Keycloak for authentication and authorization.
 - Secures both the backend microservices and the frontend application , in fact addapter were added to both backend microservices (with spring security) and frontend
   
+  ![Capture d’écran (1421)](https://github.com/soulaimanGhailan/fullstack-ecomApp-microservices-kafka-angular-kuberenates/assets/99770237/a4e8ff0b-0274-4186-8cfb-6eaf5d7c6cc6)
+
   ![Capture d’écran (1408)](https://github.com/soulaimanGhailan/fullstack-ecomApp-microservices-kafka-angular-kuberenates/assets/99770237/bddf2ab2-5da2-485f-8214-1f1c7e26d6fd)
+  
   ![Capture d’écran (1409)](https://github.com/soulaimanGhailan/fullstack-ecomApp-microservices-kafka-angular-kuberenates/assets/99770237/bcef7997-59c5-4ac3-9ae2-bf6ce5158adf)
 
 
 
 ## Deployment
-The application is deployed in a local kubernetes cluser using with:
+The application is deployed in a local kubernetes cluser with:
 - Helm charts
 - Helmfile
   
   ![ffff drawio (1)](https://github.com/soulaimanGhailan/fullstack-ecomApp-microservices-kafka-angular-kuberenates/assets/99770237/3a719ad3-a85a-4880-9c07-0cd73db45b86)
+
+  ![Capture d’écran (1420)](https://github.com/soulaimanGhailan/fullstack-ecomApp-microservices-kafka-angular-kuberenates/assets/99770237/26bfed6c-52ed-4da0-8a0a-37da356d297f)
+
 
 ## application screan shots
 
